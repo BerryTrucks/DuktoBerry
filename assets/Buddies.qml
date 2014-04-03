@@ -38,36 +38,59 @@ Page {
         Container {
             leftPadding: 20
             topPadding: 20
-            layout: StackLayout {
-                orientation: LayoutOrientation.LeftToRight
+            StandardListItem {
+                imageSource: "asset:///images/tux.jpg"
+                title: "Laairoy" + " (you)"
+                description: "at DesktopS"
             }
-            Container {
-                ImageView {
-                    maxWidth: 300
-                    maxHeight: 300
-                    imageSource: "asset:///images/tux.jpg"
-                }
-            }
-            Container {
-                verticalAlignment: VerticalAlignment.Center
-                Label {
-                    text: "Laairoy (You)"
-                    textStyle.fontSize: FontSize.Large
-                }
-                Label {
-                    text: "at DesktopS"
-                    textStyle.fontSize: FontSize.Medium
-                }
-            }
+            //            layout: StackLayout {
+            //                orientation: LayoutOrientation.LeftToRight
+            //            }
+            //            Container {
+            //                ImageView {
+            //                    maxWidth: 300
+            //                    maxHeight: 300
+            //                    imageSource: "asset:///images/tux.jpg"
+            //                }
+            //            }
+            //            Container {
+            //                verticalAlignment: VerticalAlignment.Center
+            //                Label {
+            //                    text: "Laairoy (You)"
+            //                    textStyle.fontSize: FontSize.Large
+            //                }
+            //                Label {
+            //                    text: "at DesktopS"
+            //                    textStyle.fontSize: FontSize.Medium
+            //                }
+            //            }
         }
         Container {
-            topPadding: 50
+            topPadding: 30
             leftPadding: 100
             rightPadding: 100
             Container {
                 background: Color.create("#30910e")
                 Divider {
                 }
+            }
+        }
+        Container {
+            topPadding: 30
+            ListView {
+                id: listview
+                rootIndexPath: [ 0 ]
+                dataModel: _control.buddyModel
+                listItemComponents: [
+                    ListItemComponent {
+                        type: "item"
+                        StandardListItem {
+                            imageSpaceReserved: true
+                            title: ListItemData.username
+                            description: ListItemData.platform
+                        }
+                    }
+                ]
             }
         }
     }

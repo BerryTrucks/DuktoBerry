@@ -40,21 +40,14 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
     // initial load
     onSystemLanguageChanged();
-    connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
 
-    // Say "hello"
-       mDuktoProtocol.setPorts(NETWORK_PORT, NETWORK_PORT);
-       mDuktoProtocol.initialize();
-       mDuktoProtocol.sayHello(QHostAddress::Broadcast);
-
-       // Periodic "hello" timer
-       mPeriodicHelloTimer = new QTimer(this);
-       connect(mPeriodicHelloTimer, SIGNAL(timeout()), this, SLOT(periodicHello()));
-       mPeriodicHelloTimer->start(60000);
+    controller * control = new controller();
+    control->initialize();
 
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
     QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
+    qml->setContextProperty("_control", control);
 
     // Create root object for the UI
     AbstractPane *root = qml->createRootObject<AbstractPane>();
@@ -72,8 +65,4 @@ void ApplicationUI::onSystemLanguageChanged()
     if (m_pTranslator->load(file_name, "app/native/qm")) {
         QCoreApplication::instance()->installTranslator(m_pTranslator);
     }
-}
-
-void ApplicationUI::peerListAdded(Peer peer) {
-	qDebug() << "ApplicationUI::peerListAdded:" << peer.name;
 }

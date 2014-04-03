@@ -18,8 +18,8 @@
 #define ApplicationUI_HPP_
 
 #include <QObject>
-#include "protocol/duktoprotocol.h"
-#include "QTimer"
+
+#include "controller.h"
 
 namespace bb
 {
@@ -44,13 +44,9 @@ class ApplicationUI : public QObject
 public:
     ApplicationUI(bb::cascades::Application *app);
     virtual ~ApplicationUI() { }
-public slots:
-    void peerListAdded(Peer peer);
 private slots:
     void onSystemLanguageChanged();
 private:
-    DuktoProtocol mDuktoProtocol;
-    QTimer *mPeriodicHelloTimer;
     QTranslator* m_pTranslator;
     bb::cascades::LocaleHandler* m_pLocaleHandler;
 };
