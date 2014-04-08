@@ -316,7 +316,7 @@ void GuiBehind::showSendPage(QString ip)
     if (buddy == NULL) return;
 
     // Update exposed data for the selected user
-    mDestBuddy->fillFromItem(buddy);
+//    mDestBuddy->fillFromItem(buddy);
 
     // Preventive update of destination buddy
     if (mDestBuddy->ip() == "IP")

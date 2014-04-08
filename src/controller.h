@@ -14,6 +14,7 @@
 #include <bb/cascades/GroupDataModel>
 
 #include "protocol/duktoprotocol.h"
+#include "destinationbuddy.h"
 #include "model/BuddyModel.h"
 
 class UpdatesChecker;
@@ -33,6 +34,10 @@ public:
 	void initialize();
 	bb::cascades::GroupDataModel* buddyModel();
 
+	// Invoked by QML
+	Q_INVOKABLE
+	void sendSomeFiles(QVariant indexPath, QStringList files);
+
 signals:
 	void onBuddyModelChanged();
 
@@ -44,6 +49,11 @@ private:
 	DuktoProtocol mDuktoProtocol;
 	QTimer *mPeriodicHelloTimer;
 	BuddyModel * m_buddyModel;
+	DestinationBuddy *mDestBuddy;
+
+    bool prepareStartTransfer(QString *ip, qint16 *port);
+    void startTransfer(QStringList files);
+    void startTransfer(QString text);
 };
 
 #endif /* CONTROLLER_H_ */

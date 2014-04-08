@@ -1,7 +1,7 @@
 import bb.cascades 1.2
 
 TabbedPane {
-    showTabsOnActionBar: false
+    showTabsOnActionBar: true
     Tab {
         title: "Buddies"
         Buddies {

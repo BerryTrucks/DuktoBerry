@@ -21,7 +21,6 @@
 
 #include <QObject>
 
-class QStandardItem;
 
 class DestinationBuddy : public QObject
 {
@@ -47,7 +46,7 @@ public:
     inline QString avatar() { return mAvatar; }
     inline QString osLogo() { return mOsLogo; }
     inline QString showBack() { return mShowBack; }
-    void fillFromItem(QStandardItem *item);
+    void fillFromItem(QVariantMap item);
     // void setAsRemoteBuddy(QString ip);
 
 signals:

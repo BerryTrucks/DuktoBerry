@@ -18,7 +18,7 @@
 
 #include "destinationbuddy.h"
 
-#include "buddylistitemmodel.h"
+#include "model/BuddyModel.h"
 
 #include <bb/cascades/DataModel>
 
@@ -27,17 +27,17 @@ DestinationBuddy::DestinationBuddy(QObject *parent) :
 {
 }
 
-void DestinationBuddy::fillFromItem(QStandardItem *item)
+void DestinationBuddy::fillFromItem(QVariantMap item)
 {
-    mIp = item->data(BuddyListItemModel::Ip).toString();
-    mPort = item->data(BuddyListItemModel::Port).toInt();
-    mUsername = item->data(BuddyListItemModel::Username).toString();
-    mSystem = item->data(BuddyListItemModel::System).toString();
-    mPlatform = item->data(BuddyListItemModel::Platform).toString();
-    mGenericAvatar = item->data(BuddyListItemModel::GenericAvatar).toString();
-    mAvatar = item->data(BuddyListItemModel::Avatar).toString();
-    mOsLogo = item->data(BuddyListItemModel::OsLogo).toString();
-    mShowBack = item->data(BuddyListItemModel::ShowBack).toString();
+    mIp = item.value("ip").toString();
+    mPort = item.value("port").toInt();
+    mUsername = item.value("username").toString();
+    mSystem = item.value("system").toString();
+    mPlatform = item.value("platform").toString();
+    mGenericAvatar = item.value("generic").toString();
+    mAvatar = item.value("avatar").toString();
+    mOsLogo = item.value("oslogo").toString();
+    mShowBack = item.value("showback").toString();
     emit ipChanged();
     emit portChanged();
     emit usernameChanged();
