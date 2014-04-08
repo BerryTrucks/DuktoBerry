@@ -15,6 +15,7 @@ controller::controller() :
 	// TODO Auto-generated constructor stub
 	m_buddyModel = new BuddyModel();
 	mDestBuddy = new DestinationBuddy(this);
+	workingDir = QDir::currentPath();
 	connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this,
 			SLOT(peerListAdded(Peer)));
 

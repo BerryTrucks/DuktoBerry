@@ -54,6 +54,7 @@ private:
     bool prepareStartTransfer(QString *ip, qint16 *port);
     void startTransfer(QStringList files);
     void startTransfer(QString text);
+	QString workingDir;
 };
 
 #endif /* CONTROLLER_H_ */

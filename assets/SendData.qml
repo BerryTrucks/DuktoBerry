@@ -91,7 +91,6 @@ Page {
             id: filePicker
             mode: FilePickerMode.PickerMultiple
             title: "Select File"
-            directories: [ "/accounts/1000/shared/" ]
             onFileSelected: {
                 _control.sendSomeFiles(index, selectedFiles)
                 console.log("FileSelected signal received : " + selectedFiles);
