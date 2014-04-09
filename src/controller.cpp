@@ -15,9 +15,12 @@ controller::controller() :
 	// TODO Auto-generated constructor stub
 	m_buddyModel = new BuddyModel();
 	mDestBuddy = new DestinationBuddy(this);
+	setCurrentTransferProgress(0);
+
 	workingDir = QDir::currentPath();
 	connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
 	connect(&mDuktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
+	connect(&mDuktoProtocol, SIGNAL(transferStatusUpdate(qint64,qint64)), this, SLOT(transferStatusUpdate(qint64,qint64)));
 
 	// Periodic "hello" timer
 	mPeriodicHelloTimer = new QTimer(this);
@@ -130,6 +133,47 @@ void controller::peerListRemoved(Peer peer) {
 	// Remove from the list
 	m_buddyModel->removeBuddy(peer.address.toString());
 	emit onBuddyModelChanged();
+}
+
+int controller::currentTransferProgress() {
+	return mCurrentTransferProgress;
+}
+
+void controller::setCurrentTransferProgress(int value) {
+	if (value == mCurrentTransferProgress) return;
+	    mCurrentTransferProgress = value;
+	    qDebug() << "controller::setCurrentTransferProgress:" << value;
+	    emit currentTransferProgressChanged();
+}
+
+void controller::transferStatusUpdate(qint64 total, qint64 partial) {
+	// Stats formatting
+	if (total < 1024)
+		setCurrentTransferStats(
+				QString::number(partial) + " B of " + QString::number(total)
+						+ " B");
+	else if (total < 1048576)
+		setCurrentTransferStats(
+				QString::number(partial * 1.0 / 1024, 'f', 1) + " KB of "
+						+ QString::number(total * 1.0 / 1024, 'f', 1) + " KB");
+	else
+		setCurrentTransferStats(
+				QString::number(partial * 1.0 / 1048576, 'f', 1) + " MB of "
+						+ QString::number(total * 1.0 / 1048576, 'f', 1)
+						+ " MB");
+
+	double percent = partial * 1.0 / total * 100;
+	setCurrentTransferProgress(percent);
+}
+
+QString controller::currentTransferStats() {
+	return mCurrentTransferStats;
+}
+
+void controller::setCurrentTransferStats(QString stats) {
+	if (stats == mCurrentTransferStats) return;
+	mCurrentTransferStats = stats;
+	emit currentTransferStatsChanged();
 }
 
 void controller::startTransfer(QString text) {
