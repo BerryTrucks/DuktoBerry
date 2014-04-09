@@ -16,8 +16,8 @@ controller::controller() :
 	m_buddyModel = new BuddyModel();
 	mDestBuddy = new DestinationBuddy(this);
 	workingDir = QDir::currentPath();
-	connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this,
-			SLOT(peerListAdded(Peer)));
+	connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
+	connect(&mDuktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
 
 	// Periodic "hello" timer
 	mPeriodicHelloTimer = new QTimer(this);
@@ -124,6 +124,12 @@ void controller::startTransfer(QStringList files) {
 
 // Start files transfer
 	mDuktoProtocol.sendFile(ip, port, files);
+}
+
+void controller::peerListRemoved(Peer peer) {
+	// Remove from the list
+	m_buddyModel->removeBuddy(peer.address.toString());
+	emit onBuddyModelChanged();
 }
 
 void controller::startTransfer(QString text) {

@@ -43,6 +43,7 @@ signals:
 
 public slots:
 	void peerListAdded(Peer peer);
+	void peerListRemoved(Peer peer);
 	void periodicHello();
 
 private:

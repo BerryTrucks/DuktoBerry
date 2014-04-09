@@ -147,6 +147,8 @@ QString Platform::getPlatformName()
     return "Linux";
 #elif defined(Q_WS_S60)
     return "Symbian";
+#elif defined(Q_OS_BLACKBERRY)
+    return "BlackBerry";
 #else
     return "Unknown";
 #endif
