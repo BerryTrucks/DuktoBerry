@@ -2,13 +2,6 @@
 <!DOCTYPE TS>
 <TS version="2.0">
 <context>
-    <name>GuiBehind</name>
-    <message>
-        <source>Dukto</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SendData</name>
     <message>
         <source>What do you want to do?</source>
