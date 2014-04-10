@@ -21,7 +21,6 @@
 
 #include <QSettings>
 #include <QDir>
-#include "theme.h"
 
 Settings::Settings(QObject *parent) :
     QObject(parent), mSettings("msec.it", "Dukto")
@@ -71,7 +70,7 @@ void Settings::saveThemeColor(QString color)
 
 QString Settings::themeColor()
 {
-    return mSettings.value("ThemeColor", Theme::DEFAULT_THEME_COLOR).toString();
+//    return mSettings.value("ThemeColor", Theme::DEFAULT_THEME_COLOR).toString();
 }
 
 void Settings::saveShowTermsOnStart(bool show)

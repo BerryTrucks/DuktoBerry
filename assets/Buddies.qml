@@ -1,8 +1,10 @@
 import bb.cascades 1.2
+import my.timer 1.0
 
 NavigationPane {
     id: navPane
     Page {
+        id: mPage
         titleBar: TitleBar {
             kind: TitleBarKind.FreeForm
             kindProperties: FreeFormTitleBarKindProperties {
@@ -29,6 +31,7 @@ NavigationPane {
                                 base: SystemDefaults.TextStyles.TitleText
                                 fontSize: FontSize.PointValue
                                 fontSizeValue: 16
+                                color: Color.White
                             }
 
                         }
@@ -37,36 +40,11 @@ NavigationPane {
             }
         }
         Container {
-            Container {
-                leftPadding: 20
-                topPadding: 20
-
-                layout: StackLayout {
-                    orientation: LayoutOrientation.LeftToRight
-                }
-                Container {
-                    ImageView {
-                        maxWidth: 150
-                        maxHeight: 150
-                        imageSource: "asset:///images/tux.jpg"
-                    }
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 23
-                    }
-                }
-                Container {
-                    verticalAlignment: VerticalAlignment.Center
-                    Label {
-                        text: "Laairoy (You)"
-                        textStyle.fontSize: FontSize.Large
-                    }
-                    Label {
-                        text: "at DesktopS"
-                        textStyle.fontSize: FontSize.Medium
-                    }
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 77
-                    }
+            CustomItemBuddy {
+                userName: "Laai-Berry"
+                system: "BlackBerry"
+                onCreationCompleted: {
+                    timer.timeout.connect(timeout);
                 }
             }
             Container {
@@ -82,16 +60,23 @@ NavigationPane {
             Container {
                 topPadding: 30
                 ListView {
+                    signal timerToList()
+                    onCreationCompleted: {
+                        timer.timeout.connect(timerToList);
+                    }
                     id: listview
                     rootIndexPath: [ 0 ]
                     dataModel: _control.buddyModel
                     listItemComponents: [
                         ListItemComponent {
                             type: "item"
-                            StandardListItem {
-                                imageSpaceReserved: true
-                                title: ListItemData.username
-                                description: ListItemData.platform
+                            CustomItemBuddy {
+                                id: mlistItem
+                                userName: ListItemData.username
+                                system: ListItemData.system
+                                onCreationCompleted: {
+                                    mlistItem.ListItem.view.timerToList.connect(timeout)
+                                }
                             }
                         }
                     ]
@@ -109,6 +94,13 @@ NavigationPane {
             id: sendDataPane
             SendData {
             }
+        },
+        QTimer {
+            id: timer
+            interval: 5000
         }
     ]
+    onCreationCompleted: {
+        timer.start()
+    }
 }

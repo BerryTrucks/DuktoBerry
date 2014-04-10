@@ -20,6 +20,7 @@
 #include <bb/cascades/QmlDocument>
 #include <bb/cascades/AbstractPane>
 #include <bb/cascades/LocaleHandler>
+#include <QTimer>
 
 #define NETWORK_PORT 4644
 using namespace bb::cascades;
@@ -43,6 +44,8 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
     controller * control = new controller();
     control->initialize();
+
+    qmlRegisterType<QTimer>("my.timer", 1, 0, "QTimer");
 
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.

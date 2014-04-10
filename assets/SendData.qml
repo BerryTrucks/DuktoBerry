@@ -29,6 +29,7 @@ Page {
                             base: SystemDefaults.TextStyles.TitleText
                             fontSize: FontSize.PointValue
                             fontSizeValue: 16
+                            color: Color.White
                         }
 
                     }
@@ -40,35 +41,9 @@ Page {
     Container {
         leftPadding: 20
         topPadding: 20
-        Container {
-
-            layout: StackLayout {
-                orientation: LayoutOrientation.LeftToRight
-            }
-            Container {
-                ImageView {
-                    maxWidth: 150
-                    maxHeight: 150
-                    imageSource: "asset:///images/tux.jpg"
-                }
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 23
-                }
-            }
-            Container {
-                verticalAlignment: VerticalAlignment.Center
-                Label {
-                    text: "Laairoy (You)"
-                    textStyle.fontSize: FontSize.Large
-                }
-                Label {
-                    text: "at DesktopS"
-                    textStyle.fontSize: FontSize.Medium
-                }
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 77
-                }
-            }
+        CustomItemBuddy {
+            userName: "Laai-Berry"
+            system: "BlackBerry"
         }
         Container {
             topPadding: 80

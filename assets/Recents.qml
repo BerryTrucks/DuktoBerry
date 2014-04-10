@@ -27,6 +27,7 @@ Page {
                             base: SystemDefaults.TextStyles.TitleText
                             fontSize: FontSize.PointValue
                             fontSizeValue: 16
+                            color: Color.White
                         }
 
                     }
