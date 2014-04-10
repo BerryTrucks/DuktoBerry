@@ -24,7 +24,7 @@ Page {
                     Label {
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
-                        text: "Send Data"
+                        text: qsTr("Send Data")
                         textStyle {
                             base: SystemDefaults.TextStyles.TitleText
                             fontSize: FontSize.PointValue

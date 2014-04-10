@@ -22,7 +22,7 @@ Page {
                     Label {
                         verticalAlignment: VerticalAlignment.Center
                         horizontalAlignment: HorizontalAlignment.Center
-                        text: "Recent"
+                        text: qsTr("Recent")
                         textStyle {
                             base: SystemDefaults.TextStyles.TitleText
                             fontSize: FontSize.PointValue

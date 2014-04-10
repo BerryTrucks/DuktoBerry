@@ -9,32 +9,20 @@ NavigationPane {
             kind: TitleBarKind.FreeForm
             kindProperties: FreeFormTitleBarKindProperties {
                 Container {
-                    leftPadding: 15
-                    rightPadding: 15
                     preferredHeight: 110
                     background: Color.create("#30910e")
                     horizontalAlignment: HorizontalAlignment.Fill
-                    layout: StackLayout {
-                        orientation: LayoutOrientation.LeftToRight
-                    }
-                    Container {
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        layoutProperties: StackLayoutProperties {
-                            spaceQuota: 8
+                    verticalAlignment: VerticalAlignment.Center
+                    Label {
+                        horizontalAlignment: HorizontalAlignment.Center
+                        text: qsTr("Buddies")
+                        textStyle {
+                            base: SystemDefaults.TextStyles.TitleText
+                            fontSize: FontSize.PointValue
+                            fontSizeValue: 16
+                            color: Color.White
                         }
-                        Label {
-                            verticalAlignment: VerticalAlignment.Center
-                            horizontalAlignment: HorizontalAlignment.Center
-                            text: "Buddies"
-                            textStyle {
-                                base: SystemDefaults.TextStyles.TitleText
-                                fontSize: FontSize.PointValue
-                                fontSizeValue: 16
-                                color: Color.White
-                            }
 
-                        }
                     }
                 }
             }

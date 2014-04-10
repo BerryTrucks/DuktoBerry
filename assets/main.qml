@@ -16,6 +16,7 @@ TabbedPane {
     Menu.definition: MenuDefinition {
         settingsAction: SettingsActionItem {
             onTriggered: {
+                settingsPane.createObject().open()
             }
         }
         actions: [
@@ -33,12 +34,14 @@ TabbedPane {
     }
     attachedObjects: [
         ComponentDefinition {
-            id: m_about
-            source: "asset:///About.qml"
+            id: aboutPane
+            About {
+            }
         },
         ComponentDefinition {
-            id: m_settings
-            source: "asset:///Settings.qml"
+            id: settingsPane
+            Settings {
+            }
         }
     ]
 }
