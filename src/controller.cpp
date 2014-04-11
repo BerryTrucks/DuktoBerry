@@ -6,12 +6,14 @@
  */
 
 #include "controller.h"
+
 #include "protocol/platform.h"
+#include "miniwebserver.h"
 
 #define NETWORK_PORT 4644
 
 controller::controller() :
-		QObject(NULL), mDestBuddy(NULL), mSettings(NULL) {
+		QObject(NULL), mDestBuddy(NULL), mSettings(NULL), mMiniWebServer(NULL) {
 	// TODO Auto-generated constructor stub
 	m_buddyModel = new BuddyModel();
 
@@ -22,6 +24,9 @@ controller::controller() :
 
 	// Settings
 	mSettings = new Settings(this);
+
+	// Mini web server
+	mMiniWebServer = new MiniWebServer(NETWORK_PORT + 1);
 
 	workingDir = QDir::currentPath();
 	connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));

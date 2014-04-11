@@ -23,6 +23,7 @@
 #include <QFile>
 #include <QDir>
 //#include <QMessageBox>
+#include "settings.h"
 
 #if defined(Q_WS_MAC)
 #include <QTemporaryFile>
@@ -61,11 +62,17 @@ QString Platform::getSystemUsername()
     // Get username from settings
     Settings s;
     return s.buddyName();
-#else
 
+#elif defined (Q_OS_BLACKBERRY)
+    // Get username from settings
+	Settings s;
+	return s.buddyName();
+
+#else
     // Save in a static variable so that It's always ready
     static QString username = "";
     if (username != "") return username;
+
 
 #if defined (Q_WS_WIN)
 /*    QString un(getenv("USERNAME"));
@@ -175,6 +182,9 @@ QString Platform::getAvatarPath()
     return getLinuxAvatarPath();
 #elif defined(Q_WS_S60)
     return "";
+#elif defined (Q_OS_BLACKBERRY)
+    Settings s;
+    return s.buddyAvatar();
 #else
     return "";
 #endif

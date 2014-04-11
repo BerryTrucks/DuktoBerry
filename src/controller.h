@@ -80,6 +80,7 @@ private:
     void startTransfer(QString text);
 	QString workingDir;
 	Settings *mSettings;
+	MiniWebServer *mMiniWebServer;
 };
 
 #endif /* CONTROLLER_H_ */

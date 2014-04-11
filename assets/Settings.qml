@@ -6,46 +6,9 @@ Sheet {
     Page {
         titleBar: TitleBar {
             kind: TitleBarKind.FreeForm
-            kindProperties: FreeFormTitleBarKindProperties {
-                Container {
-                    leftPadding: 15
-                    rightPadding: 15
-                    preferredHeight: 110
-                    background: Color.create("#30910e")
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    layout: StackLayout {
-                        orientation: LayoutOrientation.LeftToRight
-                    }
-                    Container {
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Fill
-                        layoutProperties: StackLayoutProperties {
-                            spaceQuota: 8
-                        }
-                        Label {
-                            verticalAlignment: VerticalAlignment.Center
-                            horizontalAlignment: HorizontalAlignment.Center
-                            text: qsTr("Settings")
-                            textStyle {
-                                base: SystemDefaults.TextStyles.TitleText
-                                fontSize: FontSize.PointValue
-                                fontSizeValue: 16
-                                color: Color.White
-                            }
-
-                        }
-                    }
-                    Container {
-                        verticalAlignment: VerticalAlignment.Center
-                        maxWidth: 150
-                        Button {
-                            text: qsTr("Close")
-                            onClicked: {
-                                settingsSheet.close()
-                            }
-                        }
-                    }
-                }
+            kindProperties: CustomFreeFormTitleBar {
+                title: qsTr("Settings")
+                closeButtonActive: true
             }
         }
         ScrollView {
@@ -61,12 +24,14 @@ Sheet {
                     Container {
                         background: Color.create(_control.themeColor)
                         ImageView {
+                            property string buddyAvatar: _control.buddyAvatar
+                            onBuddyAvatarChanged: {
+                                imageSource = buddyAvatar
+                            }
                             id: imgAvatar
+                            imageSource: buddyAvatar
                             preferredHeight: 150
                             preferredWidth: 150
-                            onCreationCompleted: {
-                                imageSource = _control.buddyAvatar
-                            }
                         }
                     }
                     Button {
@@ -182,6 +147,7 @@ Sheet {
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#914994")
+                                    
                                 }
                             }
                         }

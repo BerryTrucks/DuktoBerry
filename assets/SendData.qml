@@ -5,37 +5,10 @@ Page {
     property variant index
     titleBar: TitleBar {
         kind: TitleBarKind.FreeForm
-        kindProperties: FreeFormTitleBarKindProperties {
-            Container {
-                leftPadding: 15
-                rightPadding: 15
-                preferredHeight: 110
-                background: Color.create(_control.themeColor)
-                horizontalAlignment: HorizontalAlignment.Fill
-                layout: StackLayout {
-                    orientation: LayoutOrientation.LeftToRight
-                }
-                Container {
-                    verticalAlignment: VerticalAlignment.Center
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    layoutProperties: StackLayoutProperties {
-                        spaceQuota: 8
-                    }
-                    Label {
-                        verticalAlignment: VerticalAlignment.Center
-                        horizontalAlignment: HorizontalAlignment.Center
-                        text: qsTr("Send Data")
-                        textStyle {
-                            base: SystemDefaults.TextStyles.TitleText
-                            fontSize: FontSize.PointValue
-                            fontSizeValue: 16
-                            color: Color.White
-                        }
-
-                    }
-                }
+        kindProperties: CustomFreeFormTitleBar {
+                title: qsTr("Send Data")
+                closeButtonActive: false
             }
-        }
     }
 
     Container {

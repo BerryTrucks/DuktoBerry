@@ -62,23 +62,23 @@ void BuddyModel::addBuddy(QString ip, qint16 port, QString username,
 
 	    // Update logo
 	    if (platform.toLower() == "windows")
-	        it["oslogo"]="WindowsLogo.png";
+	        it["oslogo"]="asset:///images/WindowsLogo.png";
 	    else if (platform.toLower() == "macintosh")
-	        it["oslogo"]="AppleLogo.png";
+	        it["oslogo"]="asset:///images/AppleLogo.png";
 	    else if (platform.toLower() == "linux")
-	        it["oslogo"]="LinuxLogo.png";
+	        it["oslogo"]="asset:///images/LinuxLogo.png";
 	    else if (platform.toLower() == "symbian")
-	        it["oslogo"]="SymbianLogo.png";
+	        it["oslogo"]="asset:///images/SymbianLogo.png";
 	    else if (platform.toLower() == "ios")
-	        it["oslogo"]="IosLogo.png";
+	        it["oslogo"]="asset:///images/IosLogo.png";
 	    else if (platform.toLower() == "windowsphone")
-	        it["oslogo"]="WindowsPhoneLogo.png";
+	        it["oslogo"]="asset:///images/WindowsPhoneLogo.png";
 	    else if (platform.toLower() == "blackberry")
-	        it["oslogo"]="BlackberryLogo.png";
+	        it["oslogo"]="asset:///images/BlackberryLogo.png";
 	    else if (platform.toLower() == "android")
-	        it["oslogo"]="AndroidLogo.png";
+	        it["oslogo"]="asset:///images/AndroidLogo.png";
 	    else
-	        it["oslogo"]="UnknownLogo.png";
+	        it["oslogo"]="asset:///images/UnknownLogo.png";
 
 	    // Add elemento to the list
 	    if (add) {

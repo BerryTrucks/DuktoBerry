@@ -7,30 +7,17 @@ NavigationPane {
         id: mPage
         titleBar: TitleBar {
             kind: TitleBarKind.FreeForm
-            kindProperties: FreeFormTitleBarKindProperties {
-                Container {
-                    preferredHeight: 110
-                    background: Color.create(_control.themeColor)
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Center
-                    Label {
-                        horizontalAlignment: HorizontalAlignment.Center
-                        text: qsTr("Buddies")
-                        textStyle {
-                            base: SystemDefaults.TextStyles.TitleText
-                            fontSize: FontSize.PointValue
-                            fontSizeValue: 16
-                            color: Color.White
-                        }
-
-                    }
-                }
+            kindProperties: CustomFreeFormTitleBar {
+                title: qsTr("Buddies")
+                closeButtonActive: false
             }
         }
         Container {
             CustomItemBuddy {
-                userName: "Laairoy (You)"
+                userName: _control.buddyName + " (You)"
                 system: "at Laai-Berry"
+                userImage: _control.buddyAvatar
+                plataformImage: "asset:///images/BlackberryLogo.png"
                 onCreationCompleted: {
                     timer.timeout.connect(timeout);
                 }
@@ -63,6 +50,7 @@ NavigationPane {
                                 id: mlistItem
                                 userName: ListItemData.username
                                 system: ListItemData.system
+                                plataformImage: ListItemData.oslogo
                                 onCreationCompleted: {
                                     mlistItem.ListItem.view.timerToList.connect(timeout)
                                     themeColor = mlistItem.ListItem.view.themeColorToList

@@ -9,9 +9,16 @@
     </message>
 </context>
 <context>
+    <name>CustomFreeFormTitleBar</name>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Recents</name>
     <message>
-        <source>Recent</source>
+        <source>Recents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -50,10 +57,6 @@
     </message>
     <message>
         <source>Theme Color:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

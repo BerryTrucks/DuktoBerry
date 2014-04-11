@@ -23,21 +23,24 @@
 #include <QDateTime>
 #include <QFile>
 //#include <QtCore/QMetaTypeId2< QImage >>
+#include <bb/ImageData>
 #include <QBuffer>
 
 #include "platform.h"
+#include <Qt/qimage.h>
 
 MiniWebServer::MiniWebServer(int port)
 {
     // Load and convert avatar image
     QString path = Platform::getAvatarPath();
+    qDebug() << "MiniWebServer::MiniWebServer:" << path;
     if (path != "")
     {
-//        QImage img(path);
-//        QImage scaled = img.scaled(64, 64, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-//        QBuffer tmp(&mAvatarData);
-//        tmp.open(QIODevice::WriteOnly);
-//        scaled.save(&tmp, "PNG");
+    	QImage img(path);
+        QImage scaled = img.scaled(64, 64, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        QBuffer tmp(&mAvatarData);
+        tmp.open(QIODevice::WriteOnly);
+        scaled.save(&tmp, "PNG");
 
         // Start server
         listen(QHostAddress::Any, port);

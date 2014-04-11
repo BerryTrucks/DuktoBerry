@@ -21,6 +21,15 @@ Container {
         preferredWidth: 150
         background: Color.create(themeColor)
         ImageView {
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
+            imageSource: "asset:///images/TileGradient.png"
+            maxWidth: 150
+            maxHeight: 150
+            preferredHeight: 150
+            preferredWidth: 150
+        }
+        ImageView {
             id: imgTrasition
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
@@ -36,11 +45,11 @@ Container {
             animations: [
                 ScaleTransition {
                     toY: -1
-                    duration: 150
+                    duration: 200
                 },
                 ScaleTransition {
                     toY: 0
-                    duration: 150
+                    duration: 200
 
                 }
 
@@ -52,12 +61,12 @@ Container {
             animations: [
                 ScaleTransition {
                     toY: 0
-                    duration: 150
+                    duration: 200
 
                 },
                 ScaleTransition {
                     toY: 1
-                    duration: 150
+                    duration: 200
                 }
 
             ]
