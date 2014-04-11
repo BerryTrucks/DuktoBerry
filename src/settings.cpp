@@ -51,17 +51,6 @@ void Settings::savePath(QString path)
     mSettings.sync();
 }
 
-void Settings::saveWindowGeometry(QByteArray geo)
-{
-    mSettings.setValue("WindowPosAndSize", geo);
-    mSettings.sync();
-}
-
-QByteArray Settings::windowGeometry()
-{
-    return mSettings.value("WindowPosAndSize").toByteArray();
-}
-
 void Settings::saveThemeColor(QString color)
 {
     mSettings.setValue("ThemeColor", color);
@@ -70,7 +59,7 @@ void Settings::saveThemeColor(QString color)
 
 QString Settings::themeColor()
 {
-//    return mSettings.value("ThemeColor", Theme::DEFAULT_THEME_COLOR).toString();
+    return mSettings.value("ThemeColor", "#30910e").toString();
 }
 
 void Settings::saveShowTermsOnStart(bool show)
@@ -96,4 +85,17 @@ void Settings::saveBuddyName(QString name)
     // Save the new name
     mSettings.setValue("BuddyName", name);
     mSettings.sync();
+}
+
+QString Settings::buddyAvatar()
+{
+	// Retrieve the last saved name (if any)
+	return mSettings.value("BuddyAvatar", "asset:///images/user.png").toString();
+}
+
+void Settings::saveBuddyAvatar(QString avatar)
+{
+	// Save the new avatar
+	mSettings.setValue("BuddyAvatar", avatar);
+	mSettings.sync();
 }

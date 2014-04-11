@@ -3,6 +3,7 @@ import bb.cascades 1.2
 Container {
     property string plataformImage
     property string userImage
+    property string themeColor: _control.themeColor
     signal changeImage()
     onChangeImage: {
         animationStart.play();
@@ -18,7 +19,7 @@ Container {
         }
         preferredHeight: 150
         preferredWidth: 150
-        background: Color.create("#30910e")
+        background: Color.create(themeColor)
         ImageView {
             id: imgTrasition
             horizontalAlignment: HorizontalAlignment.Center

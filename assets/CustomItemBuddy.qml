@@ -5,6 +5,7 @@ Container {
     property alias system: mSystem.text
     property alias userImage: imageTransition.userImage
     property alias plataformImage: imageTransition.plataformImage
+    property alias themeColor: imageTransition.themeColor
     leftPadding: 20
     topPadding: 20
     signal timeout()

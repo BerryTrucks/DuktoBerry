@@ -11,11 +11,17 @@
 #define NETWORK_PORT 4644
 
 controller::controller() :
-		QObject(NULL), mDestBuddy(NULL) {
+		QObject(NULL), mDestBuddy(NULL), mSettings(NULL) {
 	// TODO Auto-generated constructor stub
 	m_buddyModel = new BuddyModel();
+
+	// Destination buddy
 	mDestBuddy = new DestinationBuddy(this);
+
 	setCurrentTransferProgress(0);
+
+	// Settings
+	mSettings = new Settings(this);
 
 	workingDir = QDir::currentPath();
 	connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
@@ -174,6 +180,35 @@ void controller::setCurrentTransferStats(QString stats) {
 	if (stats == mCurrentTransferStats) return;
 	mCurrentTransferStats = stats;
 	emit currentTransferStatsChanged();
+}
+
+void controller::setBuddyName(QString name) {
+	mSettings->saveBuddyName(name.replace(' ', ""));
+	mDuktoProtocol.updateBuddyName();
+	m_buddyModel->updateMeElement();
+	emit buddyNameChanged();
+}
+
+QString controller::buddyName() {
+	return mSettings->buddyName();
+}
+
+void controller::setBuddyAvatar(QString avatar) {
+	mSettings->saveBuddyAvatar(avatar);
+	emit buddyAvatarChanged();
+}
+
+QString controller::buddyAvatar() {
+	return mSettings->buddyAvatar();
+}
+
+void controller::setThemeColor(QString color) {
+	mSettings->saveThemeColor(color);
+		emit themeColorChanged();
+}
+
+QString controller::themeColor() {
+	return mSettings->themeColor();
 }
 
 void controller::startTransfer(QString text) {

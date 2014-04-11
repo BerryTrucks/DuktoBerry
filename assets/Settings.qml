@@ -1,4 +1,5 @@
 import bb.cascades 1.2
+import bb.cascades.pickers 1.0
 
 Sheet {
     id: settingsSheet
@@ -47,135 +48,163 @@ Sheet {
                 }
             }
         }
-        Container {
-            topPadding: 20
-            leftPadding: 20
-            rightPadding: 20
-            horizontalAlignment: HorizontalAlignment.Fill
+        ScrollView {
             Container {
-                layout: StackLayout {
-                    orientation: LayoutOrientation.LeftToRight
-                }
-                Container {
-                    background: Color.create("#30910e")
-                    ImageView {
-                        preferredHeight: 150
-                        preferredWidth: 150
-                        imageSource: "asset:///images/user.png"
-                    }
-                }
-                Button {
-                    verticalAlignment: VerticalAlignment.Center
-                    text: qsTr("Change Avatar")
-                }
-            }
-            Container {
-                topPadding: 30
-                Label {
-                    text: qsTr("User name:")
-                }
-                TextField {
-                    text: "Laairoy"
-                }
-            }
-            Container {
-                topPadding: 30
-                Label {
-                    text: qsTr("Save received file in:")
-                }
-                TextField {
-                    text: "/donwloads"
-                }
-                Button {
-                	horizontalAlignment: HorizontalAlignment.Right
-                    text: qsTr("Change folder")
-                }
-            }
-            Container {
-                topPadding: 30
+                topPadding: 20
+                leftPadding: 20
+                rightPadding: 20
                 horizontalAlignment: HorizontalAlignment.Fill
-                verticalAlignment: VerticalAlignment.Fill
-                Label {
-                    text: qsTr("Theme Color:")
-                }
                 Container {
-                    horizontalAlignment: HorizontalAlignment.Fill
-                    verticalAlignment: VerticalAlignment.Fill
                     layout: StackLayout {
                         orientation: LayoutOrientation.LeftToRight
                     }
                     Container {
-                        preferredHeight: 200
-                        preferredWidth: 200
-                        background: Color.create("#30910e")
+                        background: Color.create(_control.themeColor)
+                        ImageView {
+                            id: imgAvatar
+                            preferredHeight: 150
+                            preferredWidth: 150
+                            onCreationCompleted: {
+                                imageSource = _control.buddyAvatar
+                            }
+                        }
+                    }
+                    Button {
+                        verticalAlignment: VerticalAlignment.Center
+                        text: qsTr("Change Avatar")
+                        onClicked: {
+                            newAvatar.open()
+                        }
+                    }
+                }
+                Container {
+                    topPadding: 30
+                    Label {
+                        text: qsTr("User name:")
+                    }
+                    TextField {
+                        text: _control.buddyName
+                        onTextChanging: {
+                            _control.buddyName = text
+                        }
+                    }
+                }
+                Container {
+                    topPadding: 30
+                    Label {
+                        text: qsTr("Save received file in:")
+                    }
+                    TextField {
+                        text: "/donwloads"
+                        enabled: false
+                        backgroundVisible: true
+                    }
+                    Button {
+                        horizontalAlignment: HorizontalAlignment.Right
+                        text: qsTr("Change folder")
+                    }
+                }
+                Container {
+                    topPadding: 30
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    verticalAlignment: VerticalAlignment.Fill
+                    Label {
+                        text: qsTr("Theme Color:")
                     }
                     Container {
                         horizontalAlignment: HorizontalAlignment.Fill
-                        verticalAlignment: VerticalAlignment.Center
-                        leftPadding: 40
-                        Container {
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.LeftToRight
-                            }
-                            Container {
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#30910e")
-                            }
-                            Container {
-                                leftPadding: 20
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#b01717")
-                            }
-                            Container {
-                                leftPadding: 20
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#5782c6")
-                            }
-                            Container {
-                                leftPadding: 20
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#42484a")
-                            }
+                        verticalAlignment: VerticalAlignment.Fill
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
                         }
                         Container {
-                            topPadding: 20
+                            preferredHeight: 200
+                            preferredWidth: 200
+                            background: Color.create(_control.themeColor)
+                        }
+                        Container {
                             horizontalAlignment: HorizontalAlignment.Fill
-                            layout: StackLayout {
-                                orientation: LayoutOrientation.LeftToRight
+                            verticalAlignment: VerticalAlignment.Center
+                            leftPadding: 40
+                            Container {
+                                layout: StackLayout {
+                                    orientation: LayoutOrientation.LeftToRight
+                                }
+                                Container {
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#30910e")
+                                }
+                                Container {
+                                    leftPadding: 20
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#b01717")
+                                }
+                                Container {
+                                    leftPadding: 20
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#5782c6")
+                                }
+                                Container {
+                                    leftPadding: 20
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#42484a")
+                                }
                             }
                             Container {
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#c08aa1")
-                            }
-                            Container {
-                                leftPadding: 20
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#4f546c")
-                            }
-                            Container {
-                                leftPadding: 20
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#fc982b")
-                            }
-                            Container {
-                                leftPadding: 20
-                                preferredHeight: 80
-                                preferredWidth: 80
-                                background: Color.create("#914994")
+                                topPadding: 20
+                                horizontalAlignment: HorizontalAlignment.Fill
+                                layout: StackLayout {
+                                    orientation: LayoutOrientation.LeftToRight
+                                }
+                                Container {
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#c08aa1")
+                                }
+                                Container {
+                                    leftPadding: 20
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#4f546c")
+                                }
+                                Container {
+                                    leftPadding: 20
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#fc982b")
+                                }
+                                Container {
+                                    leftPadding: 20
+                                    preferredHeight: 80
+                                    preferredWidth: 80
+                                    background: Color.create("#914994")
+                                }
                             }
                         }
+
                     }
+                }
+
+            }
+        }
+        attachedObjects: [
+            FilePicker {
+                id: newAvatar
+                type: FileType.Picture
+                title: qsTr("Select Picture")
+                imageCropEnabled: true
+                directories: [ "/accounts/1000/" ]
+                onFileSelected: {
+                    _control.buddyAvatar = "file://" + selectedFiles
+                    console.log("FileSelected signal received : " + selectedFiles);
 
                 }
             }
+        ]
 
-        }
     }
 }

@@ -16,6 +16,7 @@
 #include "protocol/duktoprotocol.h"
 #include "destinationbuddy.h"
 #include "model/BuddyModel.h"
+#include "settings.h"
 
 class UpdatesChecker;
 class MiniWebServer;
@@ -29,6 +30,9 @@ class controller: public QObject {
 	 Q_PROPERTY(bb::cascades::GroupDataModel* buddyModel READ buddyModel NOTIFY onBuddyModelChanged FINAL)
 	 Q_PROPERTY(int currentTransferProgress READ currentTransferProgress NOTIFY currentTransferProgressChanged)
 	 Q_PROPERTY(QString currentTransferStats READ currentTransferStats NOTIFY currentTransferStatsChanged)
+	 Q_PROPERTY(QString buddyName READ buddyName WRITE setBuddyName NOTIFY buddyNameChanged)
+	 Q_PROPERTY(QString buddyAvatar READ buddyAvatar WRITE setBuddyAvatar NOTIFY buddyAvatarChanged)
+	 Q_PROPERTY(QString themeColor READ themeColor WRITE setThemeColor NOTIFY themeColorChanged)
 
 public:
 	controller();
@@ -39,6 +43,12 @@ public:
 	void setCurrentTransferProgress(int value);
 	QString currentTransferStats();
 	void setCurrentTransferStats(QString stats);
+	void setBuddyName(QString name);
+	QString buddyName();
+	void setBuddyAvatar(QString avatar);
+	QString buddyAvatar();
+	void setThemeColor(QString color);
+	QString themeColor();
 
 	// Invoked by QML
 	Q_INVOKABLE
@@ -48,6 +58,9 @@ signals:
 	void onBuddyModelChanged();
 	void currentTransferProgressChanged();
 	void currentTransferStatsChanged();
+	void buddyNameChanged();
+	void buddyAvatarChanged();
+	void themeColorChanged();
 
 public slots:
 	void peerListAdded(Peer peer);
@@ -66,6 +79,7 @@ private:
     void startTransfer(QStringList files);
     void startTransfer(QString text);
 	QString workingDir;
+	Settings *mSettings;
 };
 
 #endif /* CONTROLLER_H_ */

@@ -8,7 +8,7 @@ Page {
                 leftPadding: 15
                 rightPadding: 15
                 preferredHeight: 110
-                background: Color.create("#30910e")
+                background: Color.create(_control.themeColor)
                 horizontalAlignment: HorizontalAlignment.Fill
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight

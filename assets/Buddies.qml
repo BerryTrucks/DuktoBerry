@@ -10,7 +10,7 @@ NavigationPane {
             kindProperties: FreeFormTitleBarKindProperties {
                 Container {
                     preferredHeight: 110
-                    background: Color.create("#30910e")
+                    background: Color.create(_control.themeColor)
                     horizontalAlignment: HorizontalAlignment.Fill
                     verticalAlignment: VerticalAlignment.Center
                     Label {
@@ -29,8 +29,8 @@ NavigationPane {
         }
         Container {
             CustomItemBuddy {
-                userName: "Laai-Berry"
-                system: "BlackBerry"
+                userName: "Laairoy (You)"
+                system: "at Laai-Berry"
                 onCreationCompleted: {
                     timer.timeout.connect(timeout);
                 }
@@ -40,7 +40,7 @@ NavigationPane {
                 leftPadding: 100
                 rightPadding: 100
                 Container {
-                    background: Color.create("#30910e")
+                    background: Color.create(_control.themeColor)
                     Divider {
                     }
                 }
@@ -48,6 +48,7 @@ NavigationPane {
             Container {
                 topPadding: 30
                 ListView {
+                    property string themeColorToList: _control.themeColor
                     signal timerToList()
                     onCreationCompleted: {
                         timer.timeout.connect(timerToList);
@@ -64,6 +65,7 @@ NavigationPane {
                                 system: ListItemData.system
                                 onCreationCompleted: {
                                     mlistItem.ListItem.view.timerToList.connect(timeout)
+                                    themeColor = mlistItem.ListItem.view.themeColorToList
                                 }
                             }
                         }
