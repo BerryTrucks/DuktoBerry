@@ -51,9 +51,9 @@ NavigationPane {
                                 userName: ListItemData.username
                                 system: ListItemData.system
                                 plataformImage: ListItemData.oslogo
+                                    themeColor: mlistItem.ListItem.view.themeColorToList
                                 onCreationCompleted: {
                                     mlistItem.ListItem.view.timerToList.connect(timeout)
-                                    themeColor = mlistItem.ListItem.view.themeColorToList
                                 }
                             }
                         }
