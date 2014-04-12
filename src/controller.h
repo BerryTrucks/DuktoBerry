@@ -28,6 +28,7 @@ class QNetworkReply;
 class controller: public QObject {
 	 Q_OBJECT
 	 Q_PROPERTY(bb::cascades::GroupDataModel* buddyModel READ buddyModel NOTIFY onBuddyModelChanged FINAL)
+	 Q_PROPERTY(QString currentTransferBuddy READ currentTransferBuddy NOTIFY currentTransferBuddyChanged)
 	 Q_PROPERTY(int currentTransferProgress READ currentTransferProgress NOTIFY currentTransferProgressChanged)
 	 Q_PROPERTY(QString currentTransferStats READ currentTransferStats NOTIFY currentTransferStatsChanged)
 	 Q_PROPERTY(QString buddyName READ buddyName WRITE setBuddyName NOTIFY buddyNameChanged)
@@ -39,6 +40,8 @@ public:
 	virtual ~controller();
 	void initialize();
 	bb::cascades::GroupDataModel* buddyModel();
+	QString currentTransferBuddy();
+	void setCurrentTransferBuddy(QString buddy);
 	int currentTransferProgress();
 	void setCurrentTransferProgress(int value);
 	QString currentTransferStats();
@@ -55,24 +58,31 @@ public:
 	void sendSomeFiles(QVariant indexPath, QStringList files);
 
 signals:
+	void currentTransferBuddyChanged();
 	void onBuddyModelChanged();
 	void currentTransferProgressChanged();
 	void currentTransferStatsChanged();
 	void buddyNameChanged();
 	void buddyAvatarChanged();
 	void themeColorChanged();
+	void receiveCompleted();
+	void transferStart();
 
 public slots:
 	void peerListAdded(Peer peer);
 	void peerListRemoved(Peer peer);
 	void periodicHello();
 	void transferStatusUpdate(qint64 total, qint64 partial);
+	void receiveFileStart(QString senderIp);
+	void receiveFileComplete(QStringList *files, qint64 totalSize);
+	void receiveFileCancelled();
 
 private:
 	DuktoProtocol mDuktoProtocol;
 	QTimer *mPeriodicHelloTimer;
 	BuddyModel * m_buddyModel;
 	DestinationBuddy *mDestBuddy;
+	QString mCurrentTransferBuddy;
 	QString mCurrentTransferStats;
 	int mCurrentTransferProgress;
     bool prepareStartTransfer(QString *ip, qint16 *port);

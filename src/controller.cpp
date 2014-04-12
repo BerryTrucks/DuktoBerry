@@ -29,9 +29,17 @@ controller::controller() :
 	mMiniWebServer = new MiniWebServer(NETWORK_PORT + 1);
 
 	workingDir = QDir::currentPath();
+	qDebug() << "controller::controller:" << workingDir;
+
+	// Change current folder
+//	QDir::setCurrent(mSettings->currentPath());
+
 	connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
 	connect(&mDuktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
 	connect(&mDuktoProtocol, SIGNAL(transferStatusUpdate(qint64,qint64)), this, SLOT(transferStatusUpdate(qint64,qint64)));
+	connect(&mDuktoProtocol, SIGNAL(receiveFileStart(QString)), this, SLOT(receiveFileStart(QString)));
+	connect(&mDuktoProtocol, SIGNAL(receiveFileComplete(QStringList*,qint64)), this, SLOT(receiveFileComplete(QStringList*,qint64)));
+	connect(&mDuktoProtocol, SIGNAL(receiveFileCancelled()), this, SLOT(receiveFileCancelled()));
 
 	// Periodic "hello" timer
 	mPeriodicHelloTimer = new QTimer(this);
@@ -43,6 +51,7 @@ controller::controller() :
 
 controller::~controller() {
 	// TODO Auto-generated destructor stub
+	mDuktoProtocol.sayGoodbye();
 }
 
 void controller::sendSomeFiles(QVariant indexPath, QStringList files) {
@@ -214,6 +223,52 @@ void controller::setThemeColor(QString color) {
 
 QString controller::themeColor() {
 	return mSettings->themeColor();
+}
+
+void controller::receiveFileStart(QString senderIp) {
+	// Look for the sender in the buddy list
+	    QString sender = m_buddyModel->buddyNameByIp(senderIp);
+	    if (sender == "")
+	        setCurrentTransferBuddy("remote sender");
+	    else
+	        setCurrentTransferBuddy(sender);
+
+	    // Update user interface
+//	    setCurrentTransferSending(false);
+
+	    emit transferStart();
+}
+
+void controller::receiveFileComplete(QStringList* files, qint64 totalSize) {
+	// Add an entry to recent activities
+	QDir d(".");
+//	if (files->size() == 1)
+//	    mRecentList.addRecent(files->at(0), d.absoluteFilePath(files->at(0)), "file", mCurrentTransferBuddy, totalSize);
+//	else
+//	    mRecentList.addRecent("Files and folders", d.absolutePath(), "misc", mCurrentTransferBuddy, totalSize);
+
+	// Update GUI
+//	mView->win7()->setProgressState(EcWin7::NoProgress);
+//	QApplication::alert(mView, 5000);
+	emit receiveCompleted();
+}
+
+void controller::receiveFileCancelled() {
+//	setMessagePageTitle("Error");
+//	setMessagePageText("An error has occurred during the transfer... The data you received could be incomplete or broken.");
+//	setMessagePageBackState("");
+//	mView->win7()->setProgressState(EcWin7::Error);
+//	emit gotoMessagePage();
+}
+
+QString controller::currentTransferBuddy() {
+	return mCurrentTransferBuddy;
+}
+
+void controller::setCurrentTransferBuddy(QString buddy) {
+	if (buddy == mCurrentTransferBuddy) return;
+	    mCurrentTransferBuddy = buddy;
+	    emit currentTransferBuddyChanged();
 }
 
 void controller::startTransfer(QString text) {

@@ -202,7 +202,7 @@ void DuktoProtocol::newIncomingConnection()
     // Recupero connessione
     QTcpSocket *s = mTcpServer->nextPendingConnection();
 
-    // Se sto già ricevendo o inviando, rifiuto la connessione
+    // Se sto giï¿½ ricevendo o inviando, rifiuto la connessione
     if (mIsReceiving || mIsSending)
     {
         s->close();
@@ -240,7 +240,7 @@ void DuktoProtocol::newIncomingConnection()
     mRecvStatus = FILENAME;
 
     // -- Lettura header generale --
-    // Numero entità da ricevere
+    // Numero entitï¿½ da ricevere
     mCurrentSocket->read((char*) &mElementsToReceiveCount, sizeof(qint64));
     // Dimensione totale
     mCurrentSocket->read((char*) &mTotalSize, sizeof(qint64));
@@ -253,6 +253,7 @@ void DuktoProtocol::newIncomingConnection()
 // Processo di lettura principale
 void DuktoProtocol::readNewData()
 {
+	qDebug()<< "DuktoProtocol::readNewData:" << "entrou";
 
     // Fino a che ci sono dati da leggere
     while (mCurrentSocket->bytesAvailable() > 0)
@@ -280,13 +281,14 @@ void DuktoProtocol::readNewData()
 
             case FILESIZE:
                 {
+                	qDebug()<< "DuktoProtocol::readNewData:" << mCurrentSocket->bytesAvailable() << " " << sizeof(qint64);
                     if (!(mCurrentSocket->bytesAvailable() >= sizeof(qint64))) return;
             mCurrentSocket->read((char*) &mElementSize, sizeof(qint64));
             mElementReceivedData = 0;
                     QString name = QString::fromUtf8(mPartialName);
                     mPartialName.clear();
 
-            // Se l'elemento corrente è una cartella, la creo e passo all'elemento successivo
+            // Se l'elemento corrente ï¿½ una cartella, la creo e passo all'elemento successivo
             if (mElementSize == -1)
             {
                 // Verifico il nome della cartella "root"
@@ -295,7 +297,7 @@ void DuktoProtocol::readNewData()
                 // Se non ho ancora trattato questa root, lo faccio ora
                 if (mRootFolderName != rootName) {
 
-                    // Verifico se ho già una cartella con questo nome
+                    // Verifico se ho giï¿½ una cartella con questo nome
                     // nel caso trovo un nome alternativo
                     int i = 2;
                     QString originalName = name;
@@ -307,13 +309,14 @@ void DuktoProtocol::readNewData()
 
                 }
 
-                // Se invece l'ho già trattata, allora rinomino questo percorso
+                // Se invece l'ho giï¿½ trattata, allora rinomino questo percorso
                 else if (mRootFolderName != mRootFolderRenamed)
                     name = name.replace(0, name.indexOf('/'), mRootFolderRenamed);
 
                 // Creo la cartella
                 QDir dir(".");
                         bool ret = dir.mkpath(name);
+                        qDebug()<< "DuktoProtocol::readNewData:" << dir.mkpath(name);
                         if (!ret)
                         {
                             emit receiveFileCancelled();
@@ -351,11 +354,11 @@ void DuktoProtocol::readNewData()
             // Altrimenti creo il nuovo file
             else
             {
-                // Se il file è in una cartella rinominata, devo provvedere di conseguenza
+                // Se il file ï¿½ in una cartella rinominata, devo provvedere di conseguenza
                 if ((name.indexOf('/') != -1) && (name.section("/", 0, 0) == mRootFolderName))
                     name = name.replace(0, name.indexOf('/'), mRootFolderRenamed);
 
-                // Se il file esiste già cambio il nome di quello nuovo
+                // Se il file esiste giï¿½ cambio il nome di quello nuovo
                 int i = 2;
                 QString originalName = name;
                 while (QFile::exists(name)) {
@@ -363,9 +366,15 @@ void DuktoProtocol::readNewData()
                     name = fi.baseName() + " (" + QString::number(i) + ")." + fi.completeSuffix();
                     i++;
                 }
-                mReceivedFiles->append(name);
-                mCurrentFile = new QFile(name);
+				mReceivedFiles->append(name);
+				//Need for save files in BlackBerry 10
+				QDir dir;
+				dir.mkpath("shared/downloads/");
+
+                mCurrentFile = new QFile("shared/downloads/" + name);
                         bool ret = mCurrentFile->open(QIODevice::WriteOnly);
+
+                        qDebug() << "DuktoProtocol::readNewData:" << ret;
                         if (!ret)
                         {
                             emit receiveFileCancelled();
@@ -489,7 +498,7 @@ void DuktoProtocol::sendFile(QString ipDest, qint16 port, QStringList files)
     // Check for default port
     if (port == 0) port = DEFAULT_TCP_PORT;
 
-    // Verifica altre attività in corso
+    // Verifica altre attivitï¿½ in corso
     if (mIsReceiving || mIsSending) return;
     mIsSending = true;
 
@@ -514,7 +523,7 @@ void DuktoProtocol::sendText(QString ipDest, qint16 port, QString text)
     // Check for default port
     if (port == 0) port = DEFAULT_TCP_PORT;
 
-    // Verifica altre attività in corso
+    // Verifica altre attivitï¿½ in corso
     if (mIsReceiving || mIsSending) return;
     mIsSending = true;
 
@@ -537,7 +546,7 @@ void DuktoProtocol::sendScreen(QString ipDest, qint16 port, QString path)
     // Check for default port
     if (port == 0) port = DEFAULT_TCP_PORT;
 
-    // Verifica altre attività in corso
+    // Verifica altre attivitï¿½ in corso
     if (mIsReceiving || mIsSending) return;
     mIsSending = true;
 
@@ -569,7 +578,7 @@ void DuktoProtocol::sendMetaData()
 #endif
 
     // Header
-    //  - N. entità (file, cartelle, ecc...)
+    //  - N. entitï¿½ (file, cartelle, ecc...)
     //  - Dimensione totale
     //  - Nome primo file
     //  - Dimensione primo (e unico) file (-1 per una cartella)
@@ -577,7 +586,7 @@ void DuktoProtocol::sendMetaData()
     QByteArray header;
     qint64 tmp;
 
-    // N. entità
+    // N. entitï¿½
     tmp = mFilesToSend->count();
     header.append((char*) &tmp, sizeof(tmp));
     // Dimensione totale
@@ -626,7 +635,7 @@ void DuktoProtocol::sendData(qint64 b)
         return;
     }
 
-    // Se il file corrente non è ancora terminato
+    // Se il file corrente non ï¿½ ancora terminato
     // invio una nuova parte del file
     if (mCurrentFile)
         d = mCurrentFile->read(10000);
@@ -752,11 +761,11 @@ QByteArray DuktoProtocol::nextElementHeader()
 {
     QByteArray header;
 
-    // Ricava il nome del file (se non è l'ultimo)
+    // Ricava il nome del file (se non ï¿½ l'ultimo)
     if (mFilesToSend->size() == mFileCounter) return header;
     QString fullname = mFilesToSend->at(mFileCounter++);
 
-    // Chiusura file precedente, se non è già stato chiuso
+    // Chiusura file precedente, se non ï¿½ giï¿½ stato chiuso
     if (mCurrentFile) {
         mCurrentFile->close();
         delete mCurrentFile;
@@ -805,11 +814,11 @@ QByteArray DuktoProtocol::nextElementHeader()
 // Calcola l'occupazione totale di tutti i file da trasferire
 qint64 DuktoProtocol::computeTotalSize(QStringList *e)
 {
-    // Se è un invio testuale
+    // Se ï¿½ un invio testuale
     if ((e->length() == 1) && (e->at(0) == "___DUKTO___TEXT___"))
         return mTextToSend.toUtf8().length();
 
-    // Se è un invio normale
+    // Se ï¿½ un invio normale
     qint64 size = 0;
     for (int i = 0; i < e->count(); i++)
     {

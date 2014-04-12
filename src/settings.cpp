@@ -30,7 +30,7 @@ Settings::Settings(QObject *parent) :
 QString Settings::currentPath()
 {
     // Retrieve the last saved path (if any)
-    QString path = mSettings.value("DestPath", "").toString();
+    QString path = mSettings.value("DestPath", "/shared/downloads/").toString();
 
     // Check if exists
     if ((path != "") && (QDir(path).exists()))
