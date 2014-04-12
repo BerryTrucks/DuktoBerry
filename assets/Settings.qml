@@ -99,24 +99,45 @@ Sheet {
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#30910e")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#30910e"
+                                        }
+                                    }
                                 }
                                 Container {
                                     leftPadding: 20
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#b01717")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#b01717"
+                                        }
+                                    }
                                 }
                                 Container {
                                     leftPadding: 20
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#5782c6")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#5782c6"
+                                        }
+                                    }
+                                    
                                 }
                                 Container {
                                     leftPadding: 20
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#42484a")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#42484a"
+                                        }
+                                    }
                                 }
                             }
                             Container {
@@ -129,24 +150,45 @@ Sheet {
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#c08aa1")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#c08aa1"
+                                        }
+                                    }
+                                    
                                 }
                                 Container {
                                     leftPadding: 20
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#4f546c")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#4f546c"
+                                        }
+                                    }
                                 }
                                 Container {
                                     leftPadding: 20
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#fc982b")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#fc982b"
+                                        }
+                                    }
                                 }
                                 Container {
                                     leftPadding: 20
                                     preferredHeight: 80
                                     preferredWidth: 80
                                     background: Color.create("#914994")
+                                    onTouch: {
+                                        if (event.isDown()) {
+                                            _control.themeColor = "#914994"
+                                        }
+                                    }
                                     
                                 }
                             }
