@@ -1,8 +1,10 @@
 import bb.cascades 1.2
 
 FreeFormTitleBarKindProperties {
+    id: freForm
     property alias title: lbTitle.text
     property alias closeButtonActive: closeButton.visible
+    signal backButtonClicked
     Container {
         layout: DockLayout {
         }
@@ -12,26 +14,22 @@ FreeFormTitleBarKindProperties {
         ImageView {
             imageSource: "asset:///images/BottomShadow.png"
             opacity: 0.5
-//            imageSource: "asset:///images/PanelGradient.png"
+            //            imageSource: "asset:///images/PanelGradient.png"
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
-            
-            
+
         }
         Container {
+            layout: DockLayout {
+            }
             leftPadding: 15
             rightPadding: 15
             preferredHeight: 110
             horizontalAlignment: HorizontalAlignment.Fill
-            layout: StackLayout {
-                orientation: LayoutOrientation.LeftToRight
-            }
+            verticalAlignment: VerticalAlignment.Fill
             Container {
                 verticalAlignment: VerticalAlignment.Center
                 horizontalAlignment: HorizontalAlignment.Fill
-                layoutProperties: StackLayoutProperties {
-                    spaceQuota: 8
-                }
                 Label {
                     id: lbTitle
                     verticalAlignment: VerticalAlignment.Center
@@ -50,10 +48,15 @@ FreeFormTitleBarKindProperties {
                 visible: false
                 verticalAlignment: VerticalAlignment.Center
                 maxWidth: 150
-                Button {
-                    text: qsTr("Close")
+                ImageButton {
+                    //                    text: qsTr("Close")
+                    defaultImageSource: "asset:///images/BackIcon.png"
+                    pressedImageSource: "asset:///images/BackIconPress.png"
                     onClicked: {
-                        settingsSheet.close()
+                        
+                    }
+                    onCreationCompleted: {
+                        clicked.connect(freForm.backButtonClicked)
                     }
                 }
             }

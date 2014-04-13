@@ -22,6 +22,8 @@
 #include <bb/cascades/LocaleHandler>
 #include <QTimer>
 
+#include "controller.h"
+
 #define NETWORK_PORT 4644
 using namespace bb::cascades;
 

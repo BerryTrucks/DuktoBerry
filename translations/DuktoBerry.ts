@@ -9,13 +9,6 @@
     </message>
 </context>
 <context>
-    <name>CustomFreeFormTitleBar</name>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>Recents</name>
     <message>
         <source>Recents</source>

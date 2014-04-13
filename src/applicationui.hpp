@@ -19,8 +19,6 @@
 
 #include <QObject>
 
-#include "controller.h"
-
 namespace bb
 {
     namespace cascades

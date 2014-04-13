@@ -7,7 +7,10 @@ Page {
         kind: TitleBarKind.FreeForm
         kindProperties: CustomFreeFormTitleBar {
                 title: qsTr("Send Data")
-                closeButtonActive: false
+                closeButtonActive: true
+                onBackButtonClicked: {
+                    navPane.pop();
+                }
             }
     }
 

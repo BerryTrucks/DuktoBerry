@@ -3,6 +3,7 @@ import my.timer 1.0
 
 NavigationPane {
     id: navPane
+    backButtonsVisible: false
     Page {
         id: mPage
         titleBar: TitleBar {

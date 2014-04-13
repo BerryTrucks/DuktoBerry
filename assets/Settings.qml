@@ -9,6 +9,9 @@ Sheet {
             kindProperties: CustomFreeFormTitleBar {
                 title: qsTr("Settings")
                 closeButtonActive: true
+                onBackButtonClicked: {
+                    settingsSheet.close()
+                }
             }
         }
         ScrollView {
@@ -126,7 +129,7 @@ Sheet {
                                             _control.themeColor = "#5782c6"
                                         }
                                     }
-                                    
+
                                 }
                                 Container {
                                     leftPadding: 20
@@ -155,7 +158,7 @@ Sheet {
                                             _control.themeColor = "#c08aa1"
                                         }
                                     }
-                                    
+
                                 }
                                 Container {
                                     leftPadding: 20
@@ -189,7 +192,7 @@ Sheet {
                                             _control.themeColor = "#914994"
                                         }
                                     }
-                                    
+
                                 }
                             }
                         }
