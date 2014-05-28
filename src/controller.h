@@ -31,9 +31,11 @@ class controller: public QObject {
 	 Q_PROPERTY(QString currentTransferBuddy READ currentTransferBuddy NOTIFY currentTransferBuddyChanged)
 	 Q_PROPERTY(int currentTransferProgress READ currentTransferProgress NOTIFY currentTransferProgressChanged)
 	 Q_PROPERTY(QString currentTransferStats READ currentTransferStats NOTIFY currentTransferStatsChanged)
+	 Q_PROPERTY(bool currentTransferSending READ currentTransferSending NOTIFY currentTransferSendingChanged)
 	 Q_PROPERTY(QString buddyName READ buddyName WRITE setBuddyName NOTIFY buddyNameChanged)
 	 Q_PROPERTY(QString buddyAvatar READ buddyAvatar WRITE setBuddyAvatar NOTIFY buddyAvatarChanged)
 	 Q_PROPERTY(QString themeColor READ themeColor WRITE setThemeColor NOTIFY themeColorChanged)
+	 Q_PROPERTY(QString remoteDestinationAddress READ remoteDestinationAddress WRITE setRemoteDestinationAddress NOTIFY remoteDestinationAddressChanged)
 
 public:
 	controller();
@@ -52,21 +54,29 @@ public:
 	QString buddyAvatar();
 	void setThemeColor(QString color);
 	QString themeColor();
+	QString remoteDestinationAddress();
+    void setRemoteDestinationAddress(QString address);
+    bool currentTransferSending();
+    void setCurrentTransferSending(bool sending);
 
 	// Invoked by QML
 	Q_INVOKABLE
 	void sendSomeFiles(QVariant indexPath, QStringList files);
+	Q_INVOKABLE
+    void abortTransfer();
 
 signals:
 	void currentTransferBuddyChanged();
 	void onBuddyModelChanged();
 	void currentTransferProgressChanged();
 	void currentTransferStatsChanged();
-	void buddyNameChanged();
-	void buddyAvatarChanged();
-	void themeColorChanged();
-	void receiveCompleted();
-	void transferStart();
+    void buddyNameChanged();
+    void buddyAvatarChanged();
+    void themeColorChanged();
+    void receiveCompleted();
+    void transferStart();
+    void remoteDestinationAddressChanged();
+    void currentTransferSendingChanged();
 
 public slots:
 	void peerListAdded(Peer peer);
@@ -76,6 +86,7 @@ public slots:
 	void receiveFileStart(QString senderIp);
 	void receiveFileComplete(QStringList *files, qint64 totalSize);
 	void receiveFileCancelled();
+
 
 private:
 	DuktoProtocol mDuktoProtocol;
@@ -91,6 +102,8 @@ private:
 	QString workingDir;
 	Settings *mSettings;
 	MiniWebServer *mMiniWebServer;
+	QString mRemoteDestinationAddress;
+	bool mCurrentTransferSending;
 };
 
 #endif /* CONTROLLER_H_ */

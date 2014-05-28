@@ -9,6 +9,13 @@
     </message>
 </context>
 <context>
+    <name>ProgressPage</name>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Recents</name>
     <message>
         <source>Recents</source>

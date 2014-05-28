@@ -1,6 +1,7 @@
 import bb.cascades 1.2
 
 TabbedPane {
+    property bool currentTransfer: _control.currentTransferSending
     showTabsOnActionBar: true
     Tab {
         title: "Buddies"
@@ -42,6 +43,16 @@ TabbedPane {
             id: settingsPane
             Settings {
             }
+        },
+        ProgressPage {
+            id: progressDialog
         }
     ]
+    
+    onCurrentTransferChanged: {
+        console.log("currentTransfer:",currentTransfer)
+        if(currentTransfer){
+            progressDialog.open()
+        }
+    }
 }
