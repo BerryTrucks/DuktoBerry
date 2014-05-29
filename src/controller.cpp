@@ -56,6 +56,9 @@ controller::~controller()
 {
     // TODO Auto-generated destructor stub
     mDuktoProtocol.sayGoodbye();
+    if (mPeriodicHelloTimer) mPeriodicHelloTimer->deleteLater();
+    if (mSettings) mSettings->deleteLater();
+    if (mMiniWebServer) mMiniWebServer->deleteLater();
 }
 
 void controller::sendSomeFiles(QVariant indexPath, QStringList files)
@@ -154,15 +157,12 @@ void controller::startTransfer(QStringList files)
     // Prepare file transfer
     QString ip = mDestBuddy->ip();
     qint16 port = mDestBuddy->port();
-    qDebug() << "controller::startTransfer:" << !prepareStartTransfer(&ip, &port);
+    //qDebug() << "controller::startTransfer:" << !prepareStartTransfer(&ip, &port);
     if (!prepareStartTransfer(&ip, &port))
         return;
 
     // Start files transfer
     mDuktoProtocol.sendFile(ip, port, files);
-
-    // Update user interface
-    setCurrentTransferSending(false);
 }
 
 void controller::peerListRemoved(Peer peer)

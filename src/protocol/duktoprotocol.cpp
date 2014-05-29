@@ -255,6 +255,10 @@ void DuktoProtocol::readNewData()
 {
 	qDebug()<< "DuktoProtocol::readNewData:" << "entrou";
 
+    //Need for save files in BlackBerry 10
+    QDir dir;
+    dir.mkpath("shared/downloads/");
+
     // Fino a che ci sono dati da leggere
     while (mCurrentSocket->bytesAvailable() > 0)
     {
@@ -367,9 +371,6 @@ void DuktoProtocol::readNewData()
                     i++;
                 }
 				mReceivedFiles->append(name);
-				//Need for save files in BlackBerry 10
-				QDir dir;
-				dir.mkpath("shared/downloads/");
 
                 mCurrentFile = new QFile("shared/downloads/" + name);
                         bool ret = mCurrentFile->open(QIODevice::WriteOnly);
@@ -697,6 +698,7 @@ void DuktoProtocol::updateStatus()
     if (mIsSending)
         emit transferStatusUpdate(mTotalSize, mSentData);
     else if (mIsReceiving)
+        qDebug() << "DuktoProtocol::updateStatus:" << mIsReceiving;
         emit transferStatusUpdate(mTotalSize, mTotalReceivedData);
 }
 

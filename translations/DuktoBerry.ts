@@ -14,6 +14,22 @@
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sending data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiving data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Recents</name>

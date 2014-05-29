@@ -2,6 +2,7 @@ import bb.cascades 1.2
 
 Dialog {
     id: progressDialog
+    property bool transferSending: _control.currentTransferSending
     Container {
         layout: DockLayout {
         }
@@ -20,14 +21,14 @@ Dialog {
                 horizontalAlignment: HorizontalAlignment.Fill
                 topPadding: 20
                 Label {
-                    text: "Sending data"
+                    text: (transferSending)? qsTr("Sending data"): qsTr("Receiving data")
                     textStyle {
                         fontSize: FontSize.XXLarge
                         color: Color.White
                     }
                 }
                 Label {
-                    text: "to" + "Laairoy"
+                    text: ((transferSending)? qsTr("to"): qsTr("from")) + " Laairoy"
                     textStyle.color: Color.White
                 }
                 Container {
