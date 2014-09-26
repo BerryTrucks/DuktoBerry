@@ -6,12 +6,12 @@ Page {
     titleBar: TitleBar {
         kind: TitleBarKind.FreeForm
         kindProperties: CustomFreeFormTitleBar {
-                title: qsTr("Send Data")
-                closeButtonActive: true
-                onBackButtonClicked: {
-                    navPane.pop();
-                }
+            title: qsTr("Send Data")
+            closeButtonActive: true
+            onBackButtonClicked: {
+                navPane.pop();
             }
+        }
     }
 
     Container {
@@ -35,6 +35,13 @@ Page {
                     filePicker.open()
                 }
             }
+            Button {
+                horizontalAlignment: HorizontalAlignment.Center
+                text: "send a folder"
+                onClicked: {
+                    folderPicker.open()
+                }
+            }
         }
     }
     attachedObjects: [
@@ -46,6 +53,16 @@ Page {
                 _control.sendSomeFiles(index, selectedFiles)
                 console.log("FileSelected signal received : " + selectedFiles);
             }
+        },
+        FilePicker {
+            id: folderPicker
+            mode: FilePickerMode.SaverMultiple
+            title: "Select Folder"
+            onFileSelected: {
+                _control.sendSomeFiles(index, selectedFiles)
+                console.log("FileSelected signal received : " + selectedFiles[0]);
+            }
+            
         }
     ]
 }
