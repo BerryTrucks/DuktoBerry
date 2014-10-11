@@ -46,7 +46,9 @@ Page {
                 horizontalAlignment: HorizontalAlignment.Center
                 text: "send a text"
                 onClicked: {
-                    _control.sendtext(index, "olamundo");
+                   var msgSheet =  messageSheet.createObject()
+                   msgSheet.index = index
+                   msgSheet.open()
                 }
             }
         }
@@ -70,6 +72,11 @@ Page {
                 console.log("FileSelected signal received : " + selectedFiles[0]);
             }
             
+        },
+        ComponentDefinition {
+            id: messageSheet
+            MessagePage {
+            }
         }
     ]
 }
