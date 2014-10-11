@@ -63,6 +63,8 @@ public:
 	Q_INVOKABLE
 	void sendSomeFiles(QVariant indexPath, QStringList files);
 	Q_INVOKABLE
+	void sendtext(QVariant indexPath, QString text);
+	Q_INVOKABLE
     void abortTransfer();
 
 signals:

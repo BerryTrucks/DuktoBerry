@@ -42,6 +42,13 @@ Page {
                     folderPicker.open()
                 }
             }
+            Button {
+                horizontalAlignment: HorizontalAlignment.Center
+                text: "send a text"
+                onClicked: {
+                    _control.sendtext(index, "olamundo");
+                }
+            }
         }
     }
     attachedObjects: [

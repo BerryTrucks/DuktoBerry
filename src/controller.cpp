@@ -317,13 +317,24 @@ void controller::setRemoteDestinationAddress(QString address)
     emit remoteDestinationAddressChanged();
 }
 
+void controller::sendtext(QVariant indexPath, QString text)
+{
+    if (text == "")
+        return;
+
+    QVariantMap item = indexPath.toMap();
+    mDestBuddy->fillFromItem(item);
+    // Send text
+    startTransfer(text);
+}
+
 void controller::startTransfer(QString text)
 {
     // Prepare file transfer
     QString ip = mDestBuddy->ip();
     qint16 port = mDestBuddy->port();
-//	if (!prepareStartTransfer(&ip, &port))
-//		return;
+	if (!prepareStartTransfer(&ip, &port))
+		return;
 
 // Start files transfer
     mDuktoProtocol.sendText(ip, port, text);
