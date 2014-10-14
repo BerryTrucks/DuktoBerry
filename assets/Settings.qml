@@ -10,6 +10,7 @@ Sheet {
                 title: qsTr("Settings")
                 closeButtonActive: true
                 onBackButtonClicked: {
+                    _control.buddyName = userName.text
                     settingsSheet.close()
                 }
             }
@@ -35,13 +36,18 @@ Sheet {
                             imageSource: buddyAvatar
                             preferredHeight: 150
                             preferredWidth: 150
+                            leftPadding: 40
                         }
                     }
-                    Button {
+                    Container {
+                        leftPadding: 20
                         verticalAlignment: VerticalAlignment.Center
-                        text: qsTr("Change Avatar")
-                        onClicked: {
-                            newAvatar.open()
+                        CustomButton {
+                            preferredWidth: 400
+                            text: qsTr("Change Avatar")
+                            onClicked: {
+                                newAvatar.open()
+                            }
                         }
                     }
                 }
@@ -50,11 +56,9 @@ Sheet {
                     Label {
                         text: qsTr("User name:")
                     }
-                    TextField {
+                    CustomTextField {
+                        id: userName
                         text: _control.buddyName
-                        onTextChanging: {
-                            _control.buddyName = text
-                        }
                     }
                 }
                 Container {
@@ -62,14 +66,17 @@ Sheet {
                     Label {
                         text: qsTr("Save received file in:")
                     }
-                    TextField {
+                    CustomTextField {
                         text: "/donwloads"
-                        enabled: false
-                        backgroundVisible: true
+                        txtenabled: false
                     }
-                    Button {
+                    Container {
+                        topPadding: 20
                         horizontalAlignment: HorizontalAlignment.Right
+                        CustomButton {
+                        preferredWidth: 400
                         text: qsTr("Change folder")
+                        }
                     }
                 }
                 Container {

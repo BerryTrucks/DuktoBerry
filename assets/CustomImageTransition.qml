@@ -33,9 +33,12 @@ Container {
             id: imgTrasition
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
+            scalingMethod: ScalingMethod.AspectFit
             imageSource: userImage
             maxWidth: 150
             maxHeight: 150
+            preferredHeight: 150
+            preferredWidth: 150
 
         }
     }

@@ -21,15 +21,22 @@ Sheet {
                 text: "to Laairoy"
             }
             Container {
-                TextArea {
+                CustomTextArea {
                     id: textToSend
-                    preferredHeight: 300
+                    preferredHeight: 400
                 }
-                Button {
+                Container {
+                    topPadding: 20
                     horizontalAlignment: HorizontalAlignment.Center
+                CustomButton {
+                    horizontalAlignment: HorizontalAlignment.Center
+                    preferredWidth: 400
                     text: "send"
+                    background: Color.Green
                     onClicked: {
                         _control.sendtext(index, textToSend.text);
+                        msgSheet.close()
+                    }
                     }
                 }
             }

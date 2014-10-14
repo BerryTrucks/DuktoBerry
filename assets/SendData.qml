@@ -22,33 +22,44 @@ Page {
             system: "BlackBerry"
         }
         Container {
+            leftPadding: 20
+            rightPadding: 40
             topPadding: 80
             horizontalAlignment: HorizontalAlignment.Fill
             Label {
                 text: qsTr("What do you want to do?")
                 textStyle.fontSize: FontSize.Large
             }
-            Button {
+            CustomButton {
                 horizontalAlignment: HorizontalAlignment.Center
+                preferredWidth: 550
                 text: "send file"
                 onClicked: {
                     filePicker.open()
                 }
             }
-            Button {
+            Container {
+                topPadding: 20
                 horizontalAlignment: HorizontalAlignment.Center
-                text: "send a folder"
-                onClicked: {
-                    folderPicker.open()
+                CustomButton {
+                    preferredWidth: 550
+                    text: "send a folder"
+                    onClicked: {
+                        folderPicker.open()
+                    }
                 }
             }
-            Button {
+            Container {
+                topPadding: 20
                 horizontalAlignment: HorizontalAlignment.Center
-                text: "send a text"
-                onClicked: {
-                   var msgSheet =  messageSheet.createObject()
-                   msgSheet.index = index
-                   msgSheet.open()
+                CustomButton {
+                    preferredWidth: 550
+                    text: "send a text"
+                    onClicked: {
+                        var msgSheet = messageSheet.createObject()
+                        msgSheet.index = index
+                        msgSheet.open()
+                    }
                 }
             }
         }
@@ -71,7 +82,7 @@ Page {
                 _control.sendSomeFiles(index, selectedFiles)
                 console.log("FileSelected signal received : " + selectedFiles[0]);
             }
-            
+
         },
         ComponentDefinition {
             id: messageSheet
