@@ -10,8 +10,9 @@
 
 #include <qobject.h>
 #include <QVariantList>
-#include "QTimer"
 #include <bb/cascades/GroupDataModel>
+#include <bb/system/Clipboard>
+#include "QTimer"
 
 #include "protocol/duktoprotocol.h"
 #include "destinationbuddy.h"
@@ -64,6 +65,8 @@ public:
 	void sendSomeFiles(QVariant indexPath, QStringList files);
 	Q_INVOKABLE
 	void sendtext(QVariant indexPath, QString text);
+	Q_INVOKABLE
+	QString copyFromClipboard();
 	Q_INVOKABLE
     void abortTransfer();
 

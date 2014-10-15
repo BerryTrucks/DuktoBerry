@@ -30,35 +30,52 @@ Page {
                 text: qsTr("What do you want to do?")
                 textStyle.fontSize: FontSize.Large
             }
-            CustomButton {
-                horizontalAlignment: HorizontalAlignment.Center
-                preferredWidth: 550
-                text: "send file"
-                onClicked: {
-                    filePicker.open()
-                }
-            }
             Container {
                 topPadding: 20
-                horizontalAlignment: HorizontalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Fill
                 CustomButton {
-                    preferredWidth: 550
-                    text: "send a folder"
-                    onClicked: {
-                        folderPicker.open()
-                    }
-                }
-            }
-            Container {
-                topPadding: 20
-                horizontalAlignment: HorizontalAlignment.Center
-                CustomButton {
-                    preferredWidth: 550
-                    text: "send a text"
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    text: "Send a text"
                     onClicked: {
                         var msgSheet = messageSheet.createObject()
                         msgSheet.index = index
                         msgSheet.open()
+                    }
+                }
+            }
+            Container {
+                topPadding: 30
+                horizontalAlignment: HorizontalAlignment.Fill
+                CustomButton {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    text: "Send text from clipboard"
+                    onClicked: {
+                        var msgSheet = messageSheet.createObject()
+                        msgSheet.index = index
+                        msgSheet.text = _control.copyFromClipboard()
+                        msgSheet.open()
+                    }
+                }
+            }
+            Container {
+                topPadding: 30
+                horizontalAlignment: HorizontalAlignment.Fill
+                CustomButton {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    text: "Send some files"
+                    onClicked: {
+                        filePicker.open()
+                    }
+                }
+            }
+            Container {
+                topPadding: 30
+                horizontalAlignment: HorizontalAlignment.Fill
+                CustomButton {
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    text: "Send a folder"
+                    onClicked: {
+                        folderPicker.open()
                     }
                 }
             }

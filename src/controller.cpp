@@ -357,3 +357,13 @@ void controller::abortTransfer()
 {
     mDuktoProtocol.abortCurrentTransfer();
 }
+
+QString controller::copyFromClipboard()
+{
+    bb::system::Clipboard clipboard;
+    QByteArray data = clipboard.value("text/plain");
+    if (!data.isEmpty()) {
+        return clipboard.value("text/plain");
+    }
+    return "";
+}
