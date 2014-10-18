@@ -9,59 +9,99 @@ Dialog {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         Container {
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
+            background: Color.White
+            opacity: 0.8
+        }
+        Container {
             layout: DockLayout {
             }
             horizontalAlignment: HorizontalAlignment.Fill
-            verticalAlignment: VerticalAlignment.Center
-            preferredHeight: 450
-            background: Color.create(_control.themeColor)
-            leftPadding: 30
-            rightPadding: 30
+            verticalAlignment: VerticalAlignment.Fill
             Container {
+                layout: DockLayout {
+                }
                 horizontalAlignment: HorizontalAlignment.Fill
-                topPadding: 20
-                Label {
-                    text: (transferSending)? qsTr("Sending data"): qsTr("Receiving data")
-                    textStyle {
-                        fontSize: FontSize.XXLarge
-                        color: Color.White
-                    }
-                }
-                Label {
-                    text: ((transferSending)? qsTr("to"): qsTr("from")) + " Laairoy"
-                    textStyle.color: Color.White
-                }
+                verticalAlignment: VerticalAlignment.Center
+                preferredHeight: 450
+                background: Color.create(_control.themeColor)
+                leftPadding: 30
+                rightPadding: 30
                 Container {
-                    id: progress
-                    layout: DockLayout {
-                    }
-                    preferredHeight: 100
-                    background: Color.White
-                    preferredWidth: 700
-                    opacity: 0.5
-                    Container {
-                        verticalAlignment: VerticalAlignment.Fill
-                        background: Color.White
-                        preferredWidth: (progress.preferredWidth / 100) * _control.currentTransferProgress
-                    }
-                }
-                Container {
-                    topPadding: 30
-                    layout: StackLayout {
-                        orientation: LayoutOrientation.LeftToRight
+                    id: progressContainer
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: 20
+                    visible: !messageContainer.visible
+                    Label {
+                        text: (transferSending) ? qsTr("Sending data") : qsTr("Receiving data")
+                        textStyle {
+                            fontSize: FontSize.XXLarge
+                            color: Color.White
+                        }
                     }
                     Label {
-                        text: _control.currentTransferStats
-                        layoutProperties: StackLayoutProperties {
-                            spaceQuota: 8
-                        }
-                        verticalAlignment: VerticalAlignment.Center
+                        text: ((transferSending) ? qsTr("to") : qsTr("from")) + " Laairoy"
                         textStyle.color: Color.White
-
                     }
-                    Button {
-                        horizontalAlignment: HorizontalAlignment.Right
+                    Container {
+                        id: progress
+                        layout: DockLayout {
+                        }
+                        preferredHeight: 100
+                        background: Color.White
+                        preferredWidth: 700
+                        opacity: 0.5
+                        Container {
+                            verticalAlignment: VerticalAlignment.Fill
+                            background: Color.White
+                            preferredWidth: (progress.preferredWidth / 100) * _control.currentTransferProgress
+                        }
+                    }
+                    Container {
+                        topPadding: 30
+                        layout: StackLayout {
+                            orientation: LayoutOrientation.LeftToRight
+                        }
+                        Label {
+                            text: _control.currentTransferStats
+                            layoutProperties: StackLayoutProperties {
+                                spaceQuota: 8
+                            }
+                            verticalAlignment: VerticalAlignment.Center
+                            textStyle.color: Color.White
+                        }
+                    }
+                }
+                Container {
+                    id: messageContainer
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    topPadding: 20
+                    visible: false
+                    Label {
+                        id: lbTitle
+                        textStyle {
+                            fontSize: FontSize.XXLarge
+                            color: Color.White
+                        }
+                    }
+                    Label {
+                        topPadding: 20
+                        id: lbText
+                        textStyle {
+                            color: Color.White
+                        }
+                        multiline: true
+                    }
+                }
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Right
+                    verticalAlignment: VerticalAlignment.Bottom
+                    bottomPadding: 20
+                    CustomButton {
+                        id: cbClose
                         preferredWidth: 200
+                        background: Color.Green
                         text: qsTr("Abort")
                         onClicked: {
                             _control.abortTransfer()
@@ -71,5 +111,20 @@ Dialog {
                 }
             }
         }
+    }
+    function receiveCompleted() {
+        console.log("Receive File completed")
+        progressDialog.close()
+    }
+    function messagePage(pageTitle, pageText) {
+        lbTitle.text = pageTitle
+        lbText.text = pageText
+        cbClose.text = qsTr("Close")
+        
+        messageContainer.visible = true
+    }
+    onCreationCompleted: {
+        _control.receiveCompleted.connect(progressDialog.receiveCompleted)
+        _control.gotoMessagePage.connect(progressDialog.messagePage)
     }
 }

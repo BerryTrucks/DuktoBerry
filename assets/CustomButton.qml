@@ -3,6 +3,7 @@ Container {
     id: rootContainer
     signal clicked
     property alias text: lblButton.text
+    property bool actived: true
     maxHeight: 80
     layout: DockLayout {
     }
@@ -10,7 +11,7 @@ Container {
         layout: DockLayout {
         }
         id: btnContainer
-        background: Color.create(_control.themeColor)
+        background: rootContainer.actived ? Color.create(_control.themeColor) : Color.Gray
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         topPadding: 6
@@ -22,6 +23,7 @@ Container {
             background: Color.White
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
+            opacity: rootContainer.actived ? 1.0 : 0.5
 
         }
     }
@@ -34,16 +36,18 @@ Container {
         textStyle.color: btnContainer.background
     }
     ImageButton {
-        defaultImageSource: "asset:///images/customButtom.png"
+        preferredHeight: 80
         horizontalAlignment: HorizontalAlignment.Fill
+//        defaultImageSource: "asset:///images/customButtom.png"
         onCreationCompleted: {
             clicked.connect(rootContainer.clicked)
         }
+        enabled: rootContainer.actived
         onTouch: {
-            if (event.isDown()) {
+            if (event.isDown() && rootContainer.actived) {
                 colorContainer.opacity = 0.5
-            } else if (event.isUp()) {
-                colorContainer.opacity = 100
+            } else if (event.isUp() && rootContainer.actived) {
+                colorContainer.opacity = 1
             }
         }
     }

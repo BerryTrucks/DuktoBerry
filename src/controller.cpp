@@ -17,6 +17,7 @@ controller::controller() :
 {
     // TODO Auto-generated constructor stub
     m_buddyModel = new BuddyModel();
+    m_recentModel = new RecentModel();
 
     // Destination buddy
     mDestBuddy = new DestinationBuddy(this);
@@ -38,12 +39,14 @@ controller::controller() :
 
     connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
     connect(&mDuktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
-    connect(&mDuktoProtocol, SIGNAL(transferStatusUpdate(qint64, qint64)), this,
-            SLOT(transferStatusUpdate(qint64, qint64)));
-    connect(&mDuktoProtocol, SIGNAL(receiveFileStart(QString)), this,
-            SLOT(receiveFileStart(QString)));
+    connect(&mDuktoProtocol, SIGNAL(transferStatusUpdate(qint64, qint64)), this, SLOT(transferStatusUpdate(qint64, qint64)));
+    connect(&mDuktoProtocol, SIGNAL(receiveFileStart(QString)), this, SLOT(receiveFileStart(QString)));
     connect(&mDuktoProtocol, SIGNAL(receiveFileComplete(QStringList*,qint64)), this, SLOT(receiveFileComplete(QStringList*,qint64)));
     connect(&mDuktoProtocol, SIGNAL(receiveFileCancelled()), this, SLOT(receiveFileCancelled()));
+    connect(&mDuktoProtocol, SIGNAL(receiveTextComplete(QString*,qint64)), this, SLOT(receiveTextComplete(QString*,qint64)));
+    connect(&mDuktoProtocol, SIGNAL(sendFileComplete(QStringList*)), this, SLOT(sendFileComplete(QStringList*)));
+    connect(&mDuktoProtocol, SIGNAL(sendFileError(int)), this, SLOT(sendFileError(int)));
+    connect(&mDuktoProtocol, SIGNAL(sendFileAborted()), this, SLOT(sendFileAborted()));
 
     // Periodic "hello" timer
     mPeriodicHelloTimer = new QTimer(this);
@@ -119,6 +122,10 @@ bool controller::prepareStartTransfer(QString* ip, qint16* port)
                  "Hey, take a look at your destination, it appears to be malformed!");
                  setMessagePageBackState("send");
                  emit gotoMessagePage();*/
+                QString pageTitle = "Send";
+                QString pageText =
+                        "Hey, take a look at your destination, it appears to be malformed!";
+                emit gotoMessagePage(pageTitle, pageText);
                 return false;
             }
 
@@ -188,18 +195,21 @@ void controller::setCurrentTransferProgress(int value)
 
 void controller::transferStatusUpdate(qint64 total, qint64 partial)
 {
+    QString temp = QString::number(partial * 1.0 / 1048576, 'f', 1) + " MB of " + QString::number(total * 1.0 / 1048576, 'f', 1) + " MB";
+//    qDebug() << "controller::transferStatusUpdate:" << partial;
+//    qDebug() << "controller::transferStatusUpdate:" << temp;
     // Stats formatting
-    if (total < 1024)
+    if (total < 1024) {
         setCurrentTransferStats(
                 QString::number(partial) + " B of " + QString::number(total) + " B");
-    else if (total < 1048576)
+    } else if (total < 1048576) {
         setCurrentTransferStats(
                 QString::number(partial * 1.0 / 1024, 'f', 1) + " KB of "
                         + QString::number(total * 1.0 / 1024, 'f', 1) + " KB");
-    else
+    } else {
         setCurrentTransferStats(
                 QString::number(partial * 1.0 / 1048576, 'f', 1) + " MB of "
-                        + QString::number(total * 1.0 / 1048576, 'f', 1) + " MB");
+                        + QString::number(total * 1.0 / 1048576, 'f', 1) + " MB");}
 
     double percent = partial * 1.0 / total * 100;
     setCurrentTransferProgress(percent);
@@ -271,15 +281,18 @@ void controller::receiveFileComplete(QStringList* files, qint64 totalSize)
 {
     // Add an entry to recent activities
     QDir d(".");
-//	if (files->size() == 1)
-//	    mRecentList.addRecent(files->at(0), d.absoluteFilePath(files->at(0)), "file", mCurrentTransferBuddy, totalSize);
-//	else
-//	    mRecentList.addRecent("Files and folders", d.absolutePath(), "misc", mCurrentTransferBuddy, totalSize);
+	if (files->size() == 1)
+	    m_recentModel->addRecent(files->at(0), d.absoluteFilePath(files->at(0)), "file", mCurrentTransferBuddy, totalSize);
+	else
+	    m_recentModel->addRecent("Files and folders", d.absolutePath(), "misc", mCurrentTransferBuddy, totalSize);
 
     // Update GUI
 //	mView->win7()->setProgressState(EcWin7::NoProgress);
 //	QApplication::alert(mView, 5000);
     emit receiveCompleted();
+    emit onRecentModelChanged();
+
+    setCurrentTransferProgress(0);
 }
 
 void controller::receiveFileCancelled()
@@ -288,7 +301,10 @@ void controller::receiveFileCancelled()
 //	setMessagePageText("An error has occurred during the transfer... The data you received could be incomplete or broken.");
 //	setMessagePageBackState("");
 //	mView->win7()->setProgressState(EcWin7::Error);
-//	emit gotoMessagePage();
+    QString pageTitle = "Error";
+    QString pageText = "An error has occurred during the transfer... The data you received could be incomplete or broken.";
+	emit gotoMessagePage(pageTitle, pageText);
+	setCurrentTransferProgress(0);
 }
 
 QString controller::currentTransferBuddy()
@@ -328,6 +344,68 @@ void controller::sendtext(QVariant indexPath, QString text)
     startTransfer(text);
 }
 
+void controller::receiveTextComplete(QString* text, qint64 totalSize)
+{
+//     Add an entry to recent activities
+    m_recentModel->addRecent("Text snippet", *text, "text", mCurrentTransferBuddy, totalSize);
+
+//     Update GUI
+    emit receiveCompleted();
+    emit onRecentModelChanged();
+    setCurrentTransferProgress(0);
+}
+
+void controller::sendFileComplete(QStringList* files)
+{
+    // To remove warning
+//    files = files;
+
+    // Show completed message
+//    setMessagePageTitle("Send");
+//    setMessagePageText("Your data has been sent to your buddy!");
+//    setMessagePageBackState("send");
+
+    // Check for temporary file to delete
+//    if (mScreenTempPath != "") {
+//
+//        QFile file(mScreenTempPath);
+//        file.remove();
+//        mScreenTempPath = "";
+//    }
+
+    QString pageTitle = "Send";
+    QString pageText =
+            "Your data has been sent to your buddy!";
+    emit gotoMessagePage(pageTitle, pageText);
+    setCurrentTransferProgress(0);
+}
+
+void controller::sendFileError(int code)
+{
+//    setMessagePageTitle("Error");
+//    setMessagePageText("Sorry, an error has occurred while sending your data...\n\nError code: " + QString::number(code));
+//    setMessagePageBackState("send");
+//    mView->win7()->setProgressState(EcWin7::Error);
+
+    // Check for temporary file to delete
+//    if (mScreenTempPath != "") {
+//
+//        QFile file(mScreenTempPath);
+//        file.remove();
+//        mScreenTempPath = "";
+//    }
+
+    QString pageTitle = "Error";
+    QString pageText = "Sorry, an error has occurred while sending your data...\n\nError code: " + QString::number(code);
+    emit gotoMessagePage(pageTitle, pageText);
+    setCurrentTransferProgress(0);
+}
+
+void controller::sendFileAborted()
+{
+    setCurrentTransferProgress(0);
+}
+
 void controller::startTransfer(QString text)
 {
     // Prepare file transfer
@@ -356,6 +434,7 @@ void controller::setCurrentTransferSending(bool sending)
 void controller::abortTransfer()
 {
     mDuktoProtocol.abortCurrentTransfer();
+    setCurrentTransferProgress(0);
 }
 
 QString controller::copyFromClipboard()
@@ -366,4 +445,9 @@ QString controller::copyFromClipboard()
         return clipboard.value("text/plain");
     }
     return "";
+}
+
+bb::cascades::GroupDataModel* controller::recentModel()
+{
+    return m_recentModel;
 }

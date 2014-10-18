@@ -17,6 +17,7 @@
 #include "protocol/duktoprotocol.h"
 #include "destinationbuddy.h"
 #include "model/BuddyModel.h"
+#include "model/RecentModel.h"
 #include "settings.h"
 
 class UpdatesChecker;
@@ -29,6 +30,7 @@ class QNetworkReply;
 class controller: public QObject {
 	 Q_OBJECT
 	 Q_PROPERTY(bb::cascades::GroupDataModel* buddyModel READ buddyModel NOTIFY onBuddyModelChanged FINAL)
+	 Q_PROPERTY(bb::cascades::GroupDataModel* recentModel READ recentModel NOTIFY onRecentModelChanged FINAL)
 	 Q_PROPERTY(QString currentTransferBuddy READ currentTransferBuddy NOTIFY currentTransferBuddyChanged)
 	 Q_PROPERTY(int currentTransferProgress READ currentTransferProgress NOTIFY currentTransferProgressChanged)
 	 Q_PROPERTY(QString currentTransferStats READ currentTransferStats NOTIFY currentTransferStatsChanged)
@@ -43,6 +45,7 @@ public:
 	virtual ~controller();
 	void initialize();
 	bb::cascades::GroupDataModel* buddyModel();
+	bb::cascades::GroupDataModel* recentModel();
 	QString currentTransferBuddy();
 	void setCurrentTransferBuddy(QString buddy);
 	int currentTransferProgress();
@@ -73,6 +76,7 @@ public:
 signals:
 	void currentTransferBuddyChanged();
 	void onBuddyModelChanged();
+	void onRecentModelChanged();
 	void currentTransferProgressChanged();
 	void currentTransferStatsChanged();
     void buddyNameChanged();
@@ -80,6 +84,7 @@ signals:
     void themeColorChanged();
     void receiveCompleted();
     void transferStart();
+    void gotoMessagePage(QString pageTitle, QString pageText);
     void remoteDestinationAddressChanged();
     void currentTransferSendingChanged();
 
@@ -91,12 +96,16 @@ public slots:
 	void receiveFileStart(QString senderIp);
 	void receiveFileComplete(QStringList *files, qint64 totalSize);
 	void receiveFileCancelled();
-
+    void receiveTextComplete(QString *text, qint64 totalSize);
+    void sendFileComplete(QStringList *files);
+    void sendFileError(int code);
+    void sendFileAborted();
 
 private:
 	DuktoProtocol mDuktoProtocol;
 	QTimer *mPeriodicHelloTimer;
 	BuddyModel * m_buddyModel;
+	RecentModel * m_recentModel;
 	DestinationBuddy *mDestBuddy;
 	QString mCurrentTransferBuddy;
 	QString mCurrentTransferStats;

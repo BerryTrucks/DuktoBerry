@@ -43,16 +43,18 @@ TabbedPane {
             Settings {
             }
         },
-        ProgressPage {
+        ComponentDefinition {
             id: progressDialog
+            ProgressPage {
+            }
         }
     ]
     
     onCreationCompleted: {
-        _control.transferStart.connect(teste)
+        _control.transferStart.connect(openProgressDialog)
     }
     
-    function teste(){
-        progressDialog.open()
+    function openProgressDialog(){
+        progressDialog.createObject().open()
     }
 }

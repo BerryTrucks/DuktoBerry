@@ -698,7 +698,6 @@ void DuktoProtocol::updateStatus()
     if (mIsSending)
         emit transferStatusUpdate(mTotalSize, mSentData);
     else if (mIsReceiving)
-        qDebug() << "DuktoProtocol::updateStatus:" << mIsReceiving;
         emit transferStatusUpdate(mTotalSize, mTotalReceivedData);
 }
 
