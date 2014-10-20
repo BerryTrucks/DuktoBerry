@@ -4,16 +4,16 @@ Container {
     property alias userName: mUserName.text
     property alias system: mSystem.text
     property alias userImage: imageTransition.userImage
+    property alias avatarUrl: imageTransition.avatarUrl
     property alias plataformImage: imageTransition.plataformImage
     property alias themeColor: imageTransition.themeColor
-    leftPadding: 20
-    topPadding: 20
+
     signal timeout()
 
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
-    Container {
+    Container {    
         CustomImageTransition {
             id: imageTransition
             userImage: "asset:///images/user.png"

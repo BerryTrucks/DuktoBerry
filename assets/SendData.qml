@@ -26,8 +26,7 @@ Page {
                 system: "BlackBerry"
             }
             Container {
-                leftPadding: 20
-                rightPadding: 40
+                rightPadding: 20
                 topPadding: 80
                 horizontalAlignment: HorizontalAlignment.Fill
                 Label {

@@ -14,6 +14,8 @@ NavigationPane {
             }
         }
         Container {
+            topPadding: 20
+            leftPadding: 20
             CustomItemBuddy {
                 userName: _control.buddyName + " (You)"
                 system: "at Laai-Berry"
@@ -51,6 +53,7 @@ NavigationPane {
                                 id: mlistItem
                                 userName: ListItemData.username
                                 system: ListItemData.system
+                                avatarUrl: ListItemData.avatar
                                 plataformImage: ListItemData.oslogo
                                     themeColor: mlistItem.ListItem.view.themeColorToList
                                 onCreationCompleted: {

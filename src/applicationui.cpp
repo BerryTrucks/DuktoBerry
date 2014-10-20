@@ -23,6 +23,7 @@
 #include <QTimer>
 
 #include "controller.h"
+#include "ImageUrlLoader.h"
 
 #define NETWORK_PORT 4644
 using namespace bb::cascades;
@@ -30,6 +31,9 @@ using namespace bb::cascades;
 ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
         QObject(app)
 {
+    //Adding ImageUrlLoader Qml component to the QML Engine.
+    ImageUrlLoader::registerQmlTypes();
+
     // prepare the localization
     m_pTranslator = new QTranslator(this);
     m_pLocaleHandler = new LocaleHandler(this);
