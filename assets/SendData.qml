@@ -4,7 +4,6 @@ import bb.cascades.pickers 1.0
 Page {
     property variant index
     onCreationCompleted: {
-        console.log(index.toString())
     }
     titleBar: TitleBar {
         kind: TitleBarKind.FreeForm

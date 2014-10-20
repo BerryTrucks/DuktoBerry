@@ -36,7 +36,11 @@ MiniWebServer::MiniWebServer(int port)
     qDebug() << "MiniWebServer::MiniWebServer:" << path;
     if (path != "")
     {
-    	QImage img(path);
+        //remove the string "file:///accounts/1000/"
+        path = path.remove(0,22);
+
+    	QImage img;
+    	qDebug() << "MiniWebServer::MiniWebServer:" << img.load(path);
         QImage scaled = img.scaled(64, 64, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         QBuffer tmp(&mAvatarData);
         tmp.open(QIODevice::WriteOnly);
@@ -69,7 +73,7 @@ void MiniWebServer::readClient()
                 "Content-Length: " << mAvatarData.size() << "\r\n"
                 "\r\n";
             os.flush();
-
+            qDebug() << "MiniWebServer::readClient:" << mAvatarData.size();
             QDataStream ds(socket);
             ds.writeRawData(mAvatarData.data(), mAvatarData.size());
 

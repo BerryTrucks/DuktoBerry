@@ -57,11 +57,11 @@ controller::controller() :
 
 controller::~controller()
 {
-    // TODO Auto-generated destructor stub
     mDuktoProtocol.sayGoodbye();
     if (mPeriodicHelloTimer) mPeriodicHelloTimer->deleteLater();
     if (mSettings) mSettings->deleteLater();
     if (mMiniWebServer) mMiniWebServer->deleteLater();
+    qDebug() << "controller::~controller:" << "sayGoodbye";
 }
 
 void controller::sendSomeFiles(QVariant indexPath, QStringList files)
