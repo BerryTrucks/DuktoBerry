@@ -25,6 +25,7 @@ Container {
     TextArea {
         id: txtArea
         backgroundVisible: false
-        preferredHeight: rootContainer.preferredHeight
+        horizontalAlignment: HorizontalAlignment.Fill
+        verticalAlignment: VerticalAlignment.Fill
     }
 }
