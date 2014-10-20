@@ -16,7 +16,7 @@ Container {
     Container {    
         CustomImageTransition {
             id: imageTransition
-            userImage: "asset:///images/user.png"
+//            userImage: "asset:///images/user.png"
             plataformImage: "asset:///images/plataform.png"
             onCreationCompleted: {
                 timeout.connect(changeImage);

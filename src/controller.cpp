@@ -244,6 +244,7 @@ QString controller::buddyName()
 void controller::setBuddyAvatar(QString avatar)
 {
     mSettings->saveBuddyAvatar(avatar);
+    qDebug() << "controller::setBuddyAvatar:" << avatar;
     emit buddyAvatarChanged();
 }
 

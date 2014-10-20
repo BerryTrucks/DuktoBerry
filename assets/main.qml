@@ -3,13 +3,13 @@ import bb.cascades 1.2
 TabbedPane {
     showTabsOnActionBar: true
     Tab {
-        title: "Buddies"
+        title: qsTr("Buddies")
         Buddies {
         }
     }
 
     Tab {
-        title: "Recent"
+        title: qsTr("Recent")
         Recents {
         }
     }

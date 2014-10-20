@@ -17,9 +17,10 @@ NavigationPane {
             topPadding: 20
             leftPadding: 20
             CustomItemBuddy {
-                userName: _control.buddyName + " (You)"
+                userName: _control.buddyName + qsTr(" (You)")
                 system: "at Laai-Berry"
                 userImage: _control.buddyAvatar
+                avatarUrl: ""
                 plataformImage: "asset:///images/BlackberryLogo.png"
                 onCreationCompleted: {
                     timer.timeout.connect(timeout);
@@ -58,12 +59,19 @@ NavigationPane {
                                     themeColor: mlistItem.ListItem.view.themeColorToList
                                 onCreationCompleted: {
                                     mlistItem.ListItem.view.timerToList.connect(timeout)
+                                    console.log("testes",mlistItem.ListItem.view.toString())
+                                    
                                 }
                             }
                         }
                     ]
                     onTriggered: {
+                        var item = dataModel.data(indexPath)
                         var sendData = sendDataPane.createObject();
+                        sendData.userName = item.username
+                        sendData.system = item.system
+                        sendData.avatarUrl = item.avatar
+                        sendData.plataformImage = item.oslogo
                         sendData.index = dataModel.data(indexPath)
                         navPane.push(sendData)
                     }

@@ -75,6 +75,7 @@ Sheet {
                         horizontalAlignment: HorizontalAlignment.Right
                         CustomButton {
                         preferredWidth: 400
+                        actived: false
                         text: qsTr("Change folder")
                         }
                     }

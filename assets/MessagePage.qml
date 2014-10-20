@@ -3,12 +3,14 @@ import bb.cascades 1.2
 Sheet {
     id: msgSheet
     property variant index
+    property string user: "Laairoy" 
     property alias text: textToSend.text
-    Page {    
+    property bool editable: true
+    Page {
         titleBar: TitleBar {
             kind: TitleBarKind.FreeForm
             kindProperties: CustomFreeFormTitleBar {
-                title: qsTr("Send Text")
+                title: msgSheet.editable ? qsTr("Send Text") : qsTr("Text")
                 closeButtonActive: true
                 onBackButtonClicked: {
                     msgSheet.close()
@@ -20,7 +22,8 @@ Sheet {
             leftPadding: 20
             rightPadding: 20
             Label {
-                text: "to Laairoy"
+                id: user
+                text: (msgSheet.editable ? qsTr("to ") : qsTr("from ")) + msgSheet.user
             }
             layout: DockLayout {
             }
@@ -33,39 +36,46 @@ Sheet {
                 }
                 verticalAlignment: VerticalAlignment.Fill
                 CustomTextArea {
+                    background: Color.Green
                     verticalAlignment: VerticalAlignment.Fill
                     id: textToSend
+                    editable: msgSheet.editable
                 }
             }
             Container {
                 topPadding: 20
                 bottomPadding: 20
-                horizontalAlignment: HorizontalAlignment.Center
+                horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Bottom
                 layout: StackLayout {
                     orientation: LayoutOrientation.LeftToRight
                 }
-                CustomButton {
-                    horizontalAlignment: HorizontalAlignment.Center
+                Container {
+                    horizontalAlignment: HorizontalAlignment.Left
                     preferredWidth: 350
-                    text: "Send"
-                    background: Color.Green
-                    actived: true
-                    onClicked: {
-                        _control.sendtext(index, textToSend.text);
-                        msgSheet.close()
+                    CustomButton {
+                        horizontalAlignment: HorizontalAlignment.Left
+                        preferredWidth: 350
+                        text: qsTr("Send")
+                        background: Color.Green
+                        actived: true
+                        visible: msgSheet.editable
+                        onClicked: {
+                            _control.sendtext(index, textToSend.text);
+                            msgSheet.close()
+                        }
                     }
                 }
                 Container {
-                    horizontalAlignment: HorizontalAlignment.Right
                     leftPadding: 40
+                    horizontalAlignment: HorizontalAlignment.Right
                     CustomButton {
-                        horizontalAlignment: HorizontalAlignment.Center
+                        horizontalAlignment: HorizontalAlignment.Right
                         preferredWidth: 350
-                        text: "Paste from clipboard"
+                        text: msgSheet.editable ? qsTr("Paste from clipboard") : qsTr("Copy to clipboard")
                         background: Color.Green
                         onClicked: {
-                            textToSend.text = textToSend.text + _control.copyFromClipboard()
+                            msgSheet.editable ? (textToSend.text = textToSend.text + _control.copyFromClipboard()) : "segundo paranmetro"
                         }
                     }
                 }

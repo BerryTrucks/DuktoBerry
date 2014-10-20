@@ -2,6 +2,12 @@ import bb.cascades 1.2
 import bb.cascades.pickers 1.0
 
 Page {
+    id: page
+    property alias userName: buddy.userName
+    property alias system: buddy.system
+    property alias userImage: buddy.userImage
+    property alias avatarUrl: buddy.avatarUrl
+    property alias plataformImage: buddy.plataformImage
     property variant index
     onCreationCompleted: {
     }
@@ -21,8 +27,10 @@ Page {
             leftPadding: 20
             topPadding: 20
             CustomItemBuddy {
+                id: buddy
                 userName: "Laai-Berry"
                 system: "BlackBerry"
+                
             }
             Container {
                 rightPadding: 20
@@ -37,10 +45,11 @@ Page {
                     horizontalAlignment: HorizontalAlignment.Fill
                     CustomButton {
                         horizontalAlignment: HorizontalAlignment.Fill
-                        text: "Send a text"
+                        text: qsTr("Send a text")
                         onClicked: {
                             var msgSheet = messageSheet.createObject()
-                            msgSheet.index = index
+                            msgSheet.index = page.index
+                            msgSheet.user = page.userName
                             msgSheet.open()
                         }
                     }
@@ -50,10 +59,11 @@ Page {
                     horizontalAlignment: HorizontalAlignment.Fill
                     CustomButton {
                         horizontalAlignment: HorizontalAlignment.Fill
-                        text: "Send text from clipboard"
+                        text: qsTr("Send text from clipboard")
                         onClicked: {
                             var msgSheet = messageSheet.createObject()
-                            msgSheet.index = index
+                            msgSheet.index = page.index
+                            msgSheet.user = page.userName
                             msgSheet.text = _control.copyFromClipboard()
                             msgSheet.open()
                         }
@@ -64,7 +74,7 @@ Page {
                     horizontalAlignment: HorizontalAlignment.Fill
                     CustomButton {
                         horizontalAlignment: HorizontalAlignment.Fill
-                        text: "Send some files"
+                        text: qsTr("Send some files")
                         onClicked: {
                             filePicker.open()
                         }
@@ -75,7 +85,7 @@ Page {
                     horizontalAlignment: HorizontalAlignment.Fill
                     CustomButton {
                         horizontalAlignment: HorizontalAlignment.Fill
-                        text: "Send a folder"
+                        text: qsTr("Send a folder")
                         onClicked: {
                             folderPicker.open()
                         }
@@ -87,7 +97,7 @@ Page {
             FilePicker {
                 id: filePicker
                 mode: FilePickerMode.PickerMultiple
-                title: "Select File"
+                title: qsTr("Select File")
                 onFileSelected: {
                     _control.sendSomeFiles(index, selectedFiles)
                     console.log("FileSelected signal received : " + selectedFiles);
@@ -96,7 +106,7 @@ Page {
             FilePicker {
                 id: folderPicker
                 mode: FilePickerMode.SaverMultiple
-                title: "Select Folder"
+                title: qsTr("Select Folder")
                 onFileSelected: {
                     _control.sendSomeFiles(index, selectedFiles)
                     console.log("FileSelected signal received : " + selectedFiles[0]);

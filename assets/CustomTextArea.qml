@@ -4,6 +4,7 @@ Container {
     id: rootContainer
     property alias text: txtArea.text
     property alias hintText: txtArea.hintText
+    property alias editable: txtArea.editable
     layout: DockLayout {
     }
     Container {

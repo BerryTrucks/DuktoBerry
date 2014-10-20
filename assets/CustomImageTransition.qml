@@ -2,6 +2,7 @@ import bb.cascades 1.2
 import utils.imageLoader 1.0
 
 Container {
+    id: container
     property string plataformImage
     property string userImage
     property string avatarUrl
@@ -49,29 +50,22 @@ Container {
                 maxHeight: 150
                 preferredHeight: 150
                 preferredWidth: 150
+                visible: false
 
             }
             ImageView {
                 id: imgUser
-                visible: false
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
                 scalingMethod: ScalingMethod.AspectFit
                 preferredHeight: 150
                 preferredWidth: 150
                 implicitLayoutAnimationsEnabled: false //Only fade in animation is enabled
-                onImageChanged: {
-                    console.log(imgUser.image)
-                }
+                imageSource: container.userImage
                 attachedObjects: ImageUrlLoader {
-                    imageUrl: avatarUrl + ""
+                    imageUrl: container.avatarUrl
                     onImageDone: {
-                    }
-                }
-                onCreationCompleted: {
-                    if (avatarUrl == "") {
-                        imgUser.imageSource = userImage
-                    } else {
+                        console.log("image Done")
                     }
                 }
             }

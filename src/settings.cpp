@@ -37,7 +37,7 @@ QString Settings::currentPath()
             return path;
 
     // Else return the default path for this platform
-    path = Platform::getDefaultPath();
+    path = "/shared/downloads/";
     if (QDir(path).exists())
         return path;
     else
@@ -90,7 +90,7 @@ void Settings::saveBuddyName(QString name)
 QString Settings::buddyAvatar()
 {
 	// Retrieve the last saved name (if any)
-	return mSettings.value("BuddyAvatar", "asset:///images/user.png").toString();
+	return mSettings.value("BuddyAvatar", "images/user.png").toString();
 }
 
 void Settings::saveBuddyAvatar(QString avatar)

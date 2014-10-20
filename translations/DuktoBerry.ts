@@ -7,11 +7,39 @@
         <source>Buddies</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source> (You)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
     <message>
         <source>Send Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>to </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste from clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy to clipboard</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -48,6 +76,14 @@
         <source>Recents</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sorry, no data has been received yet...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SendData</name>
@@ -57,6 +93,30 @@
     </message>
     <message>
         <source>Send Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send a text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send text from clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send some files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send a folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -99,6 +159,14 @@
     </message>
     <message>
         <source>Addresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Buddies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recent</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
