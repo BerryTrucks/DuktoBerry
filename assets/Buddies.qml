@@ -56,23 +56,26 @@ NavigationPane {
                                 system: ListItemData.system
                                 avatarUrl: ListItemData.avatar
                                 plataformImage: ListItemData.oslogo
-                                    themeColor: mlistItem.ListItem.view.themeColorToList
+                                themeColor: mlistItem.ListItem.view.themeColorToList
                                 onCreationCompleted: {
                                     mlistItem.ListItem.view.timerToList.connect(timeout)
-                                    console.log("testes",mlistItem.ListItem.view.toString())
-                                    
+                                    console.log("testes", mlistItem.ListItem.view.toString())
+
                                 }
                             }
                         }
                     ]
                     onTriggered: {
-                        var item = dataModel.data(indexPath)
+                        var item = dataModel.data(indexPath);
                         var sendData = sendDataPane.createObject();
+                        
                         sendData.userName = item.username
                         sendData.system = item.system
                         sendData.avatarUrl = item.avatar
+                        console.log("AvatarUrl", sendData.avatarUrl, item.avatar)
                         sendData.plataformImage = item.oslogo
                         sendData.index = dataModel.data(indexPath)
+                        
                         navPane.push(sendData)
                     }
                 }
@@ -82,8 +85,7 @@ NavigationPane {
     attachedObjects: [
         ComponentDefinition {
             id: sendDataPane
-            SendData {
-            }
+            source: "asset:///SendData.qml"
         },
         QTimer {
             id: timer

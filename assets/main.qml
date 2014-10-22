@@ -23,13 +23,14 @@ TabbedPane {
             ActionItem {
                 title: qsTr("About")
                 onTriggered: {
+                    aboutPane.createObject().open()
                 }
-            },
+            }/*,
             ActionItem {
                 title: qsTr("Addresses")
                 onTriggered: {
                 }
-            }
+            }*/
         ]
     }
     attachedObjects: [

@@ -32,7 +32,7 @@ Dialog {
                     id: progressContainer
                     horizontalAlignment: HorizontalAlignment.Fill
                     topPadding: 20
-                    visible: !messageContainer.visible
+                    visible: ! messageContainer.visible
                     Label {
                         text: (transferSending) ? qsTr("Sending data") : qsTr("Receiving data")
                         textStyle {
@@ -45,13 +45,17 @@ Dialog {
                         textStyle.color: Color.White
                     }
                     Container {
-                        id: progress
                         layout: DockLayout {
                         }
-                        preferredHeight: 100
-                        background: Color.White
-                        preferredWidth: 700
-                        opacity: 0.5
+                        Container {
+                            id: progress
+                            layout: DockLayout {
+                            }
+                            preferredHeight: 100
+                            background: Color.White
+                            preferredWidth: 700
+                            opacity: 0.5
+                        }
                         Container {
                             verticalAlignment: VerticalAlignment.Fill
                             background: Color.White
@@ -120,7 +124,7 @@ Dialog {
         lbTitle.text = pageTitle
         lbText.text = pageText
         cbClose.text = qsTr("Close")
-        
+
         messageContainer.visible = true
     }
     onCreationCompleted: {

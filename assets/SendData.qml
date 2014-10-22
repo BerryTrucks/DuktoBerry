@@ -6,10 +6,15 @@ Page {
     property alias userName: buddy.userName
     property alias system: buddy.system
     property alias userImage: buddy.userImage
-    property alias avatarUrl: buddy.avatarUrl
+    property string avatarUrl
     property alias plataformImage: buddy.plataformImage
     property variant index
     onCreationCompleted: {
+        console.log("sendData:",userName)
+        console.log("sendData:",system)
+        console.log("sendData:",userName)
+        console.log("sendData:",page.avatarUrl)
+        console.log("sendData:",plataformImage)
     }
     titleBar: TitleBar {
         kind: TitleBarKind.FreeForm
@@ -22,7 +27,6 @@ Page {
         }
     }
     ScrollView {
-
         Container {
             leftPadding: 20
             topPadding: 20
