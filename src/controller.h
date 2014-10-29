@@ -15,6 +15,7 @@
 #include "QTimer"
 
 #include "protocol/duktoprotocol.h"
+#include "protocol/platform.h"
 #include "destinationbuddy.h"
 #include "model/BuddyModel.h"
 #include "model/RecentModel.h"
@@ -39,7 +40,7 @@ class controller: public QObject {
 	 Q_PROPERTY(QString buddyAvatar READ buddyAvatar WRITE setBuddyAvatar NOTIFY buddyAvatarChanged)
 	 Q_PROPERTY(QString themeColor READ themeColor WRITE setThemeColor NOTIFY themeColorChanged)
 	 Q_PROPERTY(QString remoteDestinationAddress READ remoteDestinationAddress WRITE setRemoteDestinationAddress NOTIFY remoteDestinationAddressChanged)
-
+	 Q_PROPERTY(bool showTermsOnStart READ showTermsOnStart WRITE setShowTermsOnStart NOTIFY showTermsOnStartChanged)
 public:
 	controller();
 	virtual ~controller();
@@ -62,6 +63,8 @@ public:
     void setRemoteDestinationAddress(QString address);
     bool currentTransferSending();
     void setCurrentTransferSending(bool sending);
+    bool showTermsOnStart();
+    void setShowTermsOnStart(bool showTerms);
 
 	// Invoked by QML
 	Q_INVOKABLE
@@ -72,6 +75,8 @@ public:
 	QString copyFromClipboard();
 	Q_INVOKABLE
     void abortTransfer();
+	Q_INVOKABLE
+	QString getHostName();
 
 signals:
 	void currentTransferBuddyChanged();
@@ -87,6 +92,7 @@ signals:
     void gotoMessagePage(QString pageTitle, QString pageText);
     void remoteDestinationAddressChanged();
     void currentTransferSendingChanged();
+    void showTermsOnStartChanged();
 
 public slots:
 	void peerListAdded(Peer peer);
@@ -102,22 +108,22 @@ public slots:
     void sendFileAborted();
 
 private:
-	DuktoProtocol mDuktoProtocol;
-	QTimer *mPeriodicHelloTimer;
-	BuddyModel * m_buddyModel;
-	RecentModel * m_recentModel;
-	DestinationBuddy *mDestBuddy;
-	QString mCurrentTransferBuddy;
-	QString mCurrentTransferStats;
-	int mCurrentTransferProgress;
     bool prepareStartTransfer(QString *ip, qint16 *port);
     void startTransfer(QStringList files);
     void startTransfer(QString text);
-	QString workingDir;
-	Settings *mSettings;
-	MiniWebServer *mMiniWebServer;
-	QString mRemoteDestinationAddress;
-	bool mCurrentTransferSending;
+	DuktoProtocol m_duktoProtocol;
+	BuddyModel * m_buddyModel;
+	RecentModel * m_recentModel;
+	QTimer *m_periodicHelloTimer;
+	DestinationBuddy *m_destBuddy;
+	QString m_currentTransferBuddy;
+	QString m_currentTransferStats;
+	int m_currentTransferProgress;
+	QString m_workingDir;
+	Settings *m_settings;
+	MiniWebServer *m_miniWebServer;
+	QString m_remoteDestinationAddress;
+	bool m_currentTransferSending;
 };
 
 #endif /* CONTROLLER_H_ */

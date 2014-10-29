@@ -13,10 +13,10 @@ Container {
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }
-    Container {    
+    Container {
         CustomImageTransition {
             id: imageTransition
-//            userImage: "asset:///images/user.png"
+            //            userImage: "asset:///images/user.png"
             plataformImage: "asset:///images/plataform.png"
             onCreationCompleted: {
                 timeout.connect(changeImage);
@@ -27,15 +27,26 @@ Container {
         }
     }
     Container {
-        Label {
-            id: mUserName
-            text: "Laairoy (You)"
-            textStyle.fontSize: FontSize.Large
+        preferredHeight: 150
+        layout: DockLayout {
         }
-        Label {
-            id: mSystem
-            text: "at DesktopS"
-            textStyle.fontSize: FontSize.Medium
+        Container {
+            layout: DockLayout {
+            }
+            verticalAlignment: VerticalAlignment.Center
+            Label {
+                id: mUserName
+                text: "Laairoy (You)"
+                textStyle.fontSize: FontSize.Large
+            }
+            Container {
+                    topPadding: 55
+                Label {
+                    id: mSystem
+                    text: "at DesktopS"
+                    textStyle.fontSize: FontSize.Medium
+                }
+            }
         }
         layoutProperties: StackLayoutProperties {
             spaceQuota: 77

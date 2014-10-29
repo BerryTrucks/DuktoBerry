@@ -22,15 +22,17 @@ TabbedPane {
         actions: [
             ActionItem {
                 title: qsTr("About")
+                imageSource: "asset:///images/ic_info.png"
                 onTriggered: {
                     aboutPane.createObject().open()
                 }
-            }/*,
-            ActionItem {
-                title: qsTr("Addresses")
-                onTriggered: {
-                }
-            }*/
+            }
+            /*,
+             * ActionItem {
+             * title: qsTr("Addresses")
+             * onTriggered: {
+             * }
+             }*/
         ]
     }
     attachedObjects: [
@@ -48,14 +50,22 @@ TabbedPane {
             id: progressDialog
             ProgressPage {
             }
+        },
+        ComponentDefinition {
+            id: tempsPane
+            TermsPage {
+            }
         }
     ]
-    
+
     onCreationCompleted: {
         _control.transferStart.connect(openProgressDialog)
+        if (_control.showTermsOnStart) {
+            tempsPane.createObject().open()
+        }
     }
-    
-    function openProgressDialog(){
+
+    function openProgressDialog() {
         progressDialog.createObject().open()
     }
 }

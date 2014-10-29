@@ -18,7 +18,7 @@ NavigationPane {
             leftPadding: 20
             CustomItemBuddy {
                 userName: _control.buddyName + qsTr(" (You)")
-                system: "at Laai-Berry"
+                system: "at " + _control.getHostName()
                 userImage: _control.buddyAvatar
                 avatarUrl: ""
                 plataformImage: "asset:///images/BlackberryLogo.png"

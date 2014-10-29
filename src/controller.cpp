@@ -13,54 +13,54 @@
 #define NETWORK_PORT 4644
 
 controller::controller() :
-        QObject(NULL), mDestBuddy(NULL), mSettings(NULL), mMiniWebServer(NULL)
+        QObject(NULL), m_destBuddy(NULL), m_settings(NULL), m_miniWebServer(NULL)
 {
     // TODO Auto-generated constructor stub
     m_buddyModel = new BuddyModel();
     m_recentModel = new RecentModel();
 
     // Destination buddy
-    mDestBuddy = new DestinationBuddy(this);
+    m_destBuddy = new DestinationBuddy(this);
 
     setCurrentTransferProgress(0);
     setCurrentTransferSending(false);
 
     // Settings
-    mSettings = new Settings(this);
+    m_settings = new Settings(this);
 
     // Mini web server
-    mMiniWebServer = new MiniWebServer(NETWORK_PORT + 1);
+    m_miniWebServer = new MiniWebServer(NETWORK_PORT + 1);
 
-    workingDir = QDir::currentPath();
-    qDebug() << "controller::controller:" << workingDir;
+    m_workingDir = QDir::currentPath();
+    qDebug() << "controller::controller:" << m_workingDir;
 
     // Change current folder
 //	QDir::setCurrent(mSettings->currentPath());
 
-    connect(&mDuktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
-    connect(&mDuktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
-    connect(&mDuktoProtocol, SIGNAL(transferStatusUpdate(qint64, qint64)), this, SLOT(transferStatusUpdate(qint64, qint64)));
-    connect(&mDuktoProtocol, SIGNAL(receiveFileStart(QString)), this, SLOT(receiveFileStart(QString)));
-    connect(&mDuktoProtocol, SIGNAL(receiveFileComplete(QStringList*,qint64)), this, SLOT(receiveFileComplete(QStringList*,qint64)));
-    connect(&mDuktoProtocol, SIGNAL(receiveFileCancelled()), this, SLOT(receiveFileCancelled()));
-    connect(&mDuktoProtocol, SIGNAL(receiveTextComplete(QString*,qint64)), this, SLOT(receiveTextComplete(QString*,qint64)));
-    connect(&mDuktoProtocol, SIGNAL(sendFileComplete(QStringList*)), this, SLOT(sendFileComplete(QStringList*)));
-    connect(&mDuktoProtocol, SIGNAL(sendFileError(int)), this, SLOT(sendFileError(int)));
-    connect(&mDuktoProtocol, SIGNAL(sendFileAborted()), this, SLOT(sendFileAborted()));
+    connect(&m_duktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
+    connect(&m_duktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
+    connect(&m_duktoProtocol, SIGNAL(transferStatusUpdate(qint64, qint64)), this, SLOT(transferStatusUpdate(qint64, qint64)));
+    connect(&m_duktoProtocol, SIGNAL(receiveFileStart(QString)), this, SLOT(receiveFileStart(QString)));
+    connect(&m_duktoProtocol, SIGNAL(receiveFileComplete(QStringList*,qint64)), this, SLOT(receiveFileComplete(QStringList*,qint64)));
+    connect(&m_duktoProtocol, SIGNAL(receiveFileCancelled()), this, SLOT(receiveFileCancelled()));
+    connect(&m_duktoProtocol, SIGNAL(receiveTextComplete(QString*,qint64)), this, SLOT(receiveTextComplete(QString*,qint64)));
+    connect(&m_duktoProtocol, SIGNAL(sendFileComplete(QStringList*)), this, SLOT(sendFileComplete(QStringList*)));
+    connect(&m_duktoProtocol, SIGNAL(sendFileError(int)), this, SLOT(sendFileError(int)));
+    connect(&m_duktoProtocol, SIGNAL(sendFileAborted()), this, SLOT(sendFileAborted()));
 
     // Periodic "hello" timer
-    mPeriodicHelloTimer = new QTimer(this);
-    connect(mPeriodicHelloTimer, SIGNAL(timeout()), this, SLOT(periodicHello()));
-    mPeriodicHelloTimer->start(60000);
+    m_periodicHelloTimer = new QTimer(this);
+    connect(m_periodicHelloTimer, SIGNAL(timeout()), this, SLOT(periodicHello()));
+    m_periodicHelloTimer->start(60000);
 
 }
 
 controller::~controller()
 {
-    mDuktoProtocol.sayGoodbye();
-    if (mPeriodicHelloTimer) mPeriodicHelloTimer->deleteLater();
-    if (mSettings) mSettings->deleteLater();
-    if (mMiniWebServer) mMiniWebServer->deleteLater();
+    m_duktoProtocol.sayGoodbye();
+    if (m_periodicHelloTimer) m_periodicHelloTimer->deleteLater();
+    if (m_settings) m_settings->deleteLater();
+    if (m_miniWebServer) m_miniWebServer->deleteLater();
     qDebug() << "controller::~controller:" << "sayGoodbye";
 }
 
@@ -69,7 +69,7 @@ void controller::sendSomeFiles(QVariant indexPath, QStringList files)
     if (files.count() == 0)
         return;
     QVariantMap item = indexPath.toMap();
-    mDestBuddy->fillFromItem(item);
+    m_destBuddy->fillFromItem(item);
     //Send files
     QStringList toSend = files;
     startTransfer(toSend);
@@ -77,7 +77,7 @@ void controller::sendSomeFiles(QVariant indexPath, QStringList files)
 
 void controller::periodicHello()
 {
-    mDuktoProtocol.sayHello(QHostAddress::Broadcast);
+    m_duktoProtocol.sayHello(QHostAddress::Broadcast);
 }
 
 void controller::peerListAdded(Peer peer)
@@ -89,9 +89,9 @@ void controller::peerListAdded(Peer peer)
 void controller::initialize()
 {
     // Say "hello"
-    mDuktoProtocol.initialize();
-    mDuktoProtocol.setPorts(NETWORK_PORT, NETWORK_PORT);
-    mDuktoProtocol.sayHello(QHostAddress::Broadcast);
+    m_duktoProtocol.initialize();
+    m_duktoProtocol.setPorts(NETWORK_PORT, NETWORK_PORT);
+    m_duktoProtocol.sayHello(QHostAddress::Broadcast);
 
 }
 
@@ -103,7 +103,7 @@ bb::cascades::GroupDataModel* controller::buddyModel()
 bool controller::prepareStartTransfer(QString* ip, qint16* port)
 {
     // Check if it's a remote file transfer
-    if (mDestBuddy->ip() == "IP") {
+    if (m_destBuddy->ip() == "IP") {
 
         // Remote transfer
         QString dest = remoteDestinationAddress();
@@ -143,9 +143,9 @@ bool controller::prepareStartTransfer(QString* ip, qint16* port)
     } else {
 
         // Local transfer
-        *ip = mDestBuddy->ip();
-        *port = mDestBuddy->port();
-        setCurrentTransferBuddy(mDestBuddy->username());
+        *ip = m_destBuddy->ip();
+        *port = m_destBuddy->port();
+        setCurrentTransferBuddy(m_destBuddy->username());
     }
 
     // Update GUI for file transfer
@@ -162,14 +162,14 @@ bool controller::prepareStartTransfer(QString* ip, qint16* port)
 void controller::startTransfer(QStringList files)
 {
     // Prepare file transfer
-    QString ip = mDestBuddy->ip();
-    qint16 port = mDestBuddy->port();
+    QString ip = m_destBuddy->ip();
+    qint16 port = m_destBuddy->port();
     //qDebug() << "controller::startTransfer:" << !prepareStartTransfer(&ip, &port);
     if (!prepareStartTransfer(&ip, &port))
         return;
 
     // Start files transfer
-    mDuktoProtocol.sendFile(ip, port, files);
+    m_duktoProtocol.sendFile(ip, port, files);
 }
 
 void controller::peerListRemoved(Peer peer)
@@ -181,14 +181,14 @@ void controller::peerListRemoved(Peer peer)
 
 int controller::currentTransferProgress()
 {
-    return mCurrentTransferProgress;
+    return m_currentTransferProgress;
 }
 
 void controller::setCurrentTransferProgress(int value)
 {
-    if (value == mCurrentTransferProgress)
+    if (value == m_currentTransferProgress)
         return;
-    mCurrentTransferProgress = value;
+    m_currentTransferProgress = value;
     qDebug() << "controller::setCurrentTransferProgress:" << value;
     emit currentTransferProgressChanged();
 }
@@ -217,51 +217,51 @@ void controller::transferStatusUpdate(qint64 total, qint64 partial)
 
 QString controller::currentTransferStats()
 {
-    return mCurrentTransferStats;
+    return m_currentTransferStats;
 }
 
 void controller::setCurrentTransferStats(QString stats)
 {
-    if (stats == mCurrentTransferStats)
+    if (stats == m_currentTransferStats)
         return;
-    mCurrentTransferStats = stats;
+    m_currentTransferStats = stats;
     emit currentTransferStatsChanged();
 }
 
 void controller::setBuddyName(QString name)
 {
-    mSettings->saveBuddyName(name.replace(' ', ""));
-    mDuktoProtocol.updateBuddyName();
+    m_settings->saveBuddyName(name.replace(' ', ""));
+    m_duktoProtocol.updateBuddyName();
     m_buddyModel->updateMeElement();
     emit buddyNameChanged();
 }
 
 QString controller::buddyName()
 {
-    return mSettings->buddyName();
+    return m_settings->buddyName();
 }
 
 void controller::setBuddyAvatar(QString avatar)
 {
-    mSettings->saveBuddyAvatar(avatar);
+    m_settings->saveBuddyAvatar(avatar);
     qDebug() << "controller::setBuddyAvatar:" << avatar;
     emit buddyAvatarChanged();
 }
 
 QString controller::buddyAvatar()
 {
-    return mSettings->buddyAvatar();
+    return m_settings->buddyAvatar();
 }
 
 void controller::setThemeColor(QString color)
 {
-    mSettings->saveThemeColor(color);
+    m_settings->saveThemeColor(color);
     emit themeColorChanged();
 }
 
 QString controller::themeColor()
 {
-    return mSettings->themeColor();
+    return m_settings->themeColor();
 }
 
 void controller::receiveFileStart(QString senderIp)
@@ -283,9 +283,9 @@ void controller::receiveFileComplete(QStringList* files, qint64 totalSize)
     // Add an entry to recent activities
     QDir d(".");
 	if (files->size() == 1)
-	    m_recentModel->addRecent(files->at(0), d.absoluteFilePath(files->at(0)), "file", mCurrentTransferBuddy, totalSize);
+	    m_recentModel->addRecent(files->at(0), d.absoluteFilePath(files->at(0)), "file", m_currentTransferBuddy, totalSize);
 	else
-	    m_recentModel->addRecent("Files and folders", d.absolutePath(), "misc", mCurrentTransferBuddy, totalSize);
+	    m_recentModel->addRecent("Files and folders", d.absolutePath(), "misc", m_currentTransferBuddy, totalSize);
 
     // Update GUI
 //	mView->win7()->setProgressState(EcWin7::NoProgress);
@@ -310,27 +310,27 @@ void controller::receiveFileCancelled()
 
 QString controller::currentTransferBuddy()
 {
-    return mCurrentTransferBuddy;
+    return m_currentTransferBuddy;
 }
 
 void controller::setCurrentTransferBuddy(QString buddy)
 {
-    if (buddy == mCurrentTransferBuddy)
+    if (buddy == m_currentTransferBuddy)
         return;
-    mCurrentTransferBuddy = buddy;
+    m_currentTransferBuddy = buddy;
     emit currentTransferBuddyChanged();
 }
 
 QString controller::remoteDestinationAddress()
 {
-    return mRemoteDestinationAddress;
+    return m_remoteDestinationAddress;
 }
 
 void controller::setRemoteDestinationAddress(QString address)
 {
-    if (address == mRemoteDestinationAddress)
+    if (address == m_remoteDestinationAddress)
         return;
-    mRemoteDestinationAddress = address;
+    m_remoteDestinationAddress = address;
     emit remoteDestinationAddressChanged();
 }
 
@@ -340,7 +340,7 @@ void controller::sendtext(QVariant indexPath, QString text)
         return;
 
     QVariantMap item = indexPath.toMap();
-    mDestBuddy->fillFromItem(item);
+    m_destBuddy->fillFromItem(item);
     // Send text
     startTransfer(text);
 }
@@ -348,7 +348,7 @@ void controller::sendtext(QVariant indexPath, QString text)
 void controller::receiveTextComplete(QString* text, qint64 totalSize)
 {
 //     Add an entry to recent activities
-    m_recentModel->addRecent("Text snippet", *text, "text", mCurrentTransferBuddy, totalSize);
+    m_recentModel->addRecent("Text snippet", *text, "text", m_currentTransferBuddy, totalSize);
 
 //     Update GUI
     emit receiveCompleted();
@@ -410,31 +410,31 @@ void controller::sendFileAborted()
 void controller::startTransfer(QString text)
 {
     // Prepare file transfer
-    QString ip = mDestBuddy->ip();
-    qint16 port = mDestBuddy->port();
+    QString ip = m_destBuddy->ip();
+    qint16 port = m_destBuddy->port();
 	if (!prepareStartTransfer(&ip, &port))
 		return;
 
 // Start files transfer
-    mDuktoProtocol.sendText(ip, port, text);
+    m_duktoProtocol.sendText(ip, port, text);
 }
 
 bool controller::currentTransferSending()
 {
-    return mCurrentTransferSending;
+    return m_currentTransferSending;
 }
 
 void controller::setCurrentTransferSending(bool sending)
 {
-    if (sending == mCurrentTransferSending)
+    if (sending == m_currentTransferSending)
         return;
-    mCurrentTransferSending = sending;
+    m_currentTransferSending = sending;
     emit currentTransferSendingChanged();
 }
 
 void controller::abortTransfer()
 {
-    mDuktoProtocol.abortCurrentTransfer();
+    m_duktoProtocol.abortCurrentTransfer();
     setCurrentTransferProgress(0);
 }
 
@@ -451,4 +451,20 @@ QString controller::copyFromClipboard()
 bb::cascades::GroupDataModel* controller::recentModel()
 {
     return m_recentModel;
+}
+
+bool controller::showTermsOnStart()
+{
+    return m_settings->showTermsOnStart();
+}
+
+void controller::setShowTermsOnStart(bool showTerms)
+{
+    m_settings->saveShowTermsOnStart(showTerms);
+    emit showTermsOnStartChanged();
+}
+
+QString controller::getHostName()
+{
+    return Platform::getHostname();
 }

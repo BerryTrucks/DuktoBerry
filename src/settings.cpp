@@ -64,13 +64,13 @@ QString Settings::themeColor()
 
 void Settings::saveShowTermsOnStart(bool show)
 {
-    mSettings.setValue("R5/ShowTermsOnStart", show);
+    mSettings.setValue("ShowTermsOnStart", show);
     mSettings.sync();
 }
 
 bool Settings::showTermsOnStart()
 {
-    return mSettings.value("R5/ShowTermsOnStart", true).toBool();
+    return mSettings.value("ShowTermsOnStart", true).toBool();
 }
 
 QString Settings::buddyName()

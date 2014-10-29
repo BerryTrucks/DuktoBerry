@@ -10,6 +10,7 @@ Container {
     signal changeImage()
     onChangeImage: {
         animationStart.play();
+        animationEnd.play();
         if (imgUser.visible == true) {
             imgUser.visible = false
             imgTrasition.visible = true;
@@ -17,8 +18,7 @@ Container {
             imgTrasition.visible = false;
             imgUser.visible = true
         }
-        animationEnd.play();
-        
+
     }
     Container {
         layout: DockLayout {
@@ -45,6 +45,7 @@ Container {
                 horizontalAlignment: HorizontalAlignment.Center
                 verticalAlignment: VerticalAlignment.Center
                 scalingMethod: ScalingMethod.AspectFit
+                implicitLayoutAnimationsEnabled: false
                 imageSource: plataformImage
                 maxWidth: 150
                 maxHeight: 150
@@ -73,18 +74,19 @@ Container {
     }
     attachedObjects: [
         SequentialAnimation {
+            onStateChanged: {
+                console.log("animationStart", state)
+            }
             id: animationStart
             animations: [
                 ScaleTransition {
-                    toY: -1
+                    toY: 0
                     duration: 200
                 },
                 ScaleTransition {
                     toY: 0
                     duration: 200
-
                 }
-
             ]
 
         },
@@ -94,7 +96,6 @@ Container {
                 ScaleTransition {
                     toY: 0
                     duration: 200
-
                 },
                 ScaleTransition {
                     toY: 1
