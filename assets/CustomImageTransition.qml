@@ -74,9 +74,6 @@ Container {
     }
     attachedObjects: [
         SequentialAnimation {
-            onStateChanged: {
-                console.log("animationStart", state)
-            }
             id: animationStart
             animations: [
                 ScaleTransition {

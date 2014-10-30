@@ -63,6 +63,7 @@
        <image>Splash1440x1440.png</image>
        <image>Splash720x720.png</image>
     </splashScreens>
+    <category>core.media</category>
     <author>Marden Laairoy</author>
     <buildId>1</buildId>
     <configuration name="Device-Debug">
@@ -87,7 +88,8 @@
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
 
     <initialWindow>
-        <autoOrients>true</autoOrients>
+        <autoOrients>false</autoOrients>
+        <aspectRatio>portrait</aspectRatio>
         <systemChrome>none</systemChrome>
         <transparent>false</transparent>
     </initialWindow>
@@ -114,5 +116,6 @@
     <permission>access_shared</permission>
     <permission>use_camera</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
+    <env var="CASCADES_THEME" value="bright"/>
 
 </qnx>

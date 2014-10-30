@@ -90,7 +90,7 @@ void Settings::saveBuddyName(QString name)
 QString Settings::buddyAvatar()
 {
 	// Retrieve the last saved name (if any)
-	return mSettings.value("BuddyAvatar", "images/user.png").toString();
+	return mSettings.value("BuddyAvatar", "").toString();
 }
 
 void Settings::saveBuddyAvatar(QString avatar)

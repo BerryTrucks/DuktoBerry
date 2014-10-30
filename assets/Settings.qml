@@ -74,9 +74,9 @@ Sheet {
                         topPadding: 20
                         horizontalAlignment: HorizontalAlignment.Right
                         CustomButton {
-                        preferredWidth: 400
-                        actived: false
-                        text: qsTr("Change folder")
+                            preferredWidth: 400
+                            actived: false
+                            text: qsTr("Change folder")
                         }
                     }
                 }
@@ -106,49 +106,17 @@ Sheet {
                                 layout: StackLayout {
                                     orientation: LayoutOrientation.LeftToRight
                                 }
-                                Container {
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#30910e")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#30910e"
-                                        }
-                                    }
+                                ThemeColors {
+                                    color: "#30910e"
                                 }
-                                Container {
-                                    leftPadding: 20
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#b01717")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#b01717"
-                                        }
-                                    }
+                                ThemeColors {
+                                    color: "#b01717"
                                 }
-                                Container {
-                                    leftPadding: 20
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#5782c6")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#5782c6"
-                                        }
-                                    }
-
+                                ThemeColors {
+                                    color: "#5782c6"
                                 }
-                                Container {
-                                    leftPadding: 20
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#42484a")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#42484a"
-                                        }
-                                    }
+                                ThemeColors {
+                                    color: "#42484a"
                                 }
                             }
                             Container {
@@ -157,50 +125,17 @@ Sheet {
                                 layout: StackLayout {
                                     orientation: LayoutOrientation.LeftToRight
                                 }
-                                Container {
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#c08aa1")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#c08aa1"
-                                        }
-                                    }
-
+                                ThemeColors {
+                                    color: "#c08aa1"
                                 }
-                                Container {
-                                    leftPadding: 20
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#4f546c")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#4f546c"
-                                        }
-                                    }
+                                ThemeColors {
+                                    color: "#4f546c"
                                 }
-                                Container {
-                                    leftPadding: 20
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#fc982b")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#fc982b"
-                                        }
-                                    }
+                                ThemeColors {
+                                    color: "#fc982b"
                                 }
-                                Container {
-                                    leftPadding: 20
-                                    preferredHeight: 80
-                                    preferredWidth: 80
-                                    background: Color.create("#914994")
-                                    onTouch: {
-                                        if (event.isDown()) {
-                                            _control.themeColor = "#914994"
-                                        }
-                                    }
-
+                                ThemeColors {
+                                    color: "#914994"
                                 }
                             }
                         }
@@ -219,7 +154,7 @@ Sheet {
                 directories: [ "/accounts/1000/" ]
                 onFileSelected: {
                     _control.buddyAvatar = "file://" + selectedFiles
-                    console.log("FileSelected signal received : " + selectedFiles);
+//                    console.log("FileSelected signal received : " + selectedFiles);
 
                 }
             }

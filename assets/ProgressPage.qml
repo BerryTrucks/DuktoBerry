@@ -106,6 +106,8 @@ Dialog {
                         id: cbClose
                         preferredWidth: 200
                         background: Color.Green
+                        visible: transferSending
+                        implicitLayoutAnimationsEnabled: false
                         text: qsTr("Abort")
                         onClicked: {
                             _control.abortTransfer()
@@ -123,7 +125,10 @@ Dialog {
     function messagePage(pageTitle, pageText) {
         lbTitle.text = pageTitle
         lbText.text = pageText
-        cbClose.text = qsTr("Close")
+        if(pageTitle == "Error"){
+            cbClose.text = "Close"
+            cbClose.visible = true
+        }
 
         messageContainer.visible = true
     }

@@ -27,22 +27,46 @@ Sheet {
                         userImage: "images/DuktoMetroIcon.png"
                     }
                 }
-                Label {
+                Container {
                     horizontalAlignment: HorizontalAlignment.Center
-                    text: "Dukto BlackBerry"
-                    textStyle.fontSize: FontSize.XXLarge
+                    layout: DockLayout {
+                    }
+                    Label {
+                        horizontalAlignment: HorizontalAlignment.Center
+                        text: "Dukto"
+                        textStyle.fontSize: FontSize.XXLarge
+                    }
+                    Container {
+                        topPadding: 70
+                        Label {
+                            text: "by Emanuele Colombo"
+                            textStyle {
+                                color: Color.Gray
+                                fontSize: FontSize.Small
+                            }
+                        }
+                    }
                 }
-                Label {
+                Container {
+                    topPadding: 20
                     horizontalAlignment: HorizontalAlignment.Center
-                    text: "Developers"
-                }
-                Label {
-                    horizontalAlignment: HorizontalAlignment.Center
-                    text: "Marden Laairoy"
-                    textStyle {
-                        fontSize: FontSize.Large
-                        fontStyle: FontStyle.Italic
-                        color: Color.create(_control.themeColor)
+                    layout: DockLayout {
+                    }
+                    Label {
+                        horizontalAlignment: HorizontalAlignment.Center
+                        text: "Developer (BlackBerry)"
+                    }
+                    Container {
+                        topPadding: 40
+                        horizontalAlignment: HorizontalAlignment.Center
+                        Label {
+                            text: "Marden Laairoy"
+                            textStyle {
+                                fontSize: FontSize.Large
+                                fontStyle: FontStyle.Italic
+                                color: Color.create(_control.themeColor)
+                            }
+                        }
                     }
                 }
                 Container {
@@ -56,19 +80,19 @@ Sheet {
                     }
                 }
                 Label {
-                    text: "http://msec.it/dukto/"
-                    textStyle {
-                        fontSize: FontSize.Small
-                        color: Color.Blue
-
-                    }
-                }
-                Label {
                     text: "This application and it's source code are released freely as open source project."
                     multiline: true
                     textStyle {
                         fontSize: FontSize.Small
                         color: Color.Gray
+                    }
+                }
+                Label {
+                    text: "http://msec.it/dukto/"
+                    textStyle {
+                        fontSize: FontSize.Small
+                        color: Color.Blue
+
                     }
                 }
                 Container {

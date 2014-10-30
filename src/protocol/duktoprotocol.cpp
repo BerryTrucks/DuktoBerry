@@ -283,14 +283,15 @@ void DuktoProtocol::readNewData()
                 }
                 break;
 
-            case FILESIZE:
-                {
-                	qDebug()<< "DuktoProtocol::readNewData:" << mCurrentSocket->bytesAvailable() << " " << sizeof(qint64);
-                    if (!(mCurrentSocket->bytesAvailable() >= sizeof(qint64))) return;
-            mCurrentSocket->read((char*) &mElementSize, sizeof(qint64));
-            mElementReceivedData = 0;
-                    QString name = QString::fromUtf8(mPartialName);
-                    mPartialName.clear();
+            case FILESIZE: {
+                qDebug() << "DuktoProtocol::readNewData:" << mCurrentSocket->bytesAvailable() << " "
+                        << sizeof(qint64);
+                if (!(mCurrentSocket->bytesAvailable() >= sizeof(qint64)))
+                    return;
+                mCurrentSocket->read((char*) &mElementSize, sizeof(qint64));
+                mElementReceivedData = 0;
+                QString name = QString::fromUtf8(mPartialName);
+                mPartialName.clear();
 
             // Se l'elemento corrente � una cartella, la creo e passo all'elemento successivo
             if (mElementSize == -1)

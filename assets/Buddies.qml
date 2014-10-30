@@ -44,6 +44,7 @@ NavigationPane {
                     onCreationCompleted: {
                         timer.timeout.connect(timerToList);
                     }
+                    
                     id: listview
                     rootIndexPath: [ 0 ]
                     dataModel: _control.buddyModel

@@ -39,12 +39,17 @@ controller::controller() :
 
     connect(&m_duktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
     connect(&m_duktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
-    connect(&m_duktoProtocol, SIGNAL(transferStatusUpdate(qint64, qint64)), this, SLOT(transferStatusUpdate(qint64, qint64)));
-    connect(&m_duktoProtocol, SIGNAL(receiveFileStart(QString)), this, SLOT(receiveFileStart(QString)));
-    connect(&m_duktoProtocol, SIGNAL(receiveFileComplete(QStringList*,qint64)), this, SLOT(receiveFileComplete(QStringList*,qint64)));
+    connect(&m_duktoProtocol, SIGNAL(transferStatusUpdate(qint64, qint64)), this,
+            SLOT(transferStatusUpdate(qint64, qint64)));
+    connect(&m_duktoProtocol, SIGNAL(receiveFileStart(QString)), this,
+            SLOT(receiveFileStart(QString)));
+    connect(&m_duktoProtocol, SIGNAL(receiveFileComplete(QStringList*,qint64)), this,
+            SLOT(receiveFileComplete(QStringList*,qint64)));
     connect(&m_duktoProtocol, SIGNAL(receiveFileCancelled()), this, SLOT(receiveFileCancelled()));
-    connect(&m_duktoProtocol, SIGNAL(receiveTextComplete(QString*,qint64)), this, SLOT(receiveTextComplete(QString*,qint64)));
-    connect(&m_duktoProtocol, SIGNAL(sendFileComplete(QStringList*)), this, SLOT(sendFileComplete(QStringList*)));
+    connect(&m_duktoProtocol, SIGNAL(receiveTextComplete(QString*,qint64)), this,
+            SLOT(receiveTextComplete(QString*,qint64)));
+    connect(&m_duktoProtocol, SIGNAL(sendFileComplete(QStringList*)), this,
+            SLOT(sendFileComplete(QStringList*)));
     connect(&m_duktoProtocol, SIGNAL(sendFileError(int)), this, SLOT(sendFileError(int)));
     connect(&m_duktoProtocol, SIGNAL(sendFileAborted()), this, SLOT(sendFileAborted()));
 
@@ -58,9 +63,12 @@ controller::controller() :
 controller::~controller()
 {
     m_duktoProtocol.sayGoodbye();
-    if (m_periodicHelloTimer) m_periodicHelloTimer->deleteLater();
-    if (m_settings) m_settings->deleteLater();
-    if (m_miniWebServer) m_miniWebServer->deleteLater();
+    if (m_periodicHelloTimer)
+        m_periodicHelloTimer->deleteLater();
+    if (m_settings)
+        m_settings->deleteLater();
+    if (m_miniWebServer)
+        m_miniWebServer->deleteLater();
     qDebug() << "controller::~controller:" << "sayGoodbye";
 }
 
@@ -195,7 +203,8 @@ void controller::setCurrentTransferProgress(int value)
 
 void controller::transferStatusUpdate(qint64 total, qint64 partial)
 {
-    QString temp = QString::number(partial * 1.0 / 1048576, 'f', 1) + " MB of " + QString::number(total * 1.0 / 1048576, 'f', 1) + " MB";
+    QString temp = QString::number(partial * 1.0 / 1048576, 'f', 1) + " MB of "
+            + QString::number(total * 1.0 / 1048576, 'f', 1) + " MB";
 //    qDebug() << "controller::transferStatusUpdate:" << partial;
 //    qDebug() << "controller::transferStatusUpdate:" << temp;
     // Stats formatting
@@ -209,7 +218,8 @@ void controller::transferStatusUpdate(qint64 total, qint64 partial)
     } else {
         setCurrentTransferStats(
                 QString::number(partial * 1.0 / 1048576, 'f', 1) + " MB of "
-                        + QString::number(total * 1.0 / 1048576, 'f', 1) + " MB");}
+                        + QString::number(total * 1.0 / 1048576, 'f', 1) + " MB");
+    }
 
     double percent = partial * 1.0 / total * 100;
     setCurrentTransferProgress(percent);
@@ -250,7 +260,9 @@ void controller::setBuddyAvatar(QString avatar)
 
 QString controller::buddyAvatar()
 {
-    return m_settings->buddyAvatar();
+    if (m_settings->buddyAvatar() != "")
+        return m_settings->buddyAvatar();
+    return "images/user.png";
 }
 
 void controller::setThemeColor(QString color)
@@ -282,10 +294,12 @@ void controller::receiveFileComplete(QStringList* files, qint64 totalSize)
 {
     // Add an entry to recent activities
     QDir d(".");
-	if (files->size() == 1)
-	    m_recentModel->addRecent(files->at(0), d.absoluteFilePath(files->at(0)), "file", m_currentTransferBuddy, totalSize);
-	else
-	    m_recentModel->addRecent("Files and folders", d.absolutePath(), "misc", m_currentTransferBuddy, totalSize);
+    if (files->size() == 1)
+        m_recentModel->addRecent(files->at(0), d.absoluteFilePath(files->at(0)), "file",
+                m_currentTransferBuddy, totalSize);
+    else
+        m_recentModel->addRecent("Files and folders", d.absolutePath(), "misc",
+                m_currentTransferBuddy, totalSize);
 
     // Update GUI
 //	mView->win7()->setProgressState(EcWin7::NoProgress);
@@ -303,9 +317,10 @@ void controller::receiveFileCancelled()
 //	setMessagePageBackState("");
 //	mView->win7()->setProgressState(EcWin7::Error);
     QString pageTitle = "Error";
-    QString pageText = "An error has occurred during the transfer... The data you received could be incomplete or broken.";
-	emit gotoMessagePage(pageTitle, pageText);
-	setCurrentTransferProgress(0);
+    QString pageText =
+            "An error has occurred during the transfer... The data you received could be incomplete or broken.";
+    emit gotoMessagePage(pageTitle, pageText);
+    setCurrentTransferProgress(0);
 }
 
 QString controller::currentTransferBuddy()
@@ -375,8 +390,7 @@ void controller::sendFileComplete(QStringList* files)
 //    }
 
     QString pageTitle = "Send";
-    QString pageText =
-            "Your data has been sent to your buddy!";
+    QString pageText = "Your data has been sent to your buddy!";
     emit gotoMessagePage(pageTitle, pageText);
     setCurrentTransferProgress(0);
 }
@@ -397,7 +411,8 @@ void controller::sendFileError(int code)
 //    }
 
     QString pageTitle = "Error";
-    QString pageText = "Sorry, an error has occurred while sending your data...\n\nError code: " + QString::number(code);
+    QString pageText = "Sorry, an error has occurred while sending your data...\n\nError code: "
+            + QString::number(code);
     emit gotoMessagePage(pageTitle, pageText);
     setCurrentTransferProgress(0);
 }
@@ -412,8 +427,8 @@ void controller::startTransfer(QString text)
     // Prepare file transfer
     QString ip = m_destBuddy->ip();
     qint16 port = m_destBuddy->port();
-	if (!prepareStartTransfer(&ip, &port))
-		return;
+    if (!prepareStartTransfer(&ip, &port))
+        return;
 
 // Start files transfer
     m_duktoProtocol.sendText(ip, port, text);
