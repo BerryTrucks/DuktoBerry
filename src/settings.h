@@ -37,6 +37,10 @@ public:
     void saveBuddyName(QString name);
     QString buddyAvatar();
     void saveBuddyAvatar(QString avatar);
+    bool showReviewOnStart();
+    void saveShowReviewOnStart(bool show);
+    int countOpens();
+    void saveCountOpens();
 
 private:
     QSettings mSettings;

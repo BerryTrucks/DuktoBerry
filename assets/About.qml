@@ -21,7 +21,6 @@ Sheet {
                 Container {
                     horizontalAlignment: HorizontalAlignment.Center
                     topPadding: 20
-                    leftPadding: 20
                     CustomImageTransition {
                         background: Color.Green
                         userImage: "images/DuktoMetroIcon.png"
@@ -37,12 +36,12 @@ Sheet {
                         textStyle.fontSize: FontSize.XXLarge
                     }
                     Container {
-                        topPadding: 70
+                        topPadding: 75
                         Label {
                             text: "by Emanuele Colombo"
                             textStyle {
                                 color: Color.Gray
-                                fontSize: FontSize.Small
+                                fontSize: FontSize.XXSmall
                             }
                         }
                     }

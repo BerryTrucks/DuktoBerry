@@ -23,7 +23,7 @@
 #include <QDir>
 
 Settings::Settings(QObject *parent) :
-    QObject(parent), mSettings("msec.it", "Dukto")
+        QObject(parent), mSettings("msec.it", "Dukto")
 {
 }
 
@@ -34,7 +34,7 @@ QString Settings::currentPath()
 
     // Check if exists
     if ((path != "") && (QDir(path).exists()))
-            return path;
+        return path;
 
     // Else return the default path for this platform
     path = "/shared/downloads/";
@@ -89,13 +89,37 @@ void Settings::saveBuddyName(QString name)
 
 QString Settings::buddyAvatar()
 {
-	// Retrieve the last saved name (if any)
-	return mSettings.value("BuddyAvatar", "").toString();
+    // Retrieve the last saved name (if any)
+    return mSettings.value("BuddyAvatar", "").toString();
 }
 
 void Settings::saveBuddyAvatar(QString avatar)
 {
-	// Save the new avatar
-	mSettings.setValue("BuddyAvatar", avatar);
-	mSettings.sync();
+    // Save the new avatar
+    mSettings.setValue("BuddyAvatar", avatar);
+    mSettings.sync();
+}
+
+bool Settings::showReviewOnStart()
+{
+    return mSettings.value("reviewOnStart", true).toBool();
+}
+
+void Settings::saveShowReviewOnStart(bool show)
+{
+    mSettings.setValue("reviewOnStart", show);
+    mSettings.sync();
+}
+
+int Settings::countOpens()
+{
+    return mSettings.value("countOpens", 0).toInt();
+}
+
+void Settings::saveCountOpens()
+{
+    if (countOpens() == 3)
+        mSettings.setValue("countOpens", 0);
+    mSettings.setValue("countOpens", countOpens() + 1);
+    mSettings.sync();
 }

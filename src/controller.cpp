@@ -58,6 +58,8 @@ controller::controller() :
     connect(m_periodicHelloTimer, SIGNAL(timeout()), this, SLOT(periodicHello()));
     m_periodicHelloTimer->start(60000);
 
+    if (m_settings->showReviewOnStart())
+        m_settings->saveCountOpens();
 }
 
 controller::~controller()
@@ -482,4 +484,19 @@ void controller::setShowTermsOnStart(bool showTerms)
 QString controller::getHostName()
 {
     return Platform::getHostname();
+}
+
+bool controller::showReviewOnsart()
+{
+    qDebug() << "controller::showReviewOnsart:" << m_settings->countOpens();
+    if (m_settings->showReviewOnStart() && m_settings->countOpens() == 3)
+        return true;
+    else
+        return false;
+}
+
+void controller::setshowReviewOnsart(bool showReview)
+{
+    m_settings->saveShowReviewOnStart(showReview);
+    emit showReviewOnsartChanged();
 }

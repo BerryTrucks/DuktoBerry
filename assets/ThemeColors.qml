@@ -13,7 +13,7 @@ Container {
         preferredWidth: 80
         background: Color.create(color)
         onTouch: {
-            if (event.isDown()) {
+            if (event.isUp()) {
                 _control.themeColor = color
             }
         }

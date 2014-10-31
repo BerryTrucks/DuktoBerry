@@ -52,6 +52,11 @@ TabbedPane {
             }
         },
         ComponentDefinition {
+            id: reviewDialog
+            ReviewDialog {
+            }
+        },
+        ComponentDefinition {
             id: tempsPane
             TermsPage {
             }
@@ -62,6 +67,9 @@ TabbedPane {
         _control.transferStart.connect(openProgressDialog)
         if (_control.showTermsOnStart) {
             tempsPane.createObject().open()
+        }
+        else if(_control.showReviewOnsart){
+            reviewDialog.createObject().open()
         }
     }
 

@@ -89,6 +89,21 @@
     </message>
 </context>
 <context>
+    <name>ReviewDialog</name>
+    <message>
+        <source>Donate with Paypal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remind me later</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not show again</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SendData</name>
     <message>
         <source>What do you want to do?</source>

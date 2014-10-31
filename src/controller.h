@@ -40,7 +40,8 @@ class controller: public QObject {
 	 Q_PROPERTY(QString buddyAvatar READ buddyAvatar WRITE setBuddyAvatar NOTIFY buddyAvatarChanged)
 	 Q_PROPERTY(QString themeColor READ themeColor WRITE setThemeColor NOTIFY themeColorChanged)
 	 Q_PROPERTY(QString remoteDestinationAddress READ remoteDestinationAddress WRITE setRemoteDestinationAddress NOTIFY remoteDestinationAddressChanged)
-	 Q_PROPERTY(bool showTermsOnStart READ showTermsOnStart WRITE setShowTermsOnStart NOTIFY showTermsOnStartChanged)
+	 Q_PROPERTY(bool showReviewOnsart READ showReviewOnsart WRITE setshowReviewOnsart NOTIFY showReviewOnsartChanged)
+
 public:
 	controller();
 	virtual ~controller();
@@ -64,7 +65,9 @@ public:
     bool currentTransferSending();
     void setCurrentTransferSending(bool sending);
     bool showTermsOnStart();
-    void setShowTermsOnStart(bool showTerms);
+    void setShowTermsOnStart(bool showReview);
+    bool showReviewOnsart();
+    void setshowReviewOnsart(bool showReview);
 
 	// Invoked by QML
 	Q_INVOKABLE
@@ -93,6 +96,7 @@ signals:
     void remoteDestinationAddressChanged();
     void currentTransferSendingChanged();
     void showTermsOnStartChanged();
+    void showReviewOnsartChanged();
 
 public slots:
 	void peerListAdded(Peer peer);
