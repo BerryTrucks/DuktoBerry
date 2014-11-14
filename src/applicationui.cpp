@@ -62,10 +62,10 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
     QmlDocument *qmlCover =
         QmlDocument::create("asset:///AppCover.qml").parent(this);
-    qmlCover->setContextProperty("_control", control);
 
     if (!qmlCover->hasErrors()) {
         // Create the QML Container from using the QMLDocument.
+        qmlCover->setContextProperty("_controlCover", control);
         Container *coverContainer =
             qmlCover->createRootObject<Container>();
 

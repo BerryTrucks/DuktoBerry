@@ -17,7 +17,7 @@ Page {
             topPadding: 100
             leftPadding: 20
             rightPadding: 20
-            visible: false
+            visible: ! _control.countRecents
             Label {
                 text: qsTr("Sorry, no data has been received yet...")
                 textStyle.fontSize: FontSize.XXLarge
@@ -25,30 +25,36 @@ Page {
             }
         }
         Container {
+            visible: _control.countRecents
             ListView {
+                property string themeColor: _control.themeColor
                 id: listview
                 rootIndexPath: [ 0 ]
                 dataModel: _control.recentModel
-                
+
                 onTriggered: {
                     var item = dataModel.data(indexPath);
-                    if(item.type == "text"){
+                    if (item.type == "text") {
                         var openItem = openText.createObject();
                         openItem.text = item.value
                         openItem.user = item.sender
                         openItem.editable = false
                         openItem.open()
-                        
-                        
+
                     }
                 }
                 listItemComponents: [
                     ListItemComponent {
                         type: "item"
-                        StandardListItem {
+                        CustomItemRecents {
+                            id: mlistItem
+                            onCreationCompleted: {
+                                console.log("testesssssss")
+                            }
                             imageSource: ListItemData.typeIcon
                             title: ListItemData.type
                             description: qsTr("from ") + ListItemData.sender + ", " + ListItemData.dateTime
+                            themeColor: mlistItem.ListItem.view.themeColor
                         }
                     }
                 ]

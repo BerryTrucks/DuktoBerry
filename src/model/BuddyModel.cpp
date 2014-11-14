@@ -23,8 +23,8 @@ BuddyModel::~BuddyModel() {
 }
 
 void BuddyModel::addMeElement() {
-	addBuddy("IP", 0, "IP connection", "Send data to a remote device", "IP",
-			QUrl(""));
+//	addBuddy("IP", 0, "IP connection", "Send data to a remote device", "IP",
+//			QUrl(""));
 }
 
 void BuddyModel::addBuddy(QString ip, qint16 port, QString username,
@@ -110,8 +110,8 @@ void BuddyModel::addBuddy(Peer& peer) {
 }
 
 void BuddyModel::addIpElement() {
-	addBuddy("IP", 0, "IP connection", "Send data to a remote device", "IP",
-			QUrl(""));
+//	addBuddy("IP", 0, "IP connection", "Send data to a remote device", "IP",
+//			QUrl(""));
 }
 
 void BuddyModel::removeBuddy(QString ip) {
@@ -137,4 +137,9 @@ void BuddyModel::updateMeElement() {
 QString BuddyModel::buddyNameByIp(QString ip) {
 	 if (!mItemsMap.contains(ip)) return "";
 	    return mItemsMap.value(ip).toMap().value("username").toString();
+}
+
+int BuddyModel::count()
+{
+    return mItemsMap.count();
 }

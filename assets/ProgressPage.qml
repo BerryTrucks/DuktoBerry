@@ -108,7 +108,7 @@ Dialog {
                         background: Color.Green
                         visible: transferSending
                         implicitLayoutAnimationsEnabled: false
-                        text: qsTr("Abort")
+                        text: "Abort"    
                         onClicked: {
                             _control.abortTransfer()
                             progressDialog.close()
@@ -125,6 +125,7 @@ Dialog {
     function messagePage(pageTitle, pageText) {
         lbTitle.text = pageTitle
         lbText.text = pageText
+        cbClose.text = "Close"
         if(pageTitle == "Error"){
             cbClose.text = "Close"
             cbClose.visible = true

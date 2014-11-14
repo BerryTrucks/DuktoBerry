@@ -26,6 +26,7 @@ public:
 	void removeBuddy(QString ip);
 	void showSingleBack(int idx);
 	void updateMeElement();
+	int count();
 	QString buddyNameByIp(QString ip);
 //	QStandardItem* buddyByIp(QString ip);
 

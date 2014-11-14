@@ -41,6 +41,8 @@ class controller: public QObject {
 	 Q_PROPERTY(QString themeColor READ themeColor WRITE setThemeColor NOTIFY themeColorChanged)
 	 Q_PROPERTY(QString remoteDestinationAddress READ remoteDestinationAddress WRITE setRemoteDestinationAddress NOTIFY remoteDestinationAddressChanged)
 	 Q_PROPERTY(bool showReviewOnsart READ showReviewOnsart WRITE setshowReviewOnsart NOTIFY showReviewOnsartChanged)
+	 Q_PROPERTY(bool countBuddy READ countBuddy NOTIFY countBuddyChanged)
+	 Q_PROPERTY(bool countRecents READ countRecents NOTIFY countRecentsChanged)
 
 public:
 	controller();
@@ -68,6 +70,8 @@ public:
     void setShowTermsOnStart(bool showReview);
     bool showReviewOnsart();
     void setshowReviewOnsart(bool showReview);
+    bool countBuddy();
+    bool countRecents();
 
 	// Invoked by QML
 	Q_INVOKABLE
@@ -97,6 +101,8 @@ signals:
     void currentTransferSendingChanged();
     void showTermsOnStartChanged();
     void showReviewOnsartChanged();
+    void countBuddyChanged();
+    void countRecentsChanged();
 
 public slots:
 	void peerListAdded(Peer peer);
@@ -128,6 +134,8 @@ private:
 	MiniWebServer *m_miniWebServer;
 	QString m_remoteDestinationAddress;
 	bool m_currentTransferSending;
+	int m_countBuddy;
+	int m_countRecents;
 };
 
 #endif /* CONTROLLER_H_ */

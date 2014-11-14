@@ -18,7 +18,8 @@ controller::controller() :
     // TODO Auto-generated constructor stub
     m_buddyModel = new BuddyModel();
     m_recentModel = new RecentModel();
-
+    m_countBuddy = 0;
+    m_countRecents = 0;
     // Destination buddy
     m_destBuddy = new DestinationBuddy(this);
 
@@ -94,6 +95,9 @@ void controller::peerListAdded(Peer peer)
 {
     // Add user in model
     m_buddyModel->addBuddy(peer);
+
+    m_countBuddy++;
+    emit countBuddyChanged();
 }
 
 void controller::initialize()
@@ -186,6 +190,9 @@ void controller::peerListRemoved(Peer peer)
 {
     // Remove from the list
     m_buddyModel->removeBuddy(peer.address.toString());
+    m_countBuddy--;
+
+    emit countBuddyChanged();
     emit onBuddyModelChanged();
 }
 
@@ -306,6 +313,8 @@ void controller::receiveFileComplete(QStringList* files, qint64 totalSize)
     // Update GUI
 //	mView->win7()->setProgressState(EcWin7::NoProgress);
 //	QApplication::alert(mView, 5000);
+    emit countRecentsChanged();
+
     emit receiveCompleted();
     emit onRecentModelChanged();
 
@@ -367,7 +376,9 @@ void controller::receiveTextComplete(QString* text, qint64 totalSize)
 //     Add an entry to recent activities
     m_recentModel->addRecent("Text snippet", *text, "text", m_currentTransferBuddy, totalSize);
 
-//     Update GUI
+    m_countRecents++;
+    emit countRecentsChanged();
+
     emit receiveCompleted();
     emit onRecentModelChanged();
     setCurrentTransferProgress(0);
@@ -422,6 +433,20 @@ void controller::sendFileError(int code)
 void controller::sendFileAborted()
 {
     setCurrentTransferProgress(0);
+}
+
+bool controller::countBuddy()
+{
+    if (m_countBuddy && m_buddyModel->count())
+        return true;
+    return false;
+}
+
+bool controller::countRecents()
+{
+    if (m_countRecents)
+        return true;
+    return false;
 }
 
 void controller::startTransfer(QString text)

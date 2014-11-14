@@ -16,6 +16,8 @@ NavigationPane {
         Container {
             topPadding: 20
             leftPadding: 20
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
             CustomItemBuddy {
                 userName: _control.buddyName + qsTr(" (You)")
                 system: "at " + _control.getHostName()
@@ -37,47 +39,62 @@ NavigationPane {
                 }
             }
             Container {
-                topPadding: 30
-                ListView {
-                    property string themeColorToList: _control.themeColor
-                    signal timerToList()
-                    onCreationCompleted: {
-                        timer.timeout.connect(timerToList);
+                layout: DockLayout {
+                }
+                Container {
+                    topPadding: 100
+                    visible: ! _control.countBuddy
+                    Label {
+                        text: qsTr("Sorry, no buddies found...")
+                        textStyle.fontSize: FontSize.XXLarge
+                        multiline: true
                     }
-                    
-                    id: listview
-                    rootIndexPath: [ 0 ]
-                    dataModel: _control.buddyModel
-                    listItemComponents: [
-                        ListItemComponent {
-                            type: "item"
-                            CustomItemBuddy {
-                                id: mlistItem
-                                userName: ListItemData.username
-                                system: ListItemData.system
-                                avatarUrl: ListItemData.avatar
-                                plataformImage: ListItemData.oslogo
-                                themeColor: mlistItem.ListItem.view.themeColorToList
-                                onCreationCompleted: {
-                                    mlistItem.ListItem.view.timerToList.connect(timeout)
-                                    console.log("testes", mlistItem.ListItem.view.toString())
+                }
+                Container {
+                    visible: _control.countBuddy
+                    Container {
+                        topPadding: 30
+                        ListView {
+                            property string themeColorToList: _control.themeColor
+                            signal timerToList()
+                            onCreationCompleted: {
+                                timer.timeout.connect(timerToList);
+                            }
 
+                            id: listview
+                            rootIndexPath: [ 0 ]
+                            dataModel: _control.buddyModel
+                            listItemComponents: [
+                                ListItemComponent {
+                                    type: "item"
+                                    CustomItemBuddy {
+                                        id: mlistItem
+                                        userName: ListItemData.username
+                                        system: ListItemData.system
+                                        avatarUrl: ListItemData.avatar
+                                        plataformImage: ListItemData.oslogo
+                                        themeColor: mlistItem.ListItem.view.themeColorToList
+                                        onCreationCompleted: {
+                                            mlistItem.ListItem.view.timerToList.connect(timeout)
+//                                            console.log("testes", mlistItem.ListItem.view.toString())
+                                        }
+                                    }
                                 }
+                            ]
+                            onTriggered: {
+                                var item = dataModel.data(indexPath);
+                                var sendData = sendDataPane.createObject();
+
+                                sendData.userName = item.username
+                                sendData.system = item.system
+                                sendData.avatarUrl = item.avatar
+                                console.log("AvatarUrl", sendData.avatarUrl, item.avatar)
+                                sendData.plataformImage = item.oslogo
+                                sendData.index = dataModel.data(indexPath)
+
+                                navPane.push(sendData)
                             }
                         }
-                    ]
-                    onTriggered: {
-                        var item = dataModel.data(indexPath);
-                        var sendData = sendDataPane.createObject();
-                        
-                        sendData.userName = item.username
-                        sendData.system = item.system
-                        sendData.avatarUrl = item.avatar
-                        console.log("AvatarUrl", sendData.avatarUrl, item.avatar)
-                        sendData.plataformImage = item.oslogo
-                        sendData.index = dataModel.data(indexPath)
-                        
-                        navPane.push(sendData)
                     }
                 }
             }

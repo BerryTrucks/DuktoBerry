@@ -18,6 +18,10 @@
         <source> (You)</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Sorry, no buddy found...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MessagePage</name>
@@ -52,10 +56,6 @@
 </context>
 <context>
     <name>ProgressPage</name>
-    <message>
-        <source>Abort</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Sending data</source>
         <translation type="unfinished"></translation>

@@ -54,7 +54,7 @@ Sheet {
                 Container {
                     topPadding: 30
                     Label {
-                        text: qsTr("User name:")
+                        text: qsTr("Username:")
                     }
                     CustomTextField {
                         id: userName

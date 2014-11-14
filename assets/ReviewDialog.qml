@@ -45,11 +45,10 @@ Dialog {
                     CustomButton {
                         horizontalAlignment: HorizontalAlignment.Center
                         preferredWidth: 400
-                        visible: transferSending
                         implicitLayoutAnimationsEnabled: false
                         text: qsTr("Donate with Paypal")
                         onClicked: {
-                            invokeBrowser.trigger("bb.action.OPEN")
+//                            invokeBrowser.trigger("bb.action.OPEN")
                         }
                     }
                 }

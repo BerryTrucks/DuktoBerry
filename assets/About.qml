@@ -102,7 +102,7 @@ Sheet {
                         background: Color.Green
                         text: "Donate with Paypal"
                         onClicked: {
-                            invokeBrowser.trigger("bb.action.OPEN")
+//                            invokeBrowser.trigger("bb.action.OPEN")
                         }
 
                     }
