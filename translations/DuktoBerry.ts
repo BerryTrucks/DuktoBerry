@@ -34,10 +34,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>from </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>to </source>
         <translation type="unfinished"></translation>
     </message>
@@ -47,6 +43,10 @@
     </message>
     <message>
         <source>Paste from clipboard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>from </source>
         <translation type="unfinished"></translation>
     </message>
     <message>

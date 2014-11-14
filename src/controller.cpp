@@ -550,3 +550,10 @@ void controller::setshowReviewOnsart(bool showReview)
     m_settings->saveShowReviewOnStart(showReview);
     emit showReviewOnsartChanged();
 }
+
+void controller::copyToClipboard(QString text)
+{
+    bb::system::Clipboard clipboard;
+    clipboard.clear();
+    clipboard.insert("text/plain", text.toAscii());
+}

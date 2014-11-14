@@ -1,7 +1,7 @@
 import bb.cascades 1.2
 
 Container {
-    property string themeColor
+    property variant themeColor
     property alias title: titleLabel.text
     property alias description: descriptionLabel.text
     property alias imageSource: image.imageSource

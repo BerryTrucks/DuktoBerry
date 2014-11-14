@@ -79,7 +79,9 @@ public:
 	Q_INVOKABLE
 	void sendtext(QVariant indexPath, QString text);
 	Q_INVOKABLE
-	QString copyFromClipboard();
+    QString copyFromClipboard();
+	Q_INVOKABLE
+    void copyToClipboard(QString text);
 	Q_INVOKABLE
     void abortTransfer();
 	Q_INVOKABLE

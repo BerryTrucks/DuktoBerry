@@ -5,6 +5,7 @@ Container {
     property alias text: txtArea.text
     property alias hintText: txtArea.hintText
     property alias editable: txtArea.editable
+    property int count
     layout: DockLayout {
     }
     Container {
@@ -28,5 +29,8 @@ Container {
         backgroundVisible: false
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
+        onTextChanging: {
+            count = text.length
+        }
     }
 }

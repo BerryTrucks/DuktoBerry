@@ -1,9 +1,10 @@
 import bb.cascades 1.2
+import bb.system 1.0
 
 Sheet {
     id: msgSheet
     property variant index
-    property string user: "Laairoy" 
+    property string user: "Laairoy"
     property alias text: textToSend.text
     property bool editable: true
     Page {
@@ -36,9 +37,9 @@ Sheet {
                 }
                 verticalAlignment: VerticalAlignment.Fill
                 CustomTextArea {
+                    id: textToSend
                     background: Color.Green
                     verticalAlignment: VerticalAlignment.Fill
-                    id: textToSend
                     editable: msgSheet.editable
                 }
             }
@@ -51,14 +52,19 @@ Sheet {
                     orientation: LayoutOrientation.LeftToRight
                 }
                 Container {
+                    property bool showButton: textToSend.text.length
+                    onShowButtonChanged: {
+                        sendButton.actived = showButton
+                    }
                     horizontalAlignment: HorizontalAlignment.Left
                     preferredWidth: 350
                     CustomButton {
+                        id: sendButton
                         horizontalAlignment: HorizontalAlignment.Left
                         preferredWidth: 350
                         text: qsTr("Send")
                         background: Color.Green
-                        actived: true
+                        actived: textToSend.count
                         visible: msgSheet.editable
                         onClicked: {
                             _control.sendtext(index, textToSend.text);
@@ -75,8 +81,19 @@ Sheet {
                         text: msgSheet.editable ? qsTr("Paste from clipboard") : qsTr("Copy to clipboard")
                         background: Color.Green
                         onClicked: {
-                            msgSheet.editable ? (textToSend.text = textToSend.text + _control.copyFromClipboard()) : "segundo paranmetro"
+                            if (msgSheet.editable) {
+                                textToSend.text = textToSend.text + _control.copyFromClipboard()
+                            } else {
+                                notifyToast.show()
+                                _control.copyToClipboard(textToSend.text)
+                            }
                         }
+                        attachedObjects: [
+                            SystemToast {
+                                id: notifyToast
+                                body: "Copied to Clipboard"
+                            }
+                        ]
                     }
                 }
             }
