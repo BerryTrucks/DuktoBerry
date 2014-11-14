@@ -19,7 +19,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, no buddy found...</source>
+        <source>Sorry, no buddies found...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -149,10 +149,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>User name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Save received file in:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -166,6 +162,10 @@
     </message>
     <message>
         <source>Select Picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Username:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

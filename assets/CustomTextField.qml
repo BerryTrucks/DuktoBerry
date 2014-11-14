@@ -36,12 +36,12 @@ Container {
         if(!txtenabled){
             whiteContainer.visible = false
             txtField.textStyle.color = Color.White
-            colorContainer.background = Color.create(themeColor)
+            colorContainer.background = themeColor
         }
     }
     onThemeColorChanged: {
         if(!txtenabled){
-            colorContainer.background = Color.create(themeColor)
+            colorContainer.background = themeColor
         }
     }
 }

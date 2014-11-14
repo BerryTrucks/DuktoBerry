@@ -6,7 +6,7 @@ Container {
     property string plataformImage
     property string userImage
     property string avatarUrl
-    property string themeColor: _control.themeColor
+    property alias themeColor: backgroundContainer.background
     signal changeImage()
     onChangeImage: {
         animationStart.play();
@@ -21,11 +21,12 @@ Container {
 
     }
     Container {
+        id: backgroundContainer
         layout: DockLayout {
         }
         preferredHeight: 150
         preferredWidth: 150
-        background: Color.create(themeColor)
+        background: _control.themeColor
         ImageView {
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center

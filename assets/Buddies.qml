@@ -33,7 +33,7 @@ NavigationPane {
                 leftPadding: 100
                 rightPadding: 100
                 Container {
-                    background: Color.create(_control.themeColor)
+                    background: _control.themeColor
                     Divider {
                     }
                 }
@@ -55,7 +55,7 @@ NavigationPane {
                     Container {
                         topPadding: 30
                         ListView {
-                            property string themeColorToList: _control.themeColor
+                            property variant themeColorToList: _control.themeColor
                             signal timerToList()
                             onCreationCompleted: {
                                 timer.timeout.connect(timerToList);

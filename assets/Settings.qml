@@ -26,7 +26,7 @@ Sheet {
                         orientation: LayoutOrientation.LeftToRight
                     }
                     Container {
-                        background: Color.create(_control.themeColor)
+                        background: _control.themeColor
                         ImageView {
                             property string buddyAvatar: _control.buddyAvatar
                             onBuddyAvatarChanged: {
@@ -96,7 +96,7 @@ Sheet {
                         Container {
                             preferredHeight: 200
                             preferredWidth: 200
-                            background: Color.create(_control.themeColor)
+                            background: _control.themeColor
                         }
                         Container {
                             horizontalAlignment: HorizontalAlignment.Fill

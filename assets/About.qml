@@ -63,7 +63,7 @@ Sheet {
                             textStyle {
                                 fontSize: FontSize.Large
                                 fontStyle: FontStyle.Italic
-                                color: Color.create(_control.themeColor)
+                                color: _control.themeColor
                             }
                         }
                     }
@@ -73,7 +73,7 @@ Sheet {
                     leftPadding: 100
                     rightPadding: 100
                     Container {
-                        background: Color.create(_control.themeColor)
+                        background: _control.themeColor
                         Divider {
                         }
                     }

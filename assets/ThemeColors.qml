@@ -14,7 +14,7 @@ Container {
         background: Color.create(color)
         onTouch: {
             if (event.isUp()) {
-                _control.themeColor = color
+                _control.setThemeColor(color)
             }
         }
     }

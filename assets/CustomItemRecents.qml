@@ -17,7 +17,7 @@ Container {
         id: imageBackground
         preferredHeight: 100
         preferredWidth: 100
-        background: Color.create(themeColor)
+        background: themeColor
         ImageView {
             id: image
             horizontalAlignment: HorizontalAlignment.Fill

@@ -29,6 +29,8 @@ controller::controller() :
     // Settings
     m_settings = new Settings(this);
 
+    m_themeColor = bb::cascades::Color::fromARGB(convertThemeColor(m_settings->themeColor()));
+
     // Mini web server
     m_miniWebServer = new MiniWebServer(NETWORK_PORT + 1);
 
@@ -277,12 +279,13 @@ QString controller::buddyAvatar()
 void controller::setThemeColor(QString color)
 {
     m_settings->saveThemeColor(color);
+    m_themeColor = bb::cascades::Color::fromARGB(convertThemeColor(color));
     emit themeColorChanged();
 }
 
-QString controller::themeColor()
+bb::cascades::Color controller::themeColor()
 {
-    return m_settings->themeColor();
+    return m_themeColor;
 }
 
 void controller::receiveFileStart(QString senderIp)
@@ -447,6 +450,28 @@ bool controller::countRecents()
     if (m_countRecents)
         return true;
     return false;
+}
+
+uint controller::convertThemeColor(QString color)
+{
+    if (color == "#30910e")
+        return 0xff30910e;
+    else if (color == "#b01717")
+        return 0xffb01717;
+    else if (color == "#5782c6")
+        return 0xff5782c6;
+    else if (color == "#42484a")
+        return 0xff42484a;
+    else if (color == "#c08aa1")
+        return 0xffc08aa1;
+    else if (color == "#4f546c")
+        return 0xff4f546c;
+    else if (color == "#fc982b")
+        return 0xfffc982b;
+    else if (color == "#914994")
+        return 0xff914994;
+
+    return 0xff30910e;
 }
 
 void controller::startTransfer(QString text)

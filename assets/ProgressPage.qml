@@ -25,7 +25,7 @@ Dialog {
                 horizontalAlignment: HorizontalAlignment.Fill
                 verticalAlignment: VerticalAlignment.Center
                 preferredHeight: 450
-                background: Color.create(_control.themeColor)
+                background: _control.themeColor
                 leftPadding: 30
                 rightPadding: 30
                 Container {

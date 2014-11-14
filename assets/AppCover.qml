@@ -5,7 +5,7 @@ Container {
     }
     horizontalAlignment: HorizontalAlignment.Fill
     verticalAlignment: VerticalAlignment.Fill
-    background: Color.create(_controlCover.themeColor)
+    background: _controlCover.themeColor
     ImageView {
         preferredHeight: 250
         preferredWidth: 250

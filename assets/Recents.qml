@@ -27,7 +27,7 @@ Page {
         Container {
             visible: _control.countRecents
             ListView {
-                property string themeColor: _control.themeColor
+                property variant themeColor: _control.themeColor
                 id: listview
                 rootIndexPath: [ 0 ]
                 dataModel: _control.recentModel

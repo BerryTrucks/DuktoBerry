@@ -11,7 +11,7 @@ Container {
         layout: DockLayout {
         }
         id: btnContainer
-        background: rootContainer.actived ? Color.create(_control.themeColor) : Color.Gray
+        background: rootContainer.actived ? _control.themeColor : Color.Gray
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         topPadding: 6

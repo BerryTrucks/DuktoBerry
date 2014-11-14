@@ -11,6 +11,7 @@
 #include <qobject.h>
 #include <QVariantList>
 #include <bb/cascades/GroupDataModel>
+#include <bb/cascades/Color>
 #include <bb/system/Clipboard>
 #include "QTimer"
 
@@ -38,7 +39,7 @@ class controller: public QObject {
 	 Q_PROPERTY(bool currentTransferSending READ currentTransferSending NOTIFY currentTransferSendingChanged)
 	 Q_PROPERTY(QString buddyName READ buddyName WRITE setBuddyName NOTIFY buddyNameChanged)
 	 Q_PROPERTY(QString buddyAvatar READ buddyAvatar WRITE setBuddyAvatar NOTIFY buddyAvatarChanged)
-	 Q_PROPERTY(QString themeColor READ themeColor WRITE setThemeColor NOTIFY themeColorChanged)
+	 Q_PROPERTY(bb::cascades::Color themeColor READ themeColor NOTIFY themeColorChanged)
 	 Q_PROPERTY(QString remoteDestinationAddress READ remoteDestinationAddress WRITE setRemoteDestinationAddress NOTIFY remoteDestinationAddressChanged)
 	 Q_PROPERTY(bool showReviewOnsart READ showReviewOnsart WRITE setshowReviewOnsart NOTIFY showReviewOnsartChanged)
 	 Q_PROPERTY(bool countBuddy READ countBuddy NOTIFY countBuddyChanged)
@@ -60,8 +61,7 @@ public:
 	QString buddyName();
 	void setBuddyAvatar(QString avatar);
 	QString buddyAvatar();
-	void setThemeColor(QString color);
-	QString themeColor();
+	bb::cascades::Color themeColor();
 	QString remoteDestinationAddress();
     void setRemoteDestinationAddress(QString address);
     bool currentTransferSending();
@@ -84,6 +84,8 @@ public:
     void abortTransfer();
 	Q_INVOKABLE
 	QString getHostName();
+	Q_INVOKABLE
+	void setThemeColor(QString color);
 
 signals:
 	void currentTransferBuddyChanged();
@@ -118,24 +120,26 @@ public slots:
     void sendFileAborted();
 
 private:
+    uint convertThemeColor(QString color);
     bool prepareStartTransfer(QString *ip, qint16 *port);
     void startTransfer(QStringList files);
     void startTransfer(QString text);
 	DuktoProtocol m_duktoProtocol;
-	BuddyModel * m_buddyModel;
-	RecentModel * m_recentModel;
-	QTimer *m_periodicHelloTimer;
-	DestinationBuddy *m_destBuddy;
+	BuddyModel* m_buddyModel;
+	RecentModel* m_recentModel;
+	QTimer* m_periodicHelloTimer;
+	DestinationBuddy* m_destBuddy;
 	QString m_currentTransferBuddy;
 	QString m_currentTransferStats;
 	int m_currentTransferProgress;
 	QString m_workingDir;
-	Settings *m_settings;
-	MiniWebServer *m_miniWebServer;
+	Settings* m_settings;
+	MiniWebServer* m_miniWebServer;
 	QString m_remoteDestinationAddress;
 	bool m_currentTransferSending;
 	int m_countBuddy;
 	int m_countRecents;
+	bb::cascades::Color m_themeColor;
 };
 
 #endif /* CONTROLLER_H_ */

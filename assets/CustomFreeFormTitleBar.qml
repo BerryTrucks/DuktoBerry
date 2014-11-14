@@ -8,7 +8,7 @@ FreeFormTitleBarKindProperties {
     Container {
         layout: DockLayout {
         }
-        background: Color.create(_control.themeColor)
+        background: _control.themeColor
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         ImageView {
