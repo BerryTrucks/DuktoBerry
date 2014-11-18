@@ -20,9 +20,17 @@ QString ImageUrlLoader::imageUrl() {
 void ImageUrlLoader::setImageUrl(const QString& newUrl) {
 	if (m_imageUrl != newUrl && newUrl != "") {
 		m_imageUrl = newUrl;
-		QStringList splitList = m_imageUrl.split("/");
-		QString fileName(splitList.at(splitList.size() - 1));
-		m_imagePath = QDir::currentPath() + "/tmp/" + fileName;
+        QStringList splitList = m_imageUrl.split("/");
+        QString fileName(splitList.at(splitList.size() - 1));
+        int i = 2;
+        while (QFile::exists(QDir::currentPath() + "/tmp/" + fileName)) {
+            QFileInfo fi(fileName);
+            fileName = fi.baseName() + " (" + QString::number(i) + ")." + fi.completeSuffix();
+            i++;
+        }
+//      qDebug() << "ImageUrlLoader::setImageUrl:" << fileName;
+        m_fileName = fileName;
+		m_imagePath = QDir::currentPath() + "/tmp/" + m_fileName;
 		if (QFile::exists(m_imagePath)) {
 //			qDebug() << "Reusing image...";
 			emit this->imageDone(m_imagePath);
@@ -74,9 +82,9 @@ void ImageUrlLoader::replyFinished(QNetworkReply * reply) {
 		disconnect(m_manager, SIGNAL(finished(QNetworkReply*)), this,
 				SLOT(replyFinished(QNetworkReply*)));
 
-		QStringList splitList = m_imageUrl.split("/");
-		QString fileName(splitList.at(splitList.size() - 1));
-		m_file = new QFile("tmp/" + fileName);
+		//QStringList splitList = m_imageUrl.split("/");
+		//QString fileName(splitList.at(splitList.size() - 1));
+		m_file = new QFile("tmp/" + m_fileName);
 		if (!m_file->open(QIODevice::WriteOnly | QIODevice::Append)) {
 			qDebug() << "failed to open file";
 			return;
@@ -91,7 +99,7 @@ void ImageUrlLoader::replyFinished(QNetworkReply * reply) {
 		emit this->imageDone(m_imagePath);
         qDebug() << "ImageUrlLoader::replyFinished:" << QVariant::fromValue(QUrl(m_imagePath));
 //		delete m_manager;
-//		m_manager = 0;
+		m_manager = 0;
 	} else {
 		m_manager->get(QNetworkRequest(_urlRedirectedTo));
 	}

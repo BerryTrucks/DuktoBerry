@@ -4,12 +4,14 @@ TabbedPane {
     showTabsOnActionBar: true
     Tab {
         title: qsTr("Buddies")
+        imageSource: "asset:///images/ic_contact.png"
         Buddies {
         }
     }
 
     Tab {
-        title: qsTr("Recent")
+        title: qsTr("Recents")
+        imageSource: "asset:///images/ic_download.png"
         Recents {
         }
     }

@@ -187,7 +187,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Recent</source>
+        <source>Recents</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -32,7 +32,6 @@ Dialog {
                     horizontalAlignment: HorizontalAlignment.Fill
                     topPadding: 20
                     Label {
-                        topPadding: 20
                         id: lbText
                         text: "If you liked the application consider making a donation to support the developer."
                         textStyle {

@@ -67,7 +67,7 @@ Container {
                 attachedObjects: ImageUrlLoader {
                     imageUrl: container.avatarUrl
                     onImageDone: {
-                        console.log("image Done")
+                        console.log("image Done", imgUser.imageSource)
                     }
                 }
             }

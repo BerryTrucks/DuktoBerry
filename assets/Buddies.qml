@@ -53,7 +53,7 @@ NavigationPane {
                 Container {
                     visible: _control.countBuddy
                     Container {
-                        topPadding: 30
+                        //topPadding: 30
                         ListView {
                             property variant themeColorToList: _control.themeColor
                             signal timerToList()
@@ -67,16 +67,21 @@ NavigationPane {
                             listItemComponents: [
                                 ListItemComponent {
                                     type: "item"
-                                    CustomItemBuddy {
+                                    Container {
                                         id: mlistItem
-                                        userName: ListItemData.username
-                                        system: ListItemData.system
-                                        avatarUrl: ListItemData.avatar
-                                        plataformImage: ListItemData.oslogo
-                                        themeColor: mlistItem.ListItem.view.themeColorToList
-                                        onCreationCompleted: {
-                                            mlistItem.ListItem.view.timerToList.connect(timeout)
-//                                            console.log("testes", mlistItem.ListItem.view.toString())
+                                        layout: DockLayout {
+                                        }
+                                        topPadding: 30
+                                        CustomItemBuddy {
+                                            userName: ListItemData.username
+                                            system: ListItemData.system
+                                            avatarUrl: ListItemData.avatar
+                                            plataformImage: ListItemData.oslogo
+                                            themeColor: mlistItem.ListItem.view.themeColorToList
+                                            onCreationCompleted: {
+                                                mlistItem.ListItem.view.timerToList.connect(timeout)
+                                                //                                            console.log("testes", mlistItem.ListItem.view.toString())
+                                            }
                                         }
                                     }
                                 }
