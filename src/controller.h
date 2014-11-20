@@ -120,6 +120,7 @@ public slots:
     void sendFileComplete(QStringList *files);
     void sendFileError(int code);
     void sendFileAborted();
+    void aboutToQuit();
 
 private:
     uint convertThemeColor(QString color);

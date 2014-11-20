@@ -557,3 +557,15 @@ void controller::copyToClipboard(QString text)
     clipboard.clear();
     clipboard.insert("text/plain", text.toAscii());
 }
+
+void controller::aboutToQuit()
+{
+    m_duktoProtocol.sayGoodbye();
+    if (m_periodicHelloTimer)
+        m_periodicHelloTimer->deleteLater();
+    if (m_settings)
+        m_settings->deleteLater();
+    if (m_miniWebServer)
+        m_miniWebServer->deleteLater();
+    qDebug() << "controller::~controller:" << "sayGoodbye";
+}

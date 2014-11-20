@@ -52,6 +52,7 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
     controller * control = new controller();
     control->initialize();
+    connect(app, SIGNAL(aboutToQuit()), control, SLOT(aboutToQuit()));
 
     qmlRegisterType<QTimer>("my.timer", 1, 0, "QTimer");
 
