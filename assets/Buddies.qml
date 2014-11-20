@@ -41,13 +41,40 @@ NavigationPane {
             Container {
                 layout: DockLayout {
                 }
+                horizontalAlignment: HorizontalAlignment.Fill
                 Container {
-                    topPadding: 100
+                    id: msgContainer
+                    topPadding: 150
                     visible: ! _control.countBuddy
+                    horizontalAlignment: HorizontalAlignment.Center
                     Label {
-                        text: qsTr("Sorry, no buddies found...")
-                        textStyle.fontSize: FontSize.XXLarge
-                        multiline: true
+                        horizontalAlignment: HorizontalAlignment.Center
+                        text: qsTr("No buddies found")
+                        textStyle {
+                            fontSize: FontSize.Large
+                            fontWeight: FontWeight.Bold
+                        }
+                    }
+                    Label {
+                        horizontalAlignment: HorizontalAlignment.Center
+                        text: qsTr("Open Dukto in another device")
+                        textStyle {
+                            fontSize: FontSize.Small
+                        }
+                    }
+                    ImageView {
+                        id: waitingImage
+                        horizontalAlignment: HorizontalAlignment.Center
+                        preferredHeight: 10
+                        scalingMethod: ScalingMethod.AspectFit
+                        imageSource: "asset:///images/waiting.gif"
+                        attachedObjects: [
+                            ImageAnimator {
+                                id: imageAnimator
+                                animatedImage: waitingImage.image
+                                started: msgContainer.visible
+                            }
+                        ]
                     }
                 }
                 Container {

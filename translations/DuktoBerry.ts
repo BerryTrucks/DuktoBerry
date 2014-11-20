@@ -19,7 +19,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, no buddies found...</source>
+        <source>Open Dukto in another device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No buddies found</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -80,11 +84,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sorry, no data has been received yet...</source>
+        <source>from </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>from </source>
+        <source>No data has been received</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

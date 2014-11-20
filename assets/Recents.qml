@@ -14,13 +14,17 @@ Page {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         Container {
-            topPadding: 100
             leftPadding: 20
             rightPadding: 20
+            horizontalAlignment: HorizontalAlignment.Center
+            verticalAlignment: VerticalAlignment.Center
             visible: ! _control.countRecents
             Label {
-                text: qsTr("Sorry, no data has been received yet...")
-                textStyle.fontSize: FontSize.XXLarge
+                text: qsTr("No data has been received")
+                textStyle {
+                    fontSize: FontSize.Large
+                    fontWeight: FontWeight.Bold
+                }
                 multiline: true
             }
         }
