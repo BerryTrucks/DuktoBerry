@@ -18,26 +18,11 @@ QString ImageUrlLoader::imageUrl() {
 }
 
 void ImageUrlLoader::setImageUrl(const QString& newUrl) {
-	if (m_imageUrl != newUrl && newUrl != "") {
-		m_imageUrl = newUrl;
-        QStringList splitList = m_imageUrl.split("/");
-        QString fileName(splitList.at(splitList.size() - 1));
-        int i = 2;
-        while (QFile::exists(QDir::currentPath() + "/tmp/" + fileName)) {
-            QFileInfo fi(fileName);
-            fileName = fi.baseName() + " (" + QString::number(i) + ")." + fi.completeSuffix();
-            i++;
-        }
-//      qDebug() << "ImageUrlLoader::setImageUrl:" << fileName;
-        m_fileName = fileName;
-		m_imagePath = QDir::currentPath() + "/tmp/" + m_fileName;
-		if (QFile::exists(m_imagePath)) {
-//			qDebug() << "Reusing image...";
-			emit this->imageDone(m_imagePath);
-		} else {
-            m_manager = new QNetworkAccessManager;
-            this->loadImageUrl();
-		}
+    if (m_imageUrl != newUrl && newUrl != "") {
+        m_imageUrl = newUrl;
+
+        m_manager = new QNetworkAccessManager;
+        this->loadImageUrl();
 	}
 }
 
@@ -82,9 +67,19 @@ void ImageUrlLoader::replyFinished(QNetworkReply * reply) {
 		disconnect(m_manager, SIGNAL(finished(QNetworkReply*)), this,
 				SLOT(replyFinished(QNetworkReply*)));
 
-		//QStringList splitList = m_imageUrl.split("/");
-		//QString fileName(splitList.at(splitList.size() - 1));
-		m_file = new QFile("tmp/" + m_fileName);
+        QStringList splitList = m_imageUrl.split("/");
+        QString fileName(splitList.at(splitList.size() - 1));
+
+        int i = 2;
+        while (QFile::exists(QDir::currentPath() + "/tmp/" + fileName)) {
+            QFileInfo fi(fileName);
+            fileName = fi.baseName() + " (" + QString::number(i) + ")." + fi.completeSuffix();
+            i++;
+        }
+        //      qDebug() << "ImageUrlLoader::setImageUrl:" << fileName;
+        m_imagePath = QDir::currentPath() + "/tmp/" + fileName;
+
+        m_file = new QFile("tmp/" + fileName);
 		if (!m_file->open(QIODevice::WriteOnly | QIODevice::Append)) {
 			qDebug() << "failed to open file";
 			return;

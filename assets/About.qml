@@ -100,9 +100,31 @@ Sheet {
                     CustomButton {
                         preferredWidth: 400
                         background: Color.Green
-                        text: "Donate with Paypal"
+                        text: "Donate"
                         onClicked: {
-//                            invokeBrowser.trigger("bb.action.OPEN")
+                            //                            invokeBrowser.trigger("bb.action.OPEN")
+                        }
+
+                    }
+                    Container {
+                        topPadding: 20
+                        CustomButton {
+                            preferredWidth: 400
+                            background: Color.Green
+                            text: "Rate App"
+                            onClicked: {
+                            }
+                        }
+
+                    }
+                    Container {
+                        topPadding: 20
+                        CustomButton {
+                            preferredWidth: 400
+                            background: Color.Green
+                            text: "Contact me"
+                            onClicked: {
+                            }
                         }
 
                     }

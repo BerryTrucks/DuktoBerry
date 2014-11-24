@@ -34,7 +34,6 @@ private:
 	    QFile * m_file;
 	    QString m_imageUrl;
 	    QString m_imagePath;
-	    QString m_fileName;
 };
 
 #endif /* IMAGEURLLOADER_H_ */

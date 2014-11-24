@@ -316,6 +316,7 @@ void controller::receiveFileComplete(QStringList* files, qint64 totalSize)
     // Update GUI
 //	mView->win7()->setProgressState(EcWin7::NoProgress);
 //	QApplication::alert(mView, 5000);
+    m_countRecents++;
     emit countRecentsChanged();
 
     emit receiveCompleted();
@@ -458,8 +459,8 @@ uint controller::convertThemeColor(QString color)
         return 0xff30910e;
     else if (color == "#b01717")
         return 0xffb01717;
-    else if (color == "#5782c6")
-        return 0xff5782c6;
+    else if (color == "#54759e")
+        return 0xff54759e;
     else if (color == "#42484a")
         return 0xff42484a;
     else if (color == "#c08aa1")

@@ -113,7 +113,7 @@ Sheet {
                                     color: "#b01717"
                                 }
                                 ThemeColors {
-                                    color: "#5782c6"
+                                    color: "#54759e"
                                 }
                                 ThemeColors {
                                     color: "#42484a"

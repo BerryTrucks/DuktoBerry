@@ -5,17 +5,8 @@ Page {
     id: page
     property alias userName: buddy.userName
     property alias system: buddy.system
-    property alias userImage: buddy.userImage
-    property string avatarUrl
-    property alias plataformImage: buddy.plataformImage
+    property alias avatarUrl: buddy.avatarUrl
     property variant index
-    onCreationCompleted: {
-        console.log("sendData:",userName)
-        console.log("sendData:",system)
-        console.log("sendData:",userName)
-        console.log("sendData:",page.avatarUrl)
-        console.log("sendData:",plataformImage)
-    }
     titleBar: TitleBar {
         kind: TitleBarKind.FreeForm
         kindProperties: CustomFreeFormTitleBar {
@@ -34,7 +25,7 @@ Page {
                 id: buddy
                 userName: "Laai-Berry"
                 system: "BlackBerry"
-                
+            
             }
             Container {
                 rightPadding: 20

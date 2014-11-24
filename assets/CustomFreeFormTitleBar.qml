@@ -12,7 +12,7 @@ FreeFormTitleBarKindProperties {
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         ImageView {
-            imageSource: "asset:///images/BottomShadow.png"
+            //imageSource: "asset:///images/BottomShadow.png"
             opacity: 0.5
             //            imageSource: "asset:///images/PanelGradient.png"
             horizontalAlignment: HorizontalAlignment.Fill

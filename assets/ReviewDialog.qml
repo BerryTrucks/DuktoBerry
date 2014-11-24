@@ -45,7 +45,7 @@ Dialog {
                         horizontalAlignment: HorizontalAlignment.Center
                         preferredWidth: 400
                         implicitLayoutAnimationsEnabled: false
-                        text: qsTr("Donate with Paypal")
+                        text: qsTr("Donate")
                         onClicked: {
 //                            invokeBrowser.trigger("bb.action.OPEN")
                         }

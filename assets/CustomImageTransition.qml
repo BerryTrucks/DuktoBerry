@@ -4,7 +4,7 @@ import utils.imageLoader 1.0
 Container {
     id: container
     property string plataformImage
-    property string userImage
+    property string userImage: "asset:///images/user.png"
     property string avatarUrl
     property alias themeColor: backgroundContainer.background
     signal changeImage()
@@ -30,7 +30,7 @@ Container {
         ImageView {
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-            imageSource: "asset:///images/TileGradient.png"
+           // imageSource: "asset:///images/TileGradient.png"
             maxWidth: 150
             maxHeight: 150
             preferredHeight: 150

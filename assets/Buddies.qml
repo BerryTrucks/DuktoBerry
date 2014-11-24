@@ -47,19 +47,28 @@ NavigationPane {
                     topPadding: 150
                     visible: ! _control.countBuddy
                     horizontalAlignment: HorizontalAlignment.Center
-                    Label {
-                        horizontalAlignment: HorizontalAlignment.Center
-                        text: qsTr("No buddies found")
-                        textStyle {
-                            fontSize: FontSize.Large
-                            fontWeight: FontWeight.Bold
+                    Container {
+                        layout: DockLayout {
                         }
-                    }
-                    Label {
-                        horizontalAlignment: HorizontalAlignment.Center
-                        text: qsTr("Open Dukto in another device")
-                        textStyle {
-                            fontSize: FontSize.Small
+                        Label {
+                            horizontalAlignment: HorizontalAlignment.Center
+                            text: qsTr("No buddies found")
+                            textStyle {
+                                fontSize: FontSize.Large
+                                fontWeight: FontWeight.Bold
+                            }
+                        }
+                        Container {
+                            topPadding: 50
+                            bottomPadding: 10
+                            Label {
+                                horizontalAlignment: HorizontalAlignment.Center
+                                text: qsTr("Open Dukto in another device")
+                                textStyle {
+                                    fontSize: FontSize.Small
+                                    color: Color.Gray
+                                }
+                            }
                         }
                     }
                     ImageView {
@@ -103,11 +112,11 @@ NavigationPane {
                                             userName: ListItemData.username
                                             system: ListItemData.system
                                             avatarUrl: ListItemData.avatar
+                                            userImage: ListItemData.avatar
                                             plataformImage: ListItemData.oslogo
                                             themeColor: mlistItem.ListItem.view.themeColorToList
                                             onCreationCompleted: {
                                                 mlistItem.ListItem.view.timerToList.connect(timeout)
-                                                //                                            console.log("testes", mlistItem.ListItem.view.toString())
                                             }
                                         }
                                     }
@@ -117,11 +126,9 @@ NavigationPane {
                                 var item = dataModel.data(indexPath);
                                 var sendData = sendDataPane.createObject();
 
-                                sendData.userName = item.username
-                                sendData.system = item.system
-                                sendData.avatarUrl = item.avatar
-                                console.log("AvatarUrl", sendData.avatarUrl, item.avatar)
-                                sendData.plataformImage = item.oslogo
+                                sendData.userName = item.username.toString()
+                                sendData.system = item.system.toString()
+                                sendData.avatarUrl = item.avatar.toString()
                                 sendData.index = dataModel.data(indexPath)
 
                                 navPane.push(sendData)
@@ -133,13 +140,14 @@ NavigationPane {
         }
     }
     attachedObjects: [
-        ComponentDefinition {
-            id: sendDataPane
-            source: "asset:///SendData.qml"
-        },
         QTimer {
             id: timer
             interval: 5000
+        },
+        ComponentDefinition {
+            id: sendDataPane
+            SendData {
+            }
         }
     ]
     onCreationCompleted: {
