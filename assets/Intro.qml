@@ -31,9 +31,11 @@ Sheet {
             Container {
                 verticalAlignment: VerticalAlignment.Center
                 ListView {
-                    preferredWidth: 768
-                    preferredHeight: 900
+                    
                     id: listview
+                    property int screenSizeWidth: _control.displaySizeWidth()
+                    preferredWidth: screenSizeWidth
+                    preferredHeight: _control.displaySizeHeight() / 2
                     flickMode: FlickMode.SingleItem
                     snapMode: SnapMode.LeadingEdge
                     scrollIndicatorMode: ScrollIndicatorMode.None
@@ -48,8 +50,7 @@ Sheet {
                         ListItemComponent {
                             type: "intro"
                             Container {
-                                preferredWidth: 768
-                                preferredHeight: 900
+                                preferredWidth: ListItem.view.screenSizeWidth
                                 leftPadding: 50
                                 rightPadding: 50
                                 layout: DockLayout {

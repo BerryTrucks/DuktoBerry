@@ -31,6 +31,7 @@ TabbedPane {
             },
             ActionItem {
                 title: qsTr("Help")
+                imageSource: "asset:///images/ic_help.png"
                 onTriggered: {
                     introSheet.createObject().open()
                 }

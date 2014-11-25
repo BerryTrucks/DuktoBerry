@@ -89,7 +89,10 @@ public:
 	QString getHostName();
 	Q_INVOKABLE
 	void setThemeColor(QString color);
-
+	Q_INVOKABLE
+	int displaySizeWidth();
+	Q_INVOKABLE
+	int displaySizeHeight();
 signals:
 	void currentTransferBuddyChanged();
 	void onBuddyModelChanged();

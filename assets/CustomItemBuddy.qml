@@ -22,14 +22,12 @@ Container {
                 timeout.connect(changeImage);
             }
         }
-        layoutProperties: StackLayoutProperties {
-            spaceQuota: 23
-        }
     }
     Container {
         preferredHeight: 150
         layout: DockLayout {
         }
+        leftPadding: 20
         Container {
             layout: DockLayout {
             }
@@ -47,9 +45,6 @@ Container {
                     textStyle.fontSize: FontSize.Medium
                 }
             }
-        }
-        layoutProperties: StackLayoutProperties {
-            spaceQuota: 77
         }
     }
 }

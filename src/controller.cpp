@@ -7,6 +7,7 @@
 
 #include "controller.h"
 
+#include <bb/device/DisplayInfo>
 #include "protocol/platform.h"
 #include "miniwebserver.h"
 
@@ -569,4 +570,15 @@ void controller::aboutToQuit()
     if (m_miniWebServer)
         m_miniWebServer->deleteLater();
     qDebug() << "controller::~controller:" << "sayGoodbye";
+}
+
+int controller::displaySizeWidth()
+{
+    bb::device::DisplayInfo display;
+    return display.pixelSize().width();
+}
+int controller::displaySizeHeight()
+{
+    bb::device::DisplayInfo display;
+    return display.pixelSize().height();
 }

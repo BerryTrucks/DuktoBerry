@@ -21,11 +21,14 @@ Page {
         Container {
             leftPadding: 20
             topPadding: 20
+            horizontalAlignment: HorizontalAlignment.Fill
+            verticalAlignment: VerticalAlignment.Fill
+
             CustomItemBuddy {
                 id: buddy
                 userName: "Laai-Berry"
                 system: "BlackBerry"
-            
+
             }
             Container {
                 rightPadding: 20

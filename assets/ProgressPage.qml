@@ -51,9 +51,10 @@ Dialog {
                             id: progress
                             layout: DockLayout {
                             }
+                            horizontalAlignment: HorizontalAlignment.Left
                             preferredHeight: 100
                             background: Color.White
-                            preferredWidth: 700
+                            preferredWidth: _control.displaySizeWidth() - 60
                             opacity: 0.5
                         }
                         Container {
