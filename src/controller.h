@@ -41,7 +41,8 @@ class controller: public QObject {
 	 Q_PROPERTY(QString buddyAvatar READ buddyAvatar WRITE setBuddyAvatar NOTIFY buddyAvatarChanged)
 	 Q_PROPERTY(bb::cascades::Color themeColor READ themeColor NOTIFY themeColorChanged)
 	 Q_PROPERTY(QString remoteDestinationAddress READ remoteDestinationAddress WRITE setRemoteDestinationAddress NOTIFY remoteDestinationAddressChanged)
-	 Q_PROPERTY(bool showReviewOnsart READ showReviewOnsart WRITE setshowReviewOnsart NOTIFY showReviewOnsartChanged)
+	 Q_PROPERTY(bool showReviewOnsart READ showReviewOnsart WRITE setShowReviewOnsart NOTIFY showReviewOnsartChanged)
+	 Q_PROPERTY(bool showTermsOnStart READ showTermsOnStart WRITE setShowTermsOnStart NOTIFY showTermsOnStartChanged)
 	 Q_PROPERTY(bool countBuddy READ countBuddy NOTIFY countBuddyChanged)
 	 Q_PROPERTY(bool countRecents READ countRecents NOTIFY countRecentsChanged)
 
@@ -69,7 +70,7 @@ public:
     bool showTermsOnStart();
     void setShowTermsOnStart(bool showReview);
     bool showReviewOnsart();
-    void setshowReviewOnsart(bool showReview);
+    void setShowReviewOnsart(bool showReview);
     bool countBuddy();
     bool countRecents();
 

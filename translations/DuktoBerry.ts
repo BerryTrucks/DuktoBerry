@@ -28,6 +28,13 @@
     </message>
 </context>
 <context>
+    <name>Intro</name>
+    <message>
+        <source>Skip Intro</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MessagePage</name>
     <message>
         <source>Send Text</source>
@@ -192,6 +199,10 @@
     </message>
     <message>
         <source>Recents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

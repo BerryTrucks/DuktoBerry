@@ -546,7 +546,7 @@ bool controller::showReviewOnsart()
         return false;
 }
 
-void controller::setshowReviewOnsart(bool showReview)
+void controller::setShowReviewOnsart(bool showReview)
 {
     m_settings->saveShowReviewOnStart(showReview);
     emit showReviewOnsartChanged();

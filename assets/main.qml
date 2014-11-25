@@ -28,13 +28,13 @@ TabbedPane {
                 onTriggered: {
                     aboutPane.createObject().open()
                 }
+            },
+            ActionItem {
+                title: qsTr("Help")
+                onTriggered: {
+                    introSheet.createObject().open()
+                }
             }
-            /*,
-             * ActionItem {
-             * title: qsTr("Addresses")
-             * onTriggered: {
-             * }
-             }*/
         ]
     }
     attachedObjects: [
@@ -62,6 +62,11 @@ TabbedPane {
             id: tempsPane
             TermsPage {
             }
+        },
+        ComponentDefinition {
+            id: introSheet
+            Intro {
+            }
         }
     ]
 
@@ -69,8 +74,7 @@ TabbedPane {
         _control.transferStart.connect(openProgressDialog)
         if (_control.showTermsOnStart) {
             tempsPane.createObject().open()
-        }
-        else if(_control.showReviewOnsart){
+        } else if (_control.showReviewOnsart) {
             reviewDialog.createObject().open()
         }
     }

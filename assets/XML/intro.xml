@@ -1,0 +1,6 @@
+<root>
+	<intro text="Share to any Device" imageSource="asset:///images/intro1.png"/>
+	<intro text="Connect to a LAN network to find your devices" imageSource="asset:///images/intro2.png"/>
+	<intro text="Open on another device to send or receive files" imageSource="asset:///images/intro3.png"/>
+	<intro text="Thank you and enjoy the Dukto" imageSource="asset:///images/intro4.png"/>
+</root>
