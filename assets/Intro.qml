@@ -71,6 +71,7 @@ Sheet {
                             onFirstVisibleItemChanged: {
                                 var item = listview.dataModel.data(firstVisibleItem)
                                 mIntroLabel.text = item.text
+                                mIntroIndicator.number = item.number
                             }
                         }
                     ]
@@ -80,6 +81,11 @@ Sheet {
                 verticalAlignment: VerticalAlignment.Bottom
                 horizontalAlignment: HorizontalAlignment.Center
                 bottomPadding: 20
+                CustomListIndicator {
+                    id: mIntroIndicator
+                    horizontalAlignment: HorizontalAlignment.Center
+                    bottomPadding: 40
+                }
                 CustomButton {
                     preferredWidth: 400
                     background: Color.Green
