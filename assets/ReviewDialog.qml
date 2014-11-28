@@ -47,7 +47,7 @@ Dialog {
                         implicitLayoutAnimationsEnabled: false
                         text: qsTr("Donate")
                         onClicked: {
-//                            invokeBrowser.trigger("bb.action.OPEN")
+                            dotateSheet.createObject().open()
                         }
                     }
                 }
@@ -89,12 +89,10 @@ Dialog {
         }
     }
     attachedObjects: [
-        Invocation {
-            id: invokeBrowser
-            query.invokeActionId: "bb.action.OPEN"
-            query.invokeTargetId: "sys.browser"
-            query.mimeType: "text/http"
-            query.uri: "http://goo.gl/cEwC1w"
+        ComponentDefinition {
+            id: dotateSheet
+            DonateSheet {
+            }
         }
     ]
 }

@@ -102,7 +102,7 @@ Sheet {
                         background: Color.Green
                         text: "Donate"
                         onClicked: {
-                            //                            invokeBrowser.trigger("bb.action.OPEN")
+                            dotateSheet.createObject().open()
                         }
 
                     }
@@ -124,6 +124,7 @@ Sheet {
                             background: Color.Green
                             text: "Contact me"
                             onClicked: {
+                                sendMail.trigger("bb.action.SENDEMAIL")
                             }
                         }
 
@@ -136,7 +137,21 @@ Sheet {
                         query.invokeTargetId: "sys.browser"
                         query.mimeType: "text/http"
                         query.uri: "http://goo.gl/cEwC1w"
+                    },
+                    ComponentDefinition {
+                        id: dotateSheet
+                        DonateSheet {
+                        }
+                    },
+                    Invocation {
+                        id: sendMail
+                        query {
+                            invokeTargetId: "sys.pim.uib.email.hybridcomposer"
+                            invokeActionId: "bb.action.SENDEMAIL"
+                            uri: "mailto:marden.laairoy@gmail.com?subject=Dukto Support"
+                        }
                     }
+
                 ]
             }
         }

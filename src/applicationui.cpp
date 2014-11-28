@@ -22,6 +22,7 @@
 #include <bb/cascades/LocaleHandler>
 #include <bb/cascades/Container>
 #include <bb/cascades/SceneCover>
+#include <bb/platform/PaymentConnectionMode>
 #include <QTimer>
 
 #include "controller.h"
@@ -35,6 +36,9 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 {
     //Adding ImageUrlLoader Qml component to the QML Engine.
     ImageUrlLoader::registerQmlTypes();
+
+    // payment Connection mode (test or production)
+    bb::platform::PaymentConnectionMode::Test;
 
     // prepare the localization
     m_pTranslator = new QTranslator(this);

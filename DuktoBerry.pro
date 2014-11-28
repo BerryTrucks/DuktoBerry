@@ -4,6 +4,6 @@ CONFIG += qt warn_on cascades10
 
 QT += network
 
-LIBS += -lbb -lbbsystem -lbbdevice
+LIBS += -lbb -lbbsystem -lbbdevice -lbbplatform
 
 include(config.pri)

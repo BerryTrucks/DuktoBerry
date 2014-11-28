@@ -28,6 +28,17 @@
     </message>
 </context>
 <context>
+    <name>DonateSheet</name>
+    <message>
+        <source>Select the amount you wish to donate. You can donate as many times as you want.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Intro</name>
     <message>
         <source>Skip Intro</source>
