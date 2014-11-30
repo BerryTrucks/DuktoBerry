@@ -11,20 +11,24 @@ Container {
         layout: DockLayout {
         }
         id: btnContainer
-        background: rootContainer.actived ? _control.themeColor : Color.Gray
+        background: _control.themeColor
         horizontalAlignment: HorizontalAlignment.Fill
         verticalAlignment: VerticalAlignment.Fill
         topPadding: 6
         rightPadding: 6
         leftPadding: 6
         bottomPadding: 6
-        Container {
-            id: colorContainer
-            background: Color.White
+        ImageButton {
+            id: imgButton
+            preferredHeight: 80
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
-            opacity: rootContainer.actived ? 1.0 : 0.5
-
+            defaultImageSource: "asset:///images/button.png"
+            pressedImageSource: "asset:///images/buttonPressed.png"
+            disabledImageSource: "asset:///images/button.png"
+            onCreationCompleted: {
+                clicked.connect(rootContainer.clicked)
+            }
         }
     }
     Label {
@@ -35,20 +39,14 @@ Container {
         text: "Button"
         textStyle.color: btnContainer.background
     }
-    ImageButton {
-        preferredHeight: 80
-        horizontalAlignment: HorizontalAlignment.Fill
-//        defaultImageSource: "asset:///images/customButtom.png"
-        onCreationCompleted: {
-            clicked.connect(rootContainer.clicked)
+    onActivedChanged: {
+        if (actived) {
+            btnContainer.background = _control.themeColor;
+            imgButton.opacity = 1
+        } else {
+            btnContainer.background = Color.Gray
+            imgButton.opacity = 0.5
         }
-        enabled: rootContainer.actived
-        onTouch: {
-            if (event.isDown() && rootContainer.actived) {
-                colorContainer.opacity = 0.5
-            } else if (event.isUp() && rootContainer.actived) {
-                colorContainer.opacity = 1
-            }
-        }
+        imgButton.enabled = actived
     }
 }

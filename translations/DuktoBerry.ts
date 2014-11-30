@@ -7,6 +7,14 @@
         <source>About</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rate App</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contact me</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Buddies</name>

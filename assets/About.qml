@@ -111,8 +111,9 @@ Sheet {
                         CustomButton {
                             preferredWidth: 400
                             background: Color.Green
-                            text: "Rate App"
+                            text: qsTr("Rate App")
                             onClicked: {
+                                reviewApp.trigger("bb.action.OPEN")
                             }
                         }
 
@@ -122,7 +123,7 @@ Sheet {
                         CustomButton {
                             preferredWidth: 400
                             background: Color.Green
-                            text: "Contact me"
+                            text: qsTr("Contact me")
                             onClicked: {
                                 sendMail.trigger("bb.action.SENDEMAIL")
                             }
@@ -149,6 +150,14 @@ Sheet {
                             invokeTargetId: "sys.pim.uib.email.hybridcomposer"
                             invokeActionId: "bb.action.SENDEMAIL"
                             uri: "mailto:marden.laairoy@gmail.com?subject=Dukto Support"
+                        }
+                    },
+                    Invocation {
+                        id: reviewApp
+                        query {
+                            invokeTargetId: "sys.appworld"
+                            invokeActionId: "bb.action.OPEN"
+                            uri: "appworld://content/59945056"
                         }
                     }
 

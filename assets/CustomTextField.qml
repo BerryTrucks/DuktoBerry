@@ -5,7 +5,7 @@ Container {
     property alias text: txtField.text
     property alias hintText: txtField.hintText
     property alias txtenabled: txtField.enabled
-    property string themeColor: _control.themeColor
+    property variant themeColor: _control.themeColor
     layout: DockLayout {
     }
     maxHeight: 80
