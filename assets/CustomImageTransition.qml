@@ -30,7 +30,7 @@ Container {
         ImageView {
             horizontalAlignment: HorizontalAlignment.Center
             verticalAlignment: VerticalAlignment.Center
-           // imageSource: "asset:///images/TileGradient.png"
+            // imageSource: "asset:///images/TileGradient.png"
             maxWidth: 150
             maxHeight: 150
             preferredHeight: 150
@@ -99,7 +99,6 @@ Container {
                     toY: 1
                     duration: 200
                 }
-
             ]
 
         }

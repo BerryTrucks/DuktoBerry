@@ -36,7 +36,7 @@
     </message>
 </context>
 <context>
-    <name>DonateSheet</name>
+    <name>DonateDialog</name>
     <message>
         <source>Select the amount you wish to donate. You can donate as many times as you want.</source>
         <translation type="unfinished"></translation>

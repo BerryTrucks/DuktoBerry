@@ -47,7 +47,7 @@ Dialog {
                         implicitLayoutAnimationsEnabled: false
                         text: qsTr("Donate")
                         onClicked: {
-                            dotateSheet.createObject().open()
+                            dotateDialog.createObject().open()
                         }
                     }
                 }
@@ -90,8 +90,8 @@ Dialog {
     }
     attachedObjects: [
         ComponentDefinition {
-            id: dotateSheet
-            DonateSheet {
+            id: dotateDialog
+            DonateDialog {
             }
         }
     ]

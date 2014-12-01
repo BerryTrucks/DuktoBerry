@@ -102,7 +102,7 @@ Sheet {
                         background: Color.Green
                         text: "Donate"
                         onClicked: {
-                            dotateSheet.createObject().open()
+                            dotateDialog.createObject().open()
                         }
 
                     }
@@ -140,8 +140,8 @@ Sheet {
                         query.uri: "http://goo.gl/cEwC1w"
                     },
                     ComponentDefinition {
-                        id: dotateSheet
-                        DonateSheet {
+                        id: dotateDialog
+                        DonateDialog {
                         }
                     },
                     Invocation {
