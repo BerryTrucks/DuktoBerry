@@ -91,7 +91,7 @@ Sheet {
                     preferredWidth: 400
                     background: Color.Green
                     horizontalAlignment: HorizontalAlignment.Center
-                    text: qsTr("Skip Intro")
+                    text: qsTr("Close")
                     onClicked: {
                         mIntroSheet.close()
                     }

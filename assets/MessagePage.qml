@@ -52,16 +52,17 @@ Sheet {
                     orientation: LayoutOrientation.LeftToRight
                 }
                 Container {
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 50
+                    }
                     property bool showButton: textToSend.text.length
                     onShowButtonChanged: {
                         sendButton.actived = showButton
                     }
                     horizontalAlignment: HorizontalAlignment.Left
-                    preferredWidth: 350
                     CustomButton {
                         id: sendButton
-                        horizontalAlignment: HorizontalAlignment.Left
-                        preferredWidth: 350
+                        horizontalAlignment: HorizontalAlignment.Fill
                         text: qsTr("Send")
                         background: Color.Green
                         actived: textToSend.count
@@ -73,11 +74,18 @@ Sheet {
                     }
                 }
                 Container {
-                    leftPadding: 40
-                    horizontalAlignment: HorizontalAlignment.Right
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 2
+                    }
+                }
+                Container {
+                    layoutProperties: StackLayoutProperties {
+                        spaceQuota: 50
+                    }
+                    horizontalAlignment: HorizontalAlignment.Fill
                     CustomButton {
-                        horizontalAlignment: HorizontalAlignment.Right
-                        preferredWidth: 350
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        //preferredWidth:
                         text: msgSheet.editable ? qsTr("Paste from clipboard") : qsTr("Copy to clipboard")
                         background: Color.Green
                         onClicked: {

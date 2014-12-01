@@ -9,6 +9,7 @@ Dialog {
                 id: digitalGoodPaymentManager
                 onPurchaseFinished: {
                     if (reply.errorCode == 0) {
+                        mDonate.close()
                         // Store this purchase to keep track
                         // of the purchases made by the user.
                     } else {

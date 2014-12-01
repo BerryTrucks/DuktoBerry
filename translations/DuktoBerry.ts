@@ -49,7 +49,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Skip Intro</source>
+        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

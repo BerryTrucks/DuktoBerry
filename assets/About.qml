@@ -98,7 +98,7 @@ Sheet {
                     topPadding: 20
                     horizontalAlignment: HorizontalAlignment.Center
                     CustomButton {
-                        preferredWidth: 400
+                        preferredWidth: 500
                         background: Color.Green
                         text: "Donate"
                         onClicked: {
@@ -109,7 +109,7 @@ Sheet {
                     Container {
                         topPadding: 20
                         CustomButton {
-                            preferredWidth: 400
+                            preferredWidth: 500
                             background: Color.Green
                             text: qsTr("Rate App")
                             onClicked: {
@@ -121,7 +121,7 @@ Sheet {
                     Container {
                         topPadding: 20
                         CustomButton {
-                            preferredWidth: 400
+                            preferredWidth: 500
                             background: Color.Green
                             text: qsTr("Contact me")
                             onClicked: {
