@@ -106,6 +106,10 @@
         <source>from </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Recents</name>

@@ -17,10 +17,11 @@ Sheet {
             Container {
                 leftPadding: 20
                 rightPadding: 20
+                bottomPadding: 20
+                topPadding: 20
                 horizontalAlignment: HorizontalAlignment.Fill
                 Container {
                     horizontalAlignment: HorizontalAlignment.Center
-                    topPadding: 20
                     CustomImageTransition {
                         background: Color.Green
                         userImage: "images/DuktoMetroIcon.png"
@@ -36,7 +37,7 @@ Sheet {
                         textStyle.fontSize: FontSize.XXLarge
                     }
                     Container {
-                        topPadding: 75
+                        topPadding: 80
                         Label {
                             text: "by Emanuele Colombo"
                             textStyle {
@@ -52,7 +53,6 @@ Sheet {
                     layout: DockLayout {
                     }
                     Label {
-                        horizontalAlignment: HorizontalAlignment.Center
                         text: "Developer (BlackBerry)"
                     }
                     Container {
@@ -76,22 +76,6 @@ Sheet {
                         background: _control.themeColor
                         Divider {
                         }
-                    }
-                }
-                Label {
-                    text: "This application and it's source code are released freely as open source project."
-                    multiline: true
-                    textStyle {
-                        fontSize: FontSize.Small
-                        color: Color.Gray
-                    }
-                }
-                Label {
-                    text: "http://msec.it/dukto/"
-                    textStyle {
-                        fontSize: FontSize.Small
-                        color: Color.Blue
-
                     }
                 }
                 Container {
@@ -131,14 +115,27 @@ Sheet {
 
                     }
                 }
+                Label {
+                    horizontalAlignment: HorizontalAlignment.Center
+                    text: "This application and it's source code are released freely as open source project."
+                    multiline: true
+                    textStyle {
+                        textAlign: TextAlign.Center
+                        fontSize: FontSize.Small
+                        color: Color.Gray
+                    }
+                }
+                Label {
+                    horizontalAlignment: HorizontalAlignment.Center
+                    text: "Download desktop version on: \n http://msec.it/dukto/"
+                    multiline: true
+                    textStyle {
+                        textAlign: TextAlign.Center
+                        fontSize: FontSize.Small
+                        color: Color.Gray
+                    }
+                }
                 attachedObjects: [
-                    Invocation {
-                        id: invokeBrowser
-                        query.invokeActionId: "bb.action.OPEN"
-                        query.invokeTargetId: "sys.browser"
-                        query.mimeType: "text/http"
-                        query.uri: "http://goo.gl/cEwC1w"
-                    },
                     ComponentDefinition {
                         id: dotateDialog
                         DonateDialog {

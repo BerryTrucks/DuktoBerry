@@ -65,7 +65,7 @@
     </splashScreens>
     <category>core.media</category>
     <author>Marden Laairoy</author>
-    <buildId>2</buildId>
+    <buildId>3</buildId>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/DuktoBerry" entry="true" type="Qnx/Elf">DuktoBerry</asset>
@@ -114,7 +114,6 @@
     <!-- Request permission to execute native code.  Required for native applications. -->
     <permission system="true">run_native</permission>
     <permission>access_shared</permission>
-    <permission>use_camera</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
     <env var="CASCADES_THEME" value="bright"/>
 
