@@ -1,5 +1,6 @@
 import bb.cascades 1.2
 import bb.platform 1.2
+import bb.system 1.0
 
 Dialog {
     id: mDonate
@@ -9,13 +10,16 @@ Dialog {
                 id: digitalGoodPaymentManager
                 onPurchaseFinished: {
                     if (reply.errorCode == 0) {
+                        paymentNotify.show()
                         mDonate.close()
-                        // Store this purchase to keep track
-                        // of the purchases made by the user.
                     } else {
-                        console.log("Error: " + reply.errorInfo);
+                        console.log("Error:", reply.errorCode)
                     }
                 }
+            },
+            SystemToast {
+                id: paymentNotify
+                body: qsTr("Thanks for your support")
             }
         ]
         layout: DockLayout {
@@ -68,7 +72,7 @@ Dialog {
                             text: "0.99"
                             onClicked: {
                                 //digitalGoodPaymentManager.requestPurchase("", digitalGood.sku, digitalGood.name);
-                                digitalGoodPaymentManager.requestPurchase("", "SKU59946728", "donate 0.99");
+                                digitalGoodPaymentManager.requestPurchase("", "SKU59946728", "Donate 0.99");
                             }
                         }
                         CustomButton {
@@ -76,7 +80,7 @@ Dialog {
                             implicitLayoutAnimationsEnabled: false
                             text: "1.99"
                             onClicked: {
-                                digitalGoodPaymentManager.requestPurchase("", "SKU59946729", "donate 1.99");
+                                digitalGoodPaymentManager.requestPurchase("", "SKU59946729", "Donate 1.99");
                             }
                         }
                         CustomButton {
@@ -84,7 +88,7 @@ Dialog {
                             implicitLayoutAnimationsEnabled: false
                             text: "4.99"
                             onClicked: {
-                                digitalGoodPaymentManager.requestPurchase("", "SKU59946730", "donate 4.99");
+                                digitalGoodPaymentManager.requestPurchase("", "SKU59946730", "Donate 4.99");
                             }
                         }
                         CustomButton {
@@ -92,7 +96,7 @@ Dialog {
                             implicitLayoutAnimationsEnabled: false
                             text: "9.99"
                             onClicked: {
-                                digitalGoodPaymentManager.requestPurchase("", "SKU59946731", "donate 9.99");
+                                digitalGoodPaymentManager.requestPurchase("", "SKU59946731", "Donate 9.99");
                             }
                         }
                     }
