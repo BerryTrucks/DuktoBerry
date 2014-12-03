@@ -2,6 +2,7 @@ import bb.cascades 1.2
 
 Dialog {
     id: progressDialog
+    property string userName: _control.currentTransferBuddy
     property bool transferSending: _control.currentTransferSending
     Container {
         layout: DockLayout {
@@ -41,7 +42,7 @@ Dialog {
                         }
                     }
                     Label {
-                        text: ((transferSending) ? qsTr("to") : qsTr("from")) + " Laairoy"
+                        text: ((transferSending) ? qsTr("to ") : qsTr("from ")) + userName
                         textStyle.color: Color.White
                     }
                     Container {

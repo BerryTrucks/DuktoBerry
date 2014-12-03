@@ -95,11 +95,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>to</source>
+        <source>to </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>from</source>
+        <source>from </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

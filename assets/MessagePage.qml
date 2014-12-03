@@ -4,7 +4,7 @@ import bb.system 1.0
 Sheet {
     id: msgSheet
     property variant index
-    property string user: "Laairoy"
+    property string user: ""
     property alias text: textToSend.text
     property bool editable: true
     Page {
