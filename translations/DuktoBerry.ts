@@ -144,11 +144,11 @@
 <context>
     <name>SendData</name>
     <message>
-        <source>What do you want to do?</source>
+        <source>Send Data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Send Data</source>
+        <source>What do you want to do?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -173,6 +173,10 @@
     </message>
     <message>
         <source>Select Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We don&apos;t have permission to use file Picker. Change permissions and restart the app</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -204,6 +208,10 @@
     </message>
     <message>
         <source>Username:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We don&apos;t have permission to use file Picker. Change permissions and restart the app</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

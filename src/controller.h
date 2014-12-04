@@ -93,6 +93,9 @@ public:
 	int displaySizeWidth();
 	Q_INVOKABLE
 	int displaySizeHeight();
+	Q_INVOKABLE
+	bool sharedPermission();
+
 signals:
 	void currentTransferBuddyChanged();
 	void onBuddyModelChanged();

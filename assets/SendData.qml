@@ -1,5 +1,6 @@
 import bb.cascades 1.2
 import bb.cascades.pickers 1.0
+import bb.system 1.2
 
 Page {
     id: page
@@ -31,6 +32,8 @@ Page {
 
             }
             Container {
+                id: optionsContainer
+                property bool sharedPermission: _control.sharedPermission()
                 rightPadding: 20
                 topPadding: 80
                 horizontalAlignment: HorizontalAlignment.Fill
@@ -74,7 +77,10 @@ Page {
                         horizontalAlignment: HorizontalAlignment.Fill
                         text: qsTr("Send some files")
                         onClicked: {
-                            filePicker.open()
+                            if (optionsContainer.sharedPermission)
+                                filePicker.open();
+                            else
+                                notifyPermissionError.show()
                         }
                     }
                 }
@@ -85,7 +91,10 @@ Page {
                         horizontalAlignment: HorizontalAlignment.Fill
                         text: qsTr("Send a folder")
                         onClicked: {
-                            folderPicker.open()
+                            if (optionsContainer.sharedPermission)
+                                folderPicker.open();
+                            else
+                                notifyPermissionError.show()
                         }
                     }
                 }
@@ -114,6 +123,10 @@ Page {
                 id: messageSheet
                 MessagePage {
                 }
+            },
+            SystemToast {
+                id: notifyPermissionError
+                body: qsTr("We don't have permission to use file Picker. Change permissions and restart the app")
             }
         ]
     }

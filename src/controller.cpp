@@ -582,3 +582,15 @@ int controller::displaySizeHeight()
     bb::device::DisplayInfo display;
     return display.pixelSize().height();
 }
+
+bool controller::sharedPermission()
+{
+    QFileInfo info("shared/documents");
+    if (info.isWritable()) {
+        //qDebug() << "SHARED PERMISSION OK";
+        return true;
+    } else {
+        //qDebug() << "SHARED PERMISSION ERROR";
+        return false;
+    }
+}

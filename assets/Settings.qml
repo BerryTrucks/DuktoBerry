@@ -1,5 +1,6 @@
 import bb.cascades 1.2
 import bb.cascades.pickers 1.0
+import bb.system 1.2
 
 Sheet {
     id: settingsSheet
@@ -46,7 +47,10 @@ Sheet {
                             preferredWidth: 400
                             text: qsTr("Change Avatar")
                             onClicked: {
-                                newAvatar.open()
+                                if (_control.sharedPermission())
+                                    newAvatar.open();
+                                else
+                                    notifyPermissionError.show()
                             }
                         }
                     }
@@ -154,9 +158,13 @@ Sheet {
                 directories: [ "/accounts/1000/" ]
                 onFileSelected: {
                     _control.buddyAvatar = "file://" + selectedFiles
-//                    console.log("FileSelected signal received : " + selectedFiles);
+                    //                    console.log("FileSelected signal received : " + selectedFiles);
 
                 }
+            },
+            SystemToast {
+                id: notifyPermissionError
+                body: qsTr("We don't have permission to use file Picker. Change permissions and restart the app")
             }
         ]
 
