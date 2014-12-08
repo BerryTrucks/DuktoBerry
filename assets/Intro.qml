@@ -20,7 +20,7 @@ Sheet {
                     implicitLayoutAnimationsEnabled: false
                     text: "Share to any Device"
                     multiline: true
-                    textStyle{
+                    textStyle {
                         textAlign: TextAlign.Center
                         fontSize: FontSize.XLarge
                         color: Color.White
@@ -31,7 +31,7 @@ Sheet {
             Container {
                 verticalAlignment: VerticalAlignment.Center
                 ListView {
-                    
+
                     id: listview
                     property int screenSizeWidth: _control.displaySizeWidth()
                     preferredWidth: screenSizeWidth
@@ -58,9 +58,10 @@ Sheet {
                                 verticalAlignment: VerticalAlignment.Fill
                                 Container {
                                     verticalAlignment: VerticalAlignment.Center
-                                ImageView {
-                                    imageSource: ListItemData.imageSource
-                                    scalingMethod: ScalingMethod.AspectFit
+                                    horizontalAlignment: HorizontalAlignment.Center
+                                    ImageView {
+                                        imageSource: ListItemData.imageSource
+                                        scalingMethod: ScalingMethod.AspectFit
                                     }
                                 }
                             }

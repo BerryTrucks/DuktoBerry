@@ -23,7 +23,7 @@ FreeFormTitleBarKindProperties {
         Container {
             layout: DockLayout {
             }
-            leftPadding: 10
+            leftPadding: 15
             preferredHeight: 110
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
@@ -45,8 +45,8 @@ FreeFormTitleBarKindProperties {
                 id: closeButton
                 visible: false
                 verticalAlignment: VerticalAlignment.Center
-                preferredHeight: 90
-                preferredWidth: 90
+                preferredHeight: 100
+                preferredWidth: 100
                 ImageButton {
                     //                    text: qsTr("Close")
                     defaultImageSource: "asset:///images/BackIcon.png"
