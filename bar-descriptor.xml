@@ -65,7 +65,7 @@
     </splashScreens>
     <category>core.media</category>
     <author>Marden Laairoy</author>
-    <buildId>3</buildId>
+    <buildId>4</buildId>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/DuktoBerry" entry="true" type="Qnx/Elf">DuktoBerry</asset>

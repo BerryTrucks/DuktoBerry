@@ -22,6 +22,7 @@ Page {
         Container {
             leftPadding: 20
             topPadding: 20
+            bottomPadding: 20
             horizontalAlignment: HorizontalAlignment.Fill
             verticalAlignment: VerticalAlignment.Fill
 

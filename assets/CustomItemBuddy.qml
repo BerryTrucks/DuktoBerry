@@ -7,9 +7,8 @@ Container {
     property alias avatarUrl: imageTransition.avatarUrl
     property alias plataformImage: imageTransition.plataformImage
     property alias themeColor: imageTransition.themeColor
-
+    
     signal timeout()
-
     layout: StackLayout {
         orientation: LayoutOrientation.LeftToRight
     }

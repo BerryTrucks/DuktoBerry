@@ -42,6 +42,7 @@ NavigationPane {
                 layout: DockLayout {
                 }
                 horizontalAlignment: HorizontalAlignment.Fill
+                verticalAlignment: VerticalAlignment.Fill
                 Container {
                     id: msgContainer
                     topPadding: 150
@@ -59,7 +60,7 @@ NavigationPane {
                             }
                         }
                         Container {
-                            topPadding: 50
+                            topPadding: 55
                             bottomPadding: 10
                             Label {
                                 horizontalAlignment: HorizontalAlignment.Center
@@ -88,54 +89,57 @@ NavigationPane {
                 }
                 Container {
                     visible: _control.countBuddy
-                    Container {
-                        //topPadding: 30
-                        ListView {
-                            property variant themeColorToList: _control.themeColor
-                            signal timerToList()
-                            onCreationCompleted: {
-                                timer.timeout.connect(timerToList);
-                            }
+                    horizontalAlignment: HorizontalAlignment.Fill
+                    //topPadding: 30
+                    ListView {
+                        horizontalAlignment: HorizontalAlignment.Fill
+                        property variant themeColorToList: _control.themeColor
+                        signal timerToList()
+                        onCreationCompleted: {
+                            timer.timeout.connect(timerToList);
+                        }
 
-                            id: listview
-                            rootIndexPath: [ 0 ]
-                            dataModel: _control.buddyModel
-                            listItemComponents: [
-                                ListItemComponent {
-                                    type: "item"
-                                    Container {
-                                        id: mlistItem
-                                        layout: DockLayout {
-                                        }
-                                        topPadding: 30
-                                        CustomItemBuddy {
-                                            userName: ListItemData.username
-                                            system: ListItemData.system
-                                            avatarUrl: ListItemData.avatar
-                                            userImage: ListItemData.avatar
-                                            plataformImage: ListItemData.oslogo
-                                            themeColor: mlistItem.ListItem.view.themeColorToList
-                                            onCreationCompleted: {
-                                                mlistItem.ListItem.view.timerToList.connect(timeout)
-                                            }
+                        id: listview
+                        rootIndexPath: [ 0 ]
+                        dataModel: _control.buddyModel
+                        listItemComponents: [
+                            ListItemComponent {
+                                type: "item"
+                                Container {
+                                    id: mlistItem
+                                    preferredWidth: 1440
+                                    layout: DockLayout {
+                                    }
+                                    topPadding: 30
+                                    CustomItemBuddy {
+                                        horizontalAlignment: HorizontalAlignment.Fill
+                                        userName: ListItemData.username
+                                        system: ListItemData.system
+                                        avatarUrl: ListItemData.avatar
+                                        userImage: ListItemData.avatar
+                                        plataformImage: ListItemData.oslogo
+                                        themeColor: mlistItem.ListItem.view.themeColorToList
+                                        onCreationCompleted: {
+                                            mlistItem.ListItem.view.timerToList.connect(timeout)
                                         }
                                     }
                                 }
-                            ]
-                            onTriggered: {
-                                var item = dataModel.data(indexPath);
-                                var sendData = sendDataPane.createObject();
-
-                                sendData.userName = item.username.toString()
-                                sendData.system = item.system.toString()
-                                sendData.avatarUrl = item.avatar.toString()
-                                sendData.index = dataModel.data(indexPath)
-
-                                navPane.push(sendData)
                             }
+                        ]
+                        onTriggered: {
+                            var item = dataModel.data(indexPath);
+                            var sendData = sendDataPane.createObject();
+
+                            sendData.userName = item.username.toString()
+                            sendData.system = item.system.toString()
+                            sendData.avatarUrl = item.avatar.toString()
+                            sendData.index = dataModel.data(indexPath)
+
+                            navPane.push(sendData)
                         }
                     }
                 }
+
             }
         }
     }
