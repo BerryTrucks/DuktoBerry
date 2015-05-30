@@ -13,6 +13,9 @@
 #include <bb/cascades/GroupDataModel>
 #include <bb/cascades/Color>
 #include <bb/system/Clipboard>
+#include <bb/system/InvokeManager>
+#include <bb/system/InvokeRequest>
+#include <bb/system/ApplicationStartupMode>
 #include "QTimer"
 
 #include "protocol/duktoprotocol.h"
@@ -46,6 +49,7 @@ class controller: public QObject {
 	 Q_PROPERTY(bool countBuddy READ countBuddy NOTIFY countBuddyChanged)
 	 Q_PROPERTY(bool countRecents READ countRecents NOTIFY countRecentsChanged)
 	 Q_PROPERTY(QString downloadFolder READ downloadFolder WRITE setDownloadFolder NOTIFY downloadFolderChanged)
+	 Q_PROPERTY(QString forTest READ forTest NOTIFY forTestChanged)
 
 public:
 	controller();
@@ -76,12 +80,16 @@ public:
     bool countRecents();
     QString downloadFolder();
     void setDownloadFolder(QString path);
+    QString startupMode();
+    QString forTest();
 
 	// Invoked by QML
 	Q_INVOKABLE
 	void sendSomeFiles(QVariant indexPath, QStringList files);
 	Q_INVOKABLE
 	void sendtext(QVariant indexPath, QString text);
+	Q_INVOKABLE
+	void sendWithCard(QVariant indexPath);
 	Q_INVOKABLE
     QString copyFromClipboard();
 	Q_INVOKABLE
@@ -118,6 +126,7 @@ signals:
     void countBuddyChanged();
     void countRecentsChanged();
     void downloadFolderChanged();
+    void forTestChanged();
 
 public slots:
 	void peerListAdded(Peer peer);
@@ -132,6 +141,7 @@ public slots:
     void sendFileError(int code);
     void sendFileAborted();
     void aboutToQuit();
+    void handleInvoke(const bb::system::InvokeRequest& request);
 
 private:
     uint convertThemeColor(QString color);
@@ -154,6 +164,8 @@ private:
 	int m_countBuddy;
 	int m_countRecents;
 	bb::cascades::Color m_themeColor;
+	bb::system::InvokeManager *m_InvokeManager;
+	const bb::system::InvokeRequest * m_request;
 };
 
 #endif /* CONTROLLER_H_ */

@@ -58,7 +58,7 @@ ApplicationUI::ApplicationUI(bb::cascades::Application *app) :
 
     // Create scene document from main.qml asset, the parent is set
     // to ensure the document gets destroyed properly at shut down.
-    QmlDocument *qml = QmlDocument::create("asset:///main.qml").parent(this);
+    QmlDocument *qml = QmlDocument::create(control->startupMode()).parent(this);
     qml->setContextProperty("_control", control);
 
     QmlDocument *qmlCover =

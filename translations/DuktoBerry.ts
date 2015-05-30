@@ -82,6 +82,21 @@
     </message>
 </context>
 <context>
+    <name>InvokeApplication</name>
+    <message>
+        <source>No buddies found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Dukto in another device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Buddies</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MessagePage</name>
     <message>
         <source>Send Text</source>

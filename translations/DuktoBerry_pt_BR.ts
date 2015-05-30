@@ -103,6 +103,24 @@
     </message>
 </context>
 <context>
+    <name>InvokeApplication</name>
+    <message>
+        <location filename="../assets/InvokeApplication.qml" line="12"/>
+        <source>Select Buddies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/InvokeApplication.qml" line="44"/>
+        <source>No buddies found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/InvokeApplication.qml" line="55"/>
+        <source>Open Dukto in another device</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MessagePage</name>
     <message>
         <location filename="../assets/MessagePage.qml" line="14"/>

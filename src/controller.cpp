@@ -23,10 +23,13 @@ controller::controller() :
     m_countRecents = 0;
     // Destination buddy
     m_destBuddy = new DestinationBuddy(this);
+    m_request = new const bb::system::InvokeRequest();
 
     setCurrentTransferProgress(0);
     setCurrentTransferSending(false);
 
+    // Invoke Manager
+    m_InvokeManager = new bb::system::InvokeManager();
     // Settings
     m_settings = new Settings(this);
 
@@ -40,6 +43,7 @@ controller::controller() :
 
     // Change current folder
 //	QDir::setCurrent(mSettings->currentPath());
+    connect(m_InvokeManager, SIGNAL(invoked(const bb::system::InvokeRequest&)), this, SLOT(handleInvoke(const bb::system::InvokeRequest&)));
 
     connect(&m_duktoProtocol, SIGNAL(peerListAdded(Peer)), this, SLOT(peerListAdded(Peer)));
     connect(&m_duktoProtocol, SIGNAL(peerListRemoved(Peer)), this, SLOT(peerListRemoved(Peer)));
@@ -605,4 +609,52 @@ void controller::setDownloadFolder(QString path)
     m_settings->savePath(path);
     qDebug() << "controller::setDownloadFolder:" << QDir(path).exists();
     emit downloadFolderChanged();
+}
+
+void controller::handleInvoke(const bb::system::InvokeRequest& request)
+{
+    m_request = &request;
+    qDebug() << "handleInvoke";
+    qDebug() << "handleInvoke:" << request.data();
+}
+
+QString controller::startupMode()
+{
+    QString qmlDocument;
+    qDebug() << "controller::startupMode:" << m_InvokeManager->startupMode();
+    switch (m_InvokeManager->startupMode()) {
+        case bb::system::ApplicationStartupMode::LaunchApplication:
+            // An app can initialize if it
+            // was started from the home screen
+            qmlDocument = "asset:///main.qml";
+            break;
+        case bb::system::ApplicationStartupMode::InvokeApplication:
+            // If the app is invoked,
+            // it must wait until it receives an invoked() signal
+            // so that it can determine the UI that it needs to initialize
+            qmlDocument = "asset:///InvokeApplication.qml";
+            break;
+        case bb::system::ApplicationStartupMode::InvokeCard:
+            qmlDocument = "asset:///InvokeApplication.qml";
+            break;
+        default:
+            // What app is it and how did it get here?
+            qmlDocument = "asset:///main.qml";
+            break;
+    }
+    return qmlDocument;
+}
+
+void controller::sendWithCard(QVariant indexPath)
+{
+    QVariantMap item = indexPath.toMap();
+    m_destBuddy->fillFromItem(item);
+    //Send files
+    //QStringList toSend = files;
+    //startTransfer(QString(m_request->data()));
+}
+
+QString controller::forTest()
+{
+    return QString(m_request->data());
 }

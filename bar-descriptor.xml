@@ -121,5 +121,13 @@
     <permission>run_when_backgrounded</permission>
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
     <env var="CASCADES_THEME" value="bright"/>
-
+	
+	<invoke-target id="com.example.DuktoBerry">
+    	<invoke-target-type>card.previewer</invoke-target-type>
+    	<filter>
+    		<action>bb.action.SHARE</action>
+   	 		<mime-type>*</mime-type>
+    		<property var="uris" value="file://"/>
+		</filter>
+	</invoke-target>
 </qnx>
