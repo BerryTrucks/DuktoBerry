@@ -476,6 +476,11 @@ uint controller::convertThemeColor(QString color)
     return 0xff30910e;
 }
 
+QString controller::downloadFolder()
+{
+    return m_settings->currentPath();
+}
+
 void controller::startTransfer(QString text)
 {
     // Prepare file transfer
@@ -593,4 +598,11 @@ bool controller::sharedPermission()
         //qDebug() << "SHARED PERMISSION ERROR";
         return false;
     }
+}
+
+void controller::setDownloadFolder(QString path)
+{
+    m_settings->savePath(path);
+    qDebug() << "controller::setDownloadFolder:" << QDir(path).exists();
+    emit downloadFolderChanged();
 }

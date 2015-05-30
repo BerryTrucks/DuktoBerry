@@ -33,7 +33,7 @@ Dialog {
                     topPadding: 20
                     Label {
                         id: lbText
-                        text: "If you liked the application consider making a donation to support the developer."
+                        text: qsTr("If you liked the application consider making a donation to support the developer.")
                         textStyle {
                             color: Color.White
                             fontSize: FontSize.Large

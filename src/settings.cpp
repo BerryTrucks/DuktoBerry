@@ -35,13 +35,8 @@ QString Settings::currentPath()
     // Check if exists
     if ((path != "") && (QDir(path).exists()))
         return path;
-
-    // Else return the default path for this platform
-    path = "/shared/downloads/";
-    if (QDir(path).exists())
-        return path;
     else
-        return ".";
+        return "/shared/downloads/";
 }
 
 void Settings::savePath(QString path)

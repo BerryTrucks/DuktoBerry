@@ -24,7 +24,7 @@ Sheet {
                 CustomButton {
                     horizontalAlignment: HorizontalAlignment.Right
                     preferredWidth: 350
-                    text: "Accept"
+                    text: qsTr("Accept")
                     background: Color.Green
                     onClicked: {
                         _control.showTermsOnStart = false

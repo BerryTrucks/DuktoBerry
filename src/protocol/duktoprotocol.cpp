@@ -17,6 +17,7 @@
  */
 
 #include "duktoprotocol.h"
+#include "settings.h"
 
 #if defined(Q_WS_WIN)
     #include <windows.h>
@@ -256,8 +257,10 @@ void DuktoProtocol::readNewData()
 	qDebug()<< "DuktoProtocol::readNewData:" << "entrou";
 
     //Need for save files in BlackBerry 10
+	Settings s;
     QDir dir;
-    dir.mkpath("shared/downloads/");
+    dir.mkpath(s.currentPath());
+
 
     // Fino a che ci sono dati da leggere
     while (mCurrentSocket->bytesAvailable() > 0)
@@ -372,8 +375,8 @@ void DuktoProtocol::readNewData()
                     i++;
                 }
 				mReceivedFiles->append(name);
-
-                mCurrentFile = new QFile("shared/downloads/" + name);
+				Settings s;
+                mCurrentFile = new QFile(s.currentPath() + name);
                         bool ret = mCurrentFile->open(QIODevice::WriteOnly);
 
                         qDebug() << "DuktoProtocol::readNewData:" << ret;

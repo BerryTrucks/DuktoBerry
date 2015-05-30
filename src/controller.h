@@ -45,6 +45,7 @@ class controller: public QObject {
 	 Q_PROPERTY(bool showTermsOnStart READ showTermsOnStart WRITE setShowTermsOnStart NOTIFY showTermsOnStartChanged)
 	 Q_PROPERTY(bool countBuddy READ countBuddy NOTIFY countBuddyChanged)
 	 Q_PROPERTY(bool countRecents READ countRecents NOTIFY countRecentsChanged)
+	 Q_PROPERTY(QString downloadFolder READ downloadFolder WRITE setDownloadFolder NOTIFY downloadFolderChanged)
 
 public:
 	controller();
@@ -73,6 +74,8 @@ public:
     void setShowReviewOnsart(bool showReview);
     bool countBuddy();
     bool countRecents();
+    QString downloadFolder();
+    void setDownloadFolder(QString path);
 
 	// Invoked by QML
 	Q_INVOKABLE
@@ -114,6 +117,7 @@ signals:
     void showReviewOnsartChanged();
     void countBuddyChanged();
     void countRecentsChanged();
+    void downloadFolderChanged();
 
 public slots:
 	void peerListAdded(Peer peer);

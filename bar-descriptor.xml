@@ -30,7 +30,10 @@
 
     <!-- The name that is displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>Dukto</name>
+    <name>
+       Dukto
+       <text xml:lang="zh-CN">&#x98de;&#x4f20;</text>
+    </name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
@@ -65,7 +68,8 @@
     </splashScreens>
     <category>core.media</category>
     <author>Marden Laairoy</author>
-    <buildId>4</buildId>
+    <buildId>6</buildId>
+    <packageLocale>pt-BR,zh-CN</packageLocale>
     <configuration name="Device-Debug">
        <platformArchitecture>armle-v7</platformArchitecture>
        <asset path="arm/o.le-v7-g/DuktoBerry" entry="true" type="Qnx/Elf">DuktoBerry</asset>

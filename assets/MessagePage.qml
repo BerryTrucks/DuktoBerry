@@ -101,7 +101,7 @@ Sheet {
                             attachedObjects: [
                                 SystemToast {
                                     id: notifyToast
-                                    body: "Copied to Clipboard"
+                                    body: qsTr("Copied to Clipboard")
                                 }
                             ]
                         }

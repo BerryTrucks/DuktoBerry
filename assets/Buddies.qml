@@ -20,7 +20,7 @@ NavigationPane {
             verticalAlignment: VerticalAlignment.Fill
             CustomItemBuddy {
                 userName: _control.buddyName + qsTr(" (You)")
-                system: "at " + _control.getHostName()
+                system: qsTr("at ") + _control.getHostName()
                 userImage: _control.buddyAvatar
                 avatarUrl: ""
                 plataformImage: "asset:///images/BlackberryLogo.png"

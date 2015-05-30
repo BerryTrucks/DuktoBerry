@@ -39,7 +39,7 @@ Sheet {
                     Container {
                         topPadding: 80
                         Label {
-                            text: "by Emanuele Colombo"
+                            text: qsTr("by Emanuele Colombo")
                             textStyle {
                                 color: Color.Gray
                                 fontSize: FontSize.XXSmall
@@ -53,7 +53,7 @@ Sheet {
                     layout: DockLayout {
                     }
                     Label {
-                        text: "Developer (BlackBerry)"
+                        text: qsTr("Developer (BlackBerry)")
                     }
                     Container {
                         topPadding: 40
@@ -84,7 +84,7 @@ Sheet {
                     CustomButton {
                         preferredWidth: 500
                         background: Color.Green
-                        text: "Donate"
+                        text: qsTr("Donate")
                         onClicked: {
                             dotateDialog.createObject().open()
                         }
@@ -117,7 +117,7 @@ Sheet {
                 }
                 Label {
                     horizontalAlignment: HorizontalAlignment.Center
-                    text: "This application and it's source code are released freely as open source project."
+                    text: qsTr("This application and it's source code are released freely as open source project.")
                     multiline: true
                     textStyle {
                         textAlign: TextAlign.Center
@@ -127,7 +127,7 @@ Sheet {
                 }
                 Label {
                     horizontalAlignment: HorizontalAlignment.Center
-                    text: "Download desktop version on: \n http://msec.it/dukto/"
+                    text: qsTr("Download desktop version on:") + " \n http://msec.it/dukto/"
                     multiline: true
                     textStyle {
                         textAlign: TextAlign.Center

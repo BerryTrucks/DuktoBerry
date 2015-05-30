@@ -71,7 +71,7 @@ Sheet {
                         text: qsTr("Save received file in:")
                     }
                     CustomTextField {
-                        text: "/donwloads"
+                        text: _control.downloadFolder
                         txtenabled: false
                     }
                     Container {
@@ -79,8 +79,14 @@ Sheet {
                         horizontalAlignment: HorizontalAlignment.Right
                         CustomButton {
                             preferredWidth: 400
-                            actived: false
+                            //actived: false
                             text: qsTr("Change folder")
+                            onClicked: {
+                                if (_control.sharedPermission())
+                                    folderPicker.open();
+                                else
+                                    notifyPermissionError.show()
+                            }
                         }
                     }
                 }
@@ -160,6 +166,15 @@ Sheet {
                     _control.buddyAvatar = "file://" + selectedFiles
                     //                    console.log("FileSelected signal received : " + selectedFiles);
 
+                }
+            },
+            FilePicker {
+                id: folderPicker
+                mode: FilePickerMode.SaverMultiple
+                title: qsTr("Select Folder")
+                onFileSelected: {
+                    _control.downloadFolder = selectedFiles[0] + "/"
+                    console.log("FileSelected signal received : " + selectedFiles[0]);
                 }
             },
             SystemToast {
