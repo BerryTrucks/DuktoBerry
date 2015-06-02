@@ -481,7 +481,7 @@ uint controller::convertThemeColor(QString color)
 
 QString controller::downloadFolder()
 {
-    return m_settings->currentPath();
+    return m_settings->currentPath().replace("/accounts/1000/", "");
 }
 
 void controller::cardDone()
