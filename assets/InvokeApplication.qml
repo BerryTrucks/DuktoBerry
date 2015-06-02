@@ -12,7 +12,7 @@ NavigationPane {
                 title: qsTr("Select Buddies")
                 closeButtonActive: true
                 onBackButtonClicked: {
-                    navPane.pop()
+                    _control.cardDone()
                 }
             }
         }
@@ -23,7 +23,7 @@ NavigationPane {
             verticalAlignment: VerticalAlignment.Fill
             Container {
                 Label {
-                    text: "dddd " + _control.forTest
+                    id: lb
                 }
             }
             Container {
@@ -127,6 +127,15 @@ NavigationPane {
         QTimer {
             id: timer
             interval: 5000
+        },
+        ComponentDefinition {
+            id: progressDialog
+            ProgressPage {
+            }
+        },ComponentDefinition {
+            id: tempsPane
+            TermsPage {
+            }
         }
     ]
     onCreationCompleted: {

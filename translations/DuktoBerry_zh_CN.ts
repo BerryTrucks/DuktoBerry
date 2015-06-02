@@ -365,6 +365,19 @@
     </message>
 </context>
 <context>
+    <name>controller</name>
+    <message>
+        <location filename="../src/controller.cpp" line="491"/>
+        <source>Card: I am done. Yay!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/controller.cpp" line="493"/>
+        <source>Success!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <location filename="../assets/main.qml" line="6"/>

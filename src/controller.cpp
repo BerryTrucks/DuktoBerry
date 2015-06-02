@@ -23,7 +23,6 @@ controller::controller() :
     m_countRecents = 0;
     // Destination buddy
     m_destBuddy = new DestinationBuddy(this);
-    m_request = new const bb::system::InvokeRequest();
 
     setCurrentTransferProgress(0);
     setCurrentTransferSending(false);
@@ -485,6 +484,18 @@ QString controller::downloadFolder()
     return m_settings->currentPath();
 }
 
+void controller::cardDone()
+{
+    // Assemble a response message
+    bb::system::CardDoneMessage message;
+    message.setData(tr("Card: I am done. Yay!"));
+    message.setDataType("text/plain");
+    message.setReason(tr("Success!"));
+
+    // Send the message
+    m_InvokeManager->sendCardDone(message);
+}
+
 void controller::startTransfer(QString text)
 {
     // Prepare file transfer
@@ -613,9 +624,27 @@ void controller::setDownloadFolder(QString path)
 
 void controller::handleInvoke(const bb::system::InvokeRequest& request)
 {
-    m_request = &request;
-    qDebug() << "handleInvoke";
-    qDebug() << "handleInvoke:" << request.data();
+    QString mimeType = request.mimeType().split("/")[0];
+    if (mimeType == "text") {
+        m_request["type"] = "text";
+        m_request["data"] = request.data();
+    } else if (mimeType == "filelist") {
+        //convert to QVariantList
+        bb::data::JsonDataAccess jda;
+        QVariant jsonData = jda.loadFromBuffer(request.data());
+        QVariantList data = jsonData.toList();
+        QStringList files;
+
+        for (int i = 0; i < data.size(); i++) {
+            files.append(QUrl(data[i].toMap()["uri"].toString()).toLocalFile());
+        }
+        m_request["type"] = "file";
+        m_request["data"] = files;
+    } else {
+        //convert to QVariantList
+        m_request["type"] = "file";
+        m_request["data"] = request.uri().toLocalFile();
+    }
 }
 
 QString controller::startupMode()
@@ -627,12 +656,6 @@ QString controller::startupMode()
             // An app can initialize if it
             // was started from the home screen
             qmlDocument = "asset:///main.qml";
-            break;
-        case bb::system::ApplicationStartupMode::InvokeApplication:
-            // If the app is invoked,
-            // it must wait until it receives an invoked() signal
-            // so that it can determine the UI that it needs to initialize
-            qmlDocument = "asset:///InvokeApplication.qml";
             break;
         case bb::system::ApplicationStartupMode::InvokeCard:
             qmlDocument = "asset:///InvokeApplication.qml";
@@ -650,11 +673,9 @@ void controller::sendWithCard(QVariant indexPath)
     QVariantMap item = indexPath.toMap();
     m_destBuddy->fillFromItem(item);
     //Send files
-    //QStringList toSend = files;
-    //startTransfer(QString(m_request->data()));
-}
-
-QString controller::forTest()
-{
-    return QString(m_request->data());
+    if (m_request["type"].toString() == "file") {
+        startTransfer(m_request["data"].toStringList());
+    } else if(m_request["type"].toString() == "text"){
+        startTransfer(m_request["data"].toString());
+    }
 }

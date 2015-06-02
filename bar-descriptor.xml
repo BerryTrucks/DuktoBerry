@@ -127,7 +127,7 @@
     	<filter>
     		<action>bb.action.SHARE</action>
    	 		<mime-type>*</mime-type>
-    		<property var="uris" value="file://"/>
+    		<property var="uris" value="file://,data://local,http://,list://"/>
 		</filter>
 	</invoke-target>
 </qnx>

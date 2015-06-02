@@ -282,6 +282,17 @@
     </message>
 </context>
 <context>
+    <name>controller</name>
+    <message>
+        <source>Card: I am done. Yay!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Success!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>main</name>
     <message>
         <source>About</source>

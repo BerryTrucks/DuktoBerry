@@ -16,6 +16,8 @@
 #include <bb/system/InvokeManager>
 #include <bb/system/InvokeRequest>
 #include <bb/system/ApplicationStartupMode>
+#include <bb/system/CardDoneMessage>
+#include <bb/data/JsonDataAccess>
 #include "QTimer"
 
 #include "protocol/duktoprotocol.h"
@@ -49,7 +51,6 @@ class controller: public QObject {
 	 Q_PROPERTY(bool countBuddy READ countBuddy NOTIFY countBuddyChanged)
 	 Q_PROPERTY(bool countRecents READ countRecents NOTIFY countRecentsChanged)
 	 Q_PROPERTY(QString downloadFolder READ downloadFolder WRITE setDownloadFolder NOTIFY downloadFolderChanged)
-	 Q_PROPERTY(QString forTest READ forTest NOTIFY forTestChanged)
 
 public:
 	controller();
@@ -81,7 +82,6 @@ public:
     QString downloadFolder();
     void setDownloadFolder(QString path);
     QString startupMode();
-    QString forTest();
 
 	// Invoked by QML
 	Q_INVOKABLE
@@ -106,6 +106,8 @@ public:
 	int displaySizeHeight();
 	Q_INVOKABLE
 	bool sharedPermission();
+	Q_INVOKABLE
+	void cardDone();
 
 signals:
 	void currentTransferBuddyChanged();
@@ -126,7 +128,6 @@ signals:
     void countBuddyChanged();
     void countRecentsChanged();
     void downloadFolderChanged();
-    void forTestChanged();
 
 public slots:
 	void peerListAdded(Peer peer);
@@ -165,7 +166,7 @@ private:
 	int m_countRecents;
 	bb::cascades::Color m_themeColor;
 	bb::system::InvokeManager *m_InvokeManager;
-	const bb::system::InvokeRequest * m_request;
+	QVariantMap m_request;
 };
 
 #endif /* CONTROLLER_H_ */

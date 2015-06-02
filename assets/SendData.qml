@@ -117,7 +117,7 @@ Page {
                 title: qsTr("Select Folder")
                 onFileSelected: {
                     _control.sendSomeFiles(index, selectedFiles)
-                    console.log("FileSelected signal received : " + selectedFiles[0]);
+                    console.log("FileSelected signal received : " + selectedFiles);
                 }
             },
             ComponentDefinition {
