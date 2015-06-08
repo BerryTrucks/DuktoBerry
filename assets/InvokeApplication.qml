@@ -9,7 +9,7 @@ NavigationPane {
         titleBar: TitleBar {
             kind: TitleBarKind.FreeForm
             kindProperties: CustomFreeFormTitleBar {
-                title: qsTr("Select Buddies")
+                title: qsTr("Buddies")
                 closeButtonActive: true
                 onBackButtonClicked: {
                     _control.cardDone()

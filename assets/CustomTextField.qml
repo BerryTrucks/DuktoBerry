@@ -35,8 +35,8 @@ Container {
     onCreationCompleted: {
         if(!txtenabled){
             whiteContainer.visible = false
-            txtField.textStyle.color = Color.White
             colorContainer.background = themeColor
+            txtField.textStyle.color = Color.White
         }
     }
     onThemeColorChanged: {

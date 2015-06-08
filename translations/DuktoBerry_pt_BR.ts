@@ -11,13 +11,13 @@
     </message>
     <message>
         <location filename="../assets/1440x1440/About.qml" line="98"/>
-        <location filename="../assets/About.qml" line="98"/>
+        <location filename="../assets/About.qml" line="122"/>
         <source>Rate App</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../assets/1440x1440/About.qml" line="110"/>
-        <location filename="../assets/About.qml" line="110"/>
+        <location filename="../assets/About.qml" line="134"/>
         <source>Contact me</source>
         <translation type="unfinished"></translation>
     </message>
@@ -27,22 +27,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="56"/>
-        <source>Developer (BlackBerry)</source>
+        <location filename="../assets/About.qml" line="57"/>
+        <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="87"/>
+        <location filename="../assets/About.qml" line="80"/>
+        <source>Translators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/About.qml" line="86"/>
+        <source>(Chinese)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../assets/About.qml" line="111"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="120"/>
+        <location filename="../assets/About.qml" line="144"/>
         <source>This application and it&apos;s source code are released freely as open source project.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="130"/>
+        <location filename="../assets/About.qml" line="154"/>
         <source>Download desktop version on:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -106,7 +116,7 @@
     <name>InvokeApplication</name>
     <message>
         <location filename="../assets/InvokeApplication.qml" line="12"/>
-        <source>Select Buddies</source>
+        <source>Buddies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

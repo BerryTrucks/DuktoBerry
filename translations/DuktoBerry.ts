@@ -20,10 +20,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Developer (BlackBerry)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -33,6 +29,18 @@
     </message>
     <message>
         <source>Download desktop version on:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translators</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Chinese)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -92,7 +100,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select Buddies</source>
+        <source>Buddies</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

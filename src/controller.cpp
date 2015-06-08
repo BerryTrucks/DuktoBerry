@@ -481,7 +481,7 @@ uint controller::convertThemeColor(QString color)
 
 QString controller::downloadFolder()
 {
-    return m_settings->currentPath().replace("/accounts/1000/", "");
+    return m_settings->currentPath().replace("/accounts/1000", "");
 }
 
 void controller::cardDone()
@@ -618,7 +618,6 @@ bool controller::sharedPermission()
 void controller::setDownloadFolder(QString path)
 {
     m_settings->savePath(path);
-    qDebug() << "controller::setDownloadFolder:" << QDir(path).exists();
     emit downloadFolderChanged();
 }
 

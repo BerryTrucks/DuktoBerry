@@ -11,13 +11,13 @@
     </message>
     <message>
         <location filename="../assets/1440x1440/About.qml" line="98"/>
-        <location filename="../assets/About.qml" line="98"/>
+        <location filename="../assets/About.qml" line="122"/>
         <source>Rate App</source>
         <translation>评价应用</translation>
     </message>
     <message>
         <location filename="../assets/1440x1440/About.qml" line="110"/>
-        <location filename="../assets/About.qml" line="110"/>
+        <location filename="../assets/About.qml" line="134"/>
         <source>Contact me</source>
         <translation>联系我们</translation>
     </message>
@@ -27,22 +27,36 @@
         <translation>作者： Emanuele Colombo</translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="56"/>
         <source>Developer (BlackBerry)</source>
-        <translation>开发者（黑莓）</translation>
+        <translation type="obsolete">开发者（黑莓）</translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="87"/>
+        <location filename="../assets/About.qml" line="57"/>
+        <source>Developer</source>
+        <translation>开发者</translation>
+    </message>
+    <message>
+        <location filename="../assets/About.qml" line="80"/>
+        <source>Translators</source>
+        <translation>翻译人员</translation>
+    </message>
+    <message>
+        <location filename="../assets/About.qml" line="86"/>
+        <source>(Chinese)</source>
+        <translation>(中文)</translation>
+    </message>
+    <message>
+        <location filename="../assets/About.qml" line="111"/>
         <source>Donate</source>
         <translation>捐赠</translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="120"/>
+        <location filename="../assets/About.qml" line="144"/>
         <source>This application and it&apos;s source code are released freely as open source project.</source>
         <translation>该应用程序及其源代码作为开源项目免费发布。</translation>
     </message>
     <message>
-        <location filename="../assets/About.qml" line="130"/>
+        <location filename="../assets/About.qml" line="154"/>
         <source>Download desktop version on:</source>
         <translation>下载桌面版本：</translation>
     </message>
@@ -105,8 +119,9 @@
 <context>
     <name>InvokeApplication</name>
     <message>
+        <location filename="../assets/InvokeApplication.qml" line="12"/>
         <source>Buddies</source>
-        <translation type="obsolete">好友</translation>
+        <translation>好友</translation>
     </message>
     <message>
         <source> (You)</source>
@@ -117,19 +132,14 @@
         <translation type="obsolete">在 </translation>
     </message>
     <message>
-        <location filename="../assets/InvokeApplication.qml" line="12"/>
-        <source>Select Buddies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../assets/InvokeApplication.qml" line="44"/>
         <source>No buddies found</source>
-        <translation type="unfinished">未发现好友</translation>
+        <translation>未发现好友</translation>
     </message>
     <message>
         <location filename="../assets/InvokeApplication.qml" line="55"/>
         <source>Open Dukto in another device</source>
-        <translation type="unfinished">在其他设备中打开飞传</translation>
+        <translation>在其他设备中打开飞传</translation>
     </message>
 </context>
 <context>

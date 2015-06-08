@@ -53,13 +53,37 @@ Sheet {
                     layout: DockLayout {
                     }
                     Label {
-                        text: qsTr("Developer (BlackBerry)")
+                        horizontalAlignment: HorizontalAlignment.Center
+                        text: qsTr("Developer")
                     }
                     Container {
                         topPadding: 40
                         horizontalAlignment: HorizontalAlignment.Center
                         Label {
                             text: "Marden Laairoy"
+                            textStyle {
+                                fontSize: FontSize.Large
+                                fontStyle: FontStyle.Italic
+                                color: _control.themeColor
+                            }
+                        }
+                    }
+                }
+                Container {
+                    topPadding: 20
+                    horizontalAlignment: HorizontalAlignment.Center
+                    layout: DockLayout {
+                    }
+                    Label {
+                        horizontalAlignment: HorizontalAlignment.Center
+                        topPadding: 10
+                        text: qsTr("Translators")
+                    }
+                    Container {
+                        topPadding: 40
+                        horizontalAlignment: HorizontalAlignment.Center
+                        Label {
+                            text: "Daniel London " + qsTr("(Chinese)")
                             textStyle {
                                 fontSize: FontSize.Large
                                 fontStyle: FontStyle.Italic
