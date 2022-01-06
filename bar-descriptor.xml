@@ -25,8 +25,8 @@
 -->
 
     <!-- A universally unique application identifier. Must be unique across all BlackBerry 10 applications.
-         Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.example.DuktoBerry</id>
+         Using a reverse DNS-style name as the id is recommended. (Eg. org.BerryTrucks.ExampleApplication.) Required. -->
+    <id>org.BerryTrucks.DuktoBerry</id>
 
     <!-- The name that is displayed in the BlackBerry 10 application installer.
          May have multiple values for each language. See samples or xsd schema file. Optional. -->
@@ -87,6 +87,12 @@
        <platformArchitecture>x86</platformArchitecture>
        <asset path="x86/o-g/DuktoBerry" entry="true" type="Qnx/Elf">DuktoBerry</asset>
     </configuration>
+    <configuration name="Device-Coverage">       <platformArchitecture>armle-v7</platformArchitecture>
+</configuration>
+    <configuration name="Simulator-Profile">       <platformArchitecture>x86</platformArchitecture>
+</configuration>
+    <configuration name="Simulator-Coverage">       <platformArchitecture>x86</platformArchitecture>
+</configuration>
 
     <!--  Unique author ID assigned by signing authority. Required if using debug tokens. -->
     <!-- <authorId>ABC1234YjsnUk235h</authorId> -->
@@ -122,7 +128,7 @@
     <env var="LD_LIBRARY_PATH" value="app/native/lib:/usr/lib/qt4/lib"/>
     <env var="CASCADES_THEME" value="bright"/>
 	
-	<invoke-target id="com.example.DuktoBerry">
+	<invoke-target id="org.BerryTrucks.DuktoBerry">
     	<invoke-target-type>card.previewer</invoke-target-type>
     	<filter>
     		<action>bb.action.SHARE</action>
